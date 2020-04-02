@@ -1,4 +1,4 @@
-package com.loitp.vocabulary.app
+package com.loitp.app
 
 import androidx.multidex.MultiDexApplication
 import com.core.common.Constants
@@ -8,7 +8,7 @@ import com.data.AdmobData
 import com.github.piasy.biv.BigImageViewer
 import com.github.piasy.biv.loader.glide.GlideImageLoader
 import com.google.gson.Gson
-import com.loitp.vocabulary.R
+import com.loitp.R
 import com.utils.util.Utils
 
 //TODO id admob

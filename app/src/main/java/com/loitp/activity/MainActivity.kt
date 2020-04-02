@@ -1,8 +1,8 @@
-package com.loitp.vocabulary.activity
+package com.loitp.activity
 
 import android.os.Bundle
 import com.core.base.BaseFontActivity
-import com.loitp.vocabulary.R
+import com.loitp.R
 
 class MainActivity : BaseFontActivity() {
     override fun setFullScreen(): Boolean {
