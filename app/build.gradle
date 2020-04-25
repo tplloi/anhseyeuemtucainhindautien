@@ -5,10 +5,10 @@ apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 29
-    buildToolsVersion '29.0.2'
+    buildToolsVersion '29.0.3'
 
     defaultConfig {
-        applicationId "com.ngontinhkangkang.offlineanhseyeuemtucainhindautien"
+        applicationId "loitp93.anhseyeuemtucainhindautien"
         minSdkVersion 19
         targetSdkVersion 29
         versionCode 3
@@ -74,7 +74,7 @@ repositories {
 }
 
 dependencies {
-    api 'com.github.tplloi:basemaster:4.2.8'
+    api 'com.github.tplloi:basemaster:4.2.9'
 }
 //apply plugin: 'com.google.gms.google-services'
 //com.google.gms.googleservices.GoogleServicesPlugin.config.disableVersionCheck = true
