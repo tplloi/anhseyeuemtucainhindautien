@@ -4,4 +4,9 @@
     <string name="str_f">a</string>
     <string name="str_reward">a</string>
     <string name="str_app_id">a</string>
+    <string name="deny">Từ chối</string>
+    <string name="yes">Đồng ý</string>
+    <string name="setting">Cài đặt</string>
+    <string name="need_permisson">Cần quyền truy cập</string>
+    <string name="need_permisson_to_use_app">Vui lòng cấp quyền để có thể sử dụng app.</string>
 </resources>
