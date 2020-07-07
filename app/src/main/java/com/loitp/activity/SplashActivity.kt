@@ -7,10 +7,8 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
 import com.core.base.BaseFontActivity
-import com.core.utilities.LActivityUtil
-import com.core.utilities.LDialogUtil
-import com.core.utilities.LSocialUtil
-import com.core.utilities.LUIUtil
+import com.core.utilities.*
+import com.interfaces.Callback1
 import com.interfaces.Callback2
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
@@ -20,10 +18,12 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.loitp.BuildConfig
 import com.loitp.R
 import kotlinx.android.synthetic.main.activity_splash.*
+import okhttp3.*
+import java.io.IOException
 
 class SplashActivity : BaseFontActivity() {
     private var isAnimDone = false
-    private var isCheckPermissionDone = false
+    private var isCheckReadyDone = false
     private var isShowDialogCheck = false
 
     @SuppressLint("SetTextI18n")
@@ -57,8 +57,7 @@ class SplashActivity : BaseFontActivity() {
                     override fun onPermissionsChecked(report: MultiplePermissionsReport) {
                         // check if all permissions are granted
                         if (report.areAllPermissionsGranted()) {
-                            isCheckPermissionDone = true
-                            goToHome()
+                            checkReady()
                         } else {
                             showShouldAcceptPermission()
                         }
@@ -79,7 +78,7 @@ class SplashActivity : BaseFontActivity() {
     }
 
     private fun goToHome() {
-        if (isAnimDone && isCheckPermissionDone) {
+        if (isAnimDone && isCheckReadyDone) {
             val intent = Intent(activity, MainActivity::class.java)
             startActivity(intent)
             LActivityUtil.tranIn(activity)
@@ -141,5 +140,63 @@ class SplashActivity : BaseFontActivity() {
                     }
                 })
         alertDialog.setCancelable(false)
+    }
+
+    private fun showDialogNotReady() {
+        runOnUiThread {
+            val title = if (LConnectivityUtil.isConnected(activity)) {
+                getString(R.string.app_is_not_ready)
+            } else {
+                getString(R.string.check_ur_connection)
+            }
+            val alertDial = LDialogUtil.showDialog1(context = activity,
+                    title = getString(R.string.warning),
+                    msg = title,
+                    button1 = getString(R.string.yes),
+                    callback1 = object : Callback1 {
+                        override fun onClick1() {
+                            onBackPressed()
+                        }
+                    })
+            alertDial.setCancelable(false)
+        }
+    }
+
+    private fun checkReady() {
+        if (LPrefUtil.getCheckAppReady(activity)) {
+            isCheckReadyDone = true
+            goToHome()
+            return
+        }
+        val linkGGDriveCheckReady = getString(R.string.link_gg_drive)
+        val request = Request.Builder().url(linkGGDriveCheckReady).build()
+        val okHttpClient = OkHttpClient()
+        okHttpClient.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                logE("onFailure $e")
+                showDialogNotReady()
+            }
+
+            @Throws(IOException::class)
+            override fun onResponse(call: Call, response: Response) {
+                if (response.isSuccessful) {
+                    val json = response.body()?.string()
+                    logD("checkReady -> onResponse isSuccessful $json")
+
+//                    val versionServer = Integer.parseInt(response.body()!!.string())
+//                    logD("onResponse $versionServer")
+//                    if (versionServer == 1) {
+//                        isCheckReadyDone = true
+//                        LPrefUtil.setCheckAppReady(activity, true)
+//                        goToHome()
+//                    } else {
+//                        showDialogNotReady()
+//                    }
+                } else {
+                    logD("onResponse !isSuccessful: $response")
+                    showDialogNotReady()
+                }
+            }
+        })
     }
 }
