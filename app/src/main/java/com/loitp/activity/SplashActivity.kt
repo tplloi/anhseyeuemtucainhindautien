@@ -10,6 +10,7 @@ import com.core.base.BaseFontActivity
 import com.core.utilities.*
 import com.interfaces.Callback1
 import com.interfaces.Callback2
+import com.interfaces.GGCallback
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
@@ -17,9 +18,10 @@ import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.loitp.BuildConfig
 import com.loitp.R
+import com.loitp.app.LApplication
+import com.model.GG
 import kotlinx.android.synthetic.main.activity_splash.*
-import okhttp3.*
-import java.io.IOException
+import okhttp3.Call
 
 class SplashActivity : BaseFontActivity() {
     private var isAnimDone = false
@@ -52,7 +54,8 @@ class SplashActivity : BaseFontActivity() {
         Dexter.withActivity(this)
                 .withPermissions(
                         Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                        Manifest.permission.ACCESS_FINE_LOCATION)
+                        Manifest.permission.ACCESS_FINE_LOCATION
+                )
                 .withListener(object : MultiplePermissionsListener {
                     override fun onPermissionsChecked(report: MultiplePermissionsReport) {
                         // check if all permissions are granted
@@ -69,7 +72,10 @@ class SplashActivity : BaseFontActivity() {
                         isShowDialogCheck = true
                     }
 
-                    override fun onPermissionRationaleShouldBeShown(permissions: List<PermissionRequest>, token: PermissionToken) {
+                    override fun onPermissionRationaleShouldBeShown(
+                            permissions: List<PermissionRequest>,
+                            token: PermissionToken
+                    ) {
                         token.continuePermissionRequest()
                     }
                 })
@@ -163,40 +169,48 @@ class SplashActivity : BaseFontActivity() {
     }
 
     private fun checkReady() {
+
+        fun setReady() {
+            runOnUiThread {
+                isCheckReadyDone = true
+                goToHome()
+            }
+        }
+
         if (LPrefUtil.getCheckAppReady(activity)) {
-            isCheckReadyDone = true
-            goToHome()
+            setReady()
             return
         }
         val linkGGDriveCheckReady = getString(R.string.link_gg_drive)
-        val request = Request.Builder().url(linkGGDriveCheckReady).build()
-        val okHttpClient = OkHttpClient()
-        okHttpClient.newCall(request).enqueue(object : Callback {
-            override fun onFailure(call: Call, e: IOException) {
-                logE("onFailure $e")
-                showDialogNotReady()
-            }
+        LStoreUtil.getTextFromGGDrive(
+                context = activity,
+                linkGGDrive = linkGGDriveCheckReady,
+                ggCallback = object : GGCallback {
+                    override fun onGGFailure(call: Call, e: Exception) {
+                        e.printStackTrace()
+                        showDialogNotReady()
+                    }
 
-            @Throws(IOException::class)
-            override fun onResponse(call: Call, response: Response) {
-                if (response.isSuccessful) {
-                    val json = response.body()?.string()
-                    logD("checkReady -> onResponse isSuccessful $json")
+                    override fun onGGResponse(listGG: ArrayList<GG>) {
+                        logD("getGG listGG: -> " + LApplication.gson.toJson(listGG))
 
-//                    val versionServer = Integer.parseInt(response.body()!!.string())
-//                    logD("onResponse $versionServer")
-//                    if (versionServer == 1) {
-//                        isCheckReadyDone = true
-//                        LPrefUtil.setCheckAppReady(activity, true)
-//                        goToHome()
-//                    } else {
-//                        showDialogNotReady()
-//                    }
-                } else {
-                    logD("onResponse !isSuccessful: $response")
-                    showDialogNotReady()
-                }
-            }
-        })
+                        fun isReady(): Boolean {
+                            listGG.forEach { gg ->
+                                if (activity.packageName == gg.pkg) {
+                                    return gg.isReady
+                                }
+                            }
+                            return false
+                        }
+
+                        val isReady = isReady()
+                        if (isReady) {
+                            LPrefUtil.setCheckAppReady(context = activity, value = true)
+                            setReady()
+                        } else {
+                            showDialogNotReady()
+                        }
+                    }
+                })
     }
 }

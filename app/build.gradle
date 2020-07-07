@@ -11,8 +11,8 @@ android {
         applicationId "loitp93.anhseyeuemtucainhindautien"
         minSdkVersion 19
         targetSdkVersion 29
-        versionCode 3
-        versionName "1.0.3"
+        versionCode 2
+        versionName "1.0.2"
         multiDexEnabled true
 
         renderscriptTargetApi 19
@@ -74,7 +74,7 @@ repositories {
 }
 
 dependencies {
-    api 'com.github.tplloi:basemaster:4.3.6'
+    api 'com.github.tplloi:basemaster:4.3.7'
 }
 //apply plugin: 'com.google.gms.google-services'
 //com.google.gms.googleservices.GoogleServicesPlugin.config.disableVersionCheck = true
