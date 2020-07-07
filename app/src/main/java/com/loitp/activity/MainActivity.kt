@@ -1,6 +1,7 @@
 package com.loitp.activity
 
 import android.os.Bundle
+import android.os.Handler
 import com.core.base.BaseFontActivity
 import com.core.utilities.LUIUtil
 import com.loitp.R
@@ -38,5 +39,18 @@ class MainActivity : BaseFontActivity() {
     public override fun onDestroy() {
         adView.destroy()
         super.onDestroy()
+    }
+
+    private var doubleBackToExitPressedOnce = false
+    override fun onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed()
+            return
+        }
+        this.doubleBackToExitPressedOnce = true
+        showShort(getString(R.string.press_again_to_exit))
+        Handler().postDelayed({
+            doubleBackToExitPressedOnce = false
+        }, 2000)
     }
 }
