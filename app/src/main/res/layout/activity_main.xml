@@ -1,24 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:ads="http://schemas.android.com/apk/res-auto"
+<com.infideap.drawerbehavior.AdvanceDrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context="com.loitp.activity.MainActivity">
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
 
-    <LinearLayout
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@color/white"
+        android:fitsSystemWindows="true"
+        android:theme="@style/Widget.Design.NavigationView"
+        app:headerLayout="@layout/view_drawer_behavior_nav_header_main"
+        app:menu="@menu/activity_drawer_behavior_drawer" />
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navViewNotification"
+        android:layout_width="800dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:background="@color/colorPrimary"
+        android:fitsSystemWindows="false">
+
+        <include layout="@layout/view_drawer_behavior_content_notification" />
+    </com.google.android.material.navigation.NavigationView>
+
+    <include
+        layout="@layout/view_drawer_behavior_app_bar_default"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:orientation="vertical">
+        android:layout_height="match_parent" />
 
-        <com.google.android.gms.ads.AdView
-            android:id="@+id/adView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            ads:adSize="SMART_BANNER"
-            ads:adUnitId="@string/str_b" />
-    </LinearLayout>
-</RelativeLayout>
+</com.infideap.drawerbehavior.AdvanceDrawerLayout>
