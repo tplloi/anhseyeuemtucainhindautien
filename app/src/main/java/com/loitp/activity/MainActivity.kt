@@ -8,12 +8,13 @@ import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import com.core.base.BaseFontActivity
+import com.core.utilities.LImageUtil
 import com.core.utilities.LUIUtil
 import com.google.android.material.navigation.NavigationView
 import com.loitp.R
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.view_drawer_main.*
-import kotlinx.android.synthetic.main.view_drawer_start.*
+import kotlinx.android.synthetic.main.view_drawer_start.view.*
 
 class MainActivity : BaseFontActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -47,8 +48,8 @@ class MainActivity : BaseFontActivity(), NavigationView.OnNavigationItemSelected
         drawerLayout.useCustomBehavior(Gravity.START)
         drawerLayout.useCustomBehavior(Gravity.END)
 
-//        ivCover.setImageResource(R.drawable.ic_launcher_playstore)
-//        LImageUtil.load(context = activity, url = "https://live.staticflickr.com/4380/35997985613_8fd2eab2d9_c.jpg", imageView = ivCover)
+        //cover
+        LImageUtil.load(context = activity, url = getString(R.string.link_cover), imageView = navViewStart.getHeaderView(0).ivCover)
     }
 
     public override fun onPause() {
