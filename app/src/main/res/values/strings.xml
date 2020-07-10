@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">Anh Se Yeu Em Tu Cai Nhin Dau Tien</string>
+    <string name="app_name_vn">Anh sẽ yêu em từ cái nhìn đầu tiên</string>
 
     <string name="link_gg_drive"><![CDATA[https://drive.google.com/uc?export=download&id=1femuL17MUTz7t0yqUkMWB5yCea1W6kqI]]></string>
+    <string name="link_cover"><![CDATA[https://live.staticflickr.com/4380/35997985613_8fd2eab2d9_c.jpg]]></string>
 <!--    <string name="str_b">ca-app-pub-3165963943681013/1910819292</string>-->
 <!--    <string name="str_f">ca-app-pub-3165963943681013/6971574284</string>-->
 <!--    <string name="str_reward">ca-app-pub-3165963943681013/9406165930</string>-->

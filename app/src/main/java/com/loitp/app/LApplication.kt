@@ -13,6 +13,7 @@ import com.utils.util.Utils
 
 //TODO id admob
 //TODO debug const
+//TODO link cover
 
 class LApplication : MultiDexApplication() {
     private val TAG = LApplication::class.java.simpleName

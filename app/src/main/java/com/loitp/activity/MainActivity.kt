@@ -13,6 +13,7 @@ import com.google.android.material.navigation.NavigationView
 import com.loitp.R
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.view_drawer_main.*
+import kotlinx.android.synthetic.main.view_drawer_start.*
 
 class MainActivity : BaseFontActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -42,9 +43,12 @@ class MainActivity : BaseFontActivity(), NavigationView.OnNavigationItemSelected
         )
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
-        navView.setNavigationItemSelectedListener(this)
+        navViewStart.setNavigationItemSelectedListener(this)
         drawerLayout.useCustomBehavior(Gravity.START)
         drawerLayout.useCustomBehavior(Gravity.END)
+
+//        ivCover.setImageResource(R.drawable.ic_launcher_playstore)
+//        LImageUtil.load(context = activity, url = "https://live.staticflickr.com/4380/35997985613_8fd2eab2d9_c.jpg", imageView = ivCover)
     }
 
     public override fun onPause() {
@@ -85,7 +89,7 @@ class MainActivity : BaseFontActivity(), NavigationView.OnNavigationItemSelected
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.main_drawer_behavior, menu)
+        menuInflater.inflate(R.menu.menu_drawer_end, menu)
         return super.onCreateOptionsMenu(menu)
     }
 

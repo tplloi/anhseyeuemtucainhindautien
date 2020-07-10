@@ -10,7 +10,7 @@
     tools:openDrawer="start">
 
     <com.google.android.material.navigation.NavigationView
-        android:id="@+id/navView"
+        android:id="@+id/navViewStart"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
@@ -18,10 +18,10 @@
         android:fitsSystemWindows="true"
         android:theme="@style/Widget.Design.NavigationView"
         app:headerLayout="@layout/view_drawer_start"
-        app:menu="@menu/activity_drawer_behavior_drawer" />
+        app:menu="@menu/menu_drawer_start" />
 
     <com.google.android.material.navigation.NavigationView
-        android:id="@+id/navViewNotification"
+        android:id="@+id/navViewEnd"
         android:layout_width="@dimen/w_300"
         android:layout_height="match_parent"
         android:layout_gravity="end"
