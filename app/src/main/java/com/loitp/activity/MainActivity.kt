@@ -33,25 +33,20 @@ class MainActivity : BaseFontActivity(), NavigationView.OnNavigationItemSelected
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         LUIUtil.createAdBanner(adView)
-
         setSupportActionBar(toolbar)
 
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
         val toggle = ActionBarDrawerToggle(
-            this,
-            drawerLayout,
-            toolbar,
-            R.string.navigation_drawer_open,
-            R.string.navigation_drawer_close
+                this,
+                drawerLayout,
+                toolbar,
+                R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close
         )
-        drawerLayout?.addDrawerListener(toggle)
+        drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
         navView.setNavigationItemSelectedListener(this)
-        drawerLayout?.useCustomBehavior(Gravity.START)
-        drawerLayout?.useCustomBehavior(Gravity.END)
+        drawerLayout.useCustomBehavior(Gravity.START)
+        drawerLayout.useCustomBehavior(Gravity.END)
     }
 
     public override fun onPause() {
@@ -71,26 +66,23 @@ class MainActivity : BaseFontActivity(), NavigationView.OnNavigationItemSelected
 
     private var doubleBackToExitPressedOnce = false
     override fun onBackPressed() {
-//        if (doubleBackToExitPressedOnce) {
-//            super.onBackPressed()
-//            return
-//        }
-//        this.doubleBackToExitPressedOnce = true
-//        showShort(getString(R.string.press_again_to_exit))
-//        Handler().postDelayed({
-//            doubleBackToExitPressedOnce = false
-//        }, 2000)
-
-        if (drawerLayout?.isDrawerOpen(GravityCompat.START) == true) {
-            drawerLayout?.closeDrawer(GravityCompat.START)
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START)
         } else {
-            super.onBackPressed()
+            if (doubleBackToExitPressedOnce) {
+                super.onBackPressed()
+                return
+            }
+            this.doubleBackToExitPressedOnce = true
+            showShort(getString(R.string.press_again_to_exit))
+            Handler().postDelayed({
+                doubleBackToExitPressedOnce = false
+            }, 2000)
         }
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        // Handle navigation view item clicks here.
-        drawerLayout?.closeDrawer(GravityCompat.START)
+        drawerLayout.closeDrawer(GravityCompat.START)
         return true
     }
 
@@ -102,7 +94,7 @@ class MainActivity : BaseFontActivity(), NavigationView.OnNavigationItemSelected
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.actionRightDrawer -> {
-                drawerLayout?.openDrawer(GravityCompat.END)
+                drawerLayout.openDrawer(GravityCompat.END)
                 return true
             }
         }
