@@ -10,11 +10,9 @@ import androidx.core.view.GravityCompat
 import com.core.base.BaseFontActivity
 import com.core.utilities.LUIUtil
 import com.google.android.material.navigation.NavigationView
-import com.google.android.material.snackbar.Snackbar
 import com.loitp.R
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.view_drawer_behavior_app_bar_default.*
-import kotlinx.android.synthetic.main.view_drawer_behavior_content_default.*
+import kotlinx.android.synthetic.main.view_drawer_main.*
 
 class MainActivity : BaseFontActivity(), NavigationView.OnNavigationItemSelectedListener {
 

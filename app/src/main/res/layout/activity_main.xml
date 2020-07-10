@@ -17,22 +17,22 @@
         android:background="@color/white"
         android:fitsSystemWindows="true"
         android:theme="@style/Widget.Design.NavigationView"
-        app:headerLayout="@layout/view_drawer_behavior_nav_header_main"
+        app:headerLayout="@layout/view_drawer_start"
         app:menu="@menu/activity_drawer_behavior_drawer" />
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navViewNotification"
-        android:layout_width="800dp"
+        android:layout_width="@dimen/w_300"
         android:layout_height="match_parent"
         android:layout_gravity="end"
         android:background="@color/colorPrimary"
         android:fitsSystemWindows="false">
 
-        <include layout="@layout/view_drawer_behavior_content_notification" />
+        <include layout="@layout/view_drawer_end" />
     </com.google.android.material.navigation.NavigationView>
 
     <include
-        layout="@layout/view_drawer_behavior_app_bar_default"
+        layout="@layout/view_drawer_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
