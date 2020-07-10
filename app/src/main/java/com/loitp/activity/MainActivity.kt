@@ -9,6 +9,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import com.core.base.BaseFontActivity
 import com.core.utilities.LImageUtil
+import com.core.utilities.LSocialUtil
 import com.core.utilities.LUIUtil
 import com.google.android.material.navigation.NavigationView
 import com.loitp.R
@@ -86,6 +87,21 @@ class MainActivity : BaseFontActivity(), NavigationView.OnNavigationItemSelected
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         drawerLayout.closeDrawer(GravityCompat.START)
+        when (item.itemId) {
+            R.id.navRateApp -> {
+                LSocialUtil.rateApp(activity = activity, packageName = packageName)
+            }
+            R.id.navMoreApp -> {
+                //TODO pass developer name
+                LSocialUtil.moreApp(activity)
+            }
+            R.id.navFacebookFanPage -> {
+                LSocialUtil.likeFacebookFanpage(activity)
+            }
+            R.id.navShareApp -> {
+                LSocialUtil.shareApp(activity)
+            }
+        }
         return true
     }
 

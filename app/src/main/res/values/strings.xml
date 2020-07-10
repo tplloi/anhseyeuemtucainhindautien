@@ -24,4 +24,8 @@
     <string name="press_again_to_exit">Nhấn lần nữa để thoát ứng dụng</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="rate_app">Đánh giá</string>
+    <string name="more_app">Thêm ứng dụng</string>
+    <string name="facebook_fanpage">Facebook fanpage</string>
+    <string name="share_app">Chia sẻ</string>
 </resources>
