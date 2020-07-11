@@ -5,24 +5,24 @@
 
         <item
             android:id="@+id/navGallery"
-            android:icon="@mipmap/ic_launcher"
+            android:icon="@drawable/ic_home_black_48dp"
             android:title="@string/gallery" />
 
         <item
             android:id="@+id/navRateApp"
-            android:icon="@mipmap/ic_launcher"
+            android:icon="@drawable/ic_rate_review_black_48dp"
             android:title="@string/rate_app" />
         <item
             android:id="@+id/navMoreApp"
-            android:icon="@mipmap/ic_launcher"
+            android:icon="@drawable/ic_get_app_black_48dp"
             android:title="@string/more_app" />
         <item
             android:id="@+id/navFacebookFanPage"
-            android:icon="@mipmap/ic_launcher"
+            android:icon="@drawable/ic_account_circle_black_48dp"
             android:title="@string/facebook_fanpage" />
         <item
             android:id="@+id/navShareApp"
-            android:icon="@mipmap/ic_launcher"
+            android:icon="@drawable/ic_email_black_48dp"
             android:title="@string/share_app" />
     </group>
 

@@ -11,13 +11,11 @@ import androidx.core.view.GravityCompat
 import com.core.base.BaseFontActivity
 import com.core.common.Constants
 import com.core.helper.gallery.GalleryCoreSplashActivity
-import com.core.utilities.LActivityUtil
-import com.core.utilities.LImageUtil
-import com.core.utilities.LSocialUtil
-import com.core.utilities.LUIUtil
+import com.core.utilities.*
 import com.google.android.material.navigation.NavigationView
 import com.loitp.R
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.view_drawer_end.*
 import kotlinx.android.synthetic.main.view_drawer_main.*
 import kotlinx.android.synthetic.main.view_drawer_start.view.*
 
@@ -55,6 +53,8 @@ class MainActivity : BaseFontActivity(), NavigationView.OnNavigationItemSelected
 
         //cover
         LImageUtil.load(context = activity, url = getString(R.string.link_cover), imageView = navViewStart.getHeaderView(0).ivCover)
+
+        tvAd.text = LStoreUtil.readTxtFromRawFolder(context = activity, nameOfRawFile = R.raw.ad)
     }
 
     public override fun onPause() {
