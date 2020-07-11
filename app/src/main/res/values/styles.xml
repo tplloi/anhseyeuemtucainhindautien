@@ -1,11 +1,8 @@
 <resources>
+    <style name="SplashTheme" parent="AppThemeAndroidO">
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowBackground">@drawable/startup</item>
+    </style>
 
-    <!-- Base application theme. -->
-    <!--<style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        &lt;!&ndash; Customize your theme here. &ndash;&gt;
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-    </style>-->
-
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 </resources>
