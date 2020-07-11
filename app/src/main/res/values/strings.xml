@@ -20,6 +20,7 @@
     <string name="need_permisson">Cần quyền truy cập</string>
     <string name="need_permisson_to_use_app">Vui lòng cấp quyền để có thể sử dụng app.</string>
     <string name="app_is_not_ready">Ứng dụng tạm thời chưa khả dụng, vui lòng thử lại sau.</string>
+    <string name="check_ur_connection">Vui lòng kiểm tra kết nối của bạn</string>
     <string name="warning">Thông báo</string>
     <string name="press_again_to_exit">Nhấn lần nữa để thoát ứng dụng</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -29,4 +30,6 @@
     <string name="facebook_fanpage">Facebook fanpage</string>
     <string name="share_app">Chia sẻ</string>
     <string name="gallery">Thư viện ảnh</string>
+    <string name="exit">Thoát</string>
+    <string name="try_again">Thử lại</string>
 </resources>

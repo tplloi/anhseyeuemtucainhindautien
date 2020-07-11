@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.provider.Settings
 import com.core.base.BaseFontActivity
 import com.core.utilities.*
-import com.interfaces.Callback1
 import com.interfaces.Callback2
 import com.interfaces.GGCallback
 import com.karumi.dexter.Dexter
@@ -155,13 +154,18 @@ class SplashActivity : BaseFontActivity() {
             } else {
                 getString(R.string.check_ur_connection)
             }
-            val alertDial = LDialogUtil.showDialog1(context = activity,
+            val alertDial = LDialogUtil.showDialog2(context = activity,
                     title = getString(R.string.warning),
                     msg = title,
-                    button1 = getString(R.string.yes),
-                    callback1 = object : Callback1 {
+                    button1 = getString(R.string.exit),
+                    button2 = getString(R.string.try_again),
+                    callback2 = object : Callback2 {
                         override fun onClick1() {
                             onBackPressed()
+                        }
+
+                        override fun onClick2() {
+                            checkReady()
                         }
                     })
             alertDial.setCancelable(false)
