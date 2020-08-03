@@ -14,6 +14,7 @@ import com.core.helper.gallery.GalleryCoreSplashActivity
 import com.core.utilities.*
 import com.google.android.material.navigation.NavigationView
 import com.loitp.R
+import com.loitp.fragment.HomeFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.view_drawer_end.*
 import kotlinx.android.synthetic.main.view_drawer_main.*
@@ -55,6 +56,13 @@ class MainActivity : BaseFontActivity(), NavigationView.OnNavigationItemSelected
         LImageUtil.load(context = activity, url = getString(R.string.link_cover), imageView = navViewStart.getHeaderView(0).ivCover)
 
         tvAd.text = LStoreUtil.readTxtFromRawFolder(context = activity, nameOfRawFile = R.raw.ad)
+
+        switchHomeScreen()
+    }
+
+    private fun switchHomeScreen() {
+        navViewStart.menu.performIdentifierAction(R.id.navHome, 0)
+        navViewStart.menu.findItem(R.id.navHome).isChecked = true
     }
 
     public override fun onPause() {
@@ -91,6 +99,10 @@ class MainActivity : BaseFontActivity(), NavigationView.OnNavigationItemSelected
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
+            R.id.navHome -> {
+                logD("onNavigationItemSelected navHome")
+                LScreenUtil.addFragment(activity, R.id.flContainer, HomeFragment(), false)
+            }
             R.id.navGallery -> {
                 val intent = Intent(activity, GalleryCoreSplashActivity::class.java)
                 intent.putExtra(Constants.AD_UNIT_ID_BANNER, getString(R.string.str_b))
@@ -117,7 +129,11 @@ class MainActivity : BaseFontActivity(), NavigationView.OnNavigationItemSelected
                 LSocialUtil.shareApp(activity)
             }
         }
+
         drawerLayout.closeDrawer(GravityCompat.START)
+        navViewStart.postDelayed({
+            navViewStart.menu.findItem(R.id.navHome).isChecked = true//hight light navViewStart menu home
+        }, 500)
         return true
     }
 

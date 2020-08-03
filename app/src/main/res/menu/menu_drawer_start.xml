@@ -4,8 +4,13 @@
     <group android:checkableBehavior="single">
 
         <item
-            android:id="@+id/navGallery"
+            android:id="@+id/navHome"
             android:icon="@drawable/ic_home_black_48dp"
+            android:title="@string/home" />
+
+        <item
+            android:id="@+id/navGallery"
+            android:icon="@drawable/ic_insert_photo_black_48dp"
             android:title="@string/gallery" />
 
         <item
