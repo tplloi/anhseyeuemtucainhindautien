@@ -13,10 +13,10 @@ import com.utils.util.Utils
 
 //TODO id admob
 //TODO debug const
-//TODO link cover
+//TODO link link_cover string
 
 class LApplication : MultiDexApplication() {
-    private val TAG = LApplication::class.java.simpleName
+    private val logTag = LApplication::class.java.simpleName
 
     companion object {
         val gson: Gson = Gson()

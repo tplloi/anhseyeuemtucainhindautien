@@ -119,7 +119,6 @@ class MainActivity : BaseFontActivity(), NavigationView.OnNavigationItemSelected
                 LSocialUtil.rateApp(activity = activity, packageName = packageName)
             }
             R.id.navMoreApp -> {
-                //TODO pass developer name
                 LSocialUtil.moreApp(activity)
             }
             R.id.navFacebookFanPage -> {
