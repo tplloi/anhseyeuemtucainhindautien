@@ -1,26 +1,28 @@
 package com.loitp.viewmodels
 
-import android.app.Application
+import android.content.Context
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.core.base.BaseViewModel
+import com.core.utilities.LStoreUtil
 import com.service.model.UserTest
+import kotlinx.coroutines.launch
 
-class MainViewModel(application: Application) : BaseViewModel(application) {
-    private val logTag = javaClass.simpleName
+class MainViewModel : BaseViewModel() {
+    private val logTag = "loitpp" + javaClass.simpleName
 
-    val userTestListLiveData: MutableLiveData<ArrayList<UserTest>?> = MutableLiveData()
+    val listChapLiveData: MutableLiveData<List<String>> = MutableLiveData()
 
-    fun addUserList(userTestList: ArrayList<UserTest>, isRefresh: Boolean?) {
-        //LLog.d(TAG, "addUserList size: ${userTestList.size}, isRefresh: $isRefresh")
-        var currentUserTestList = userTestListLiveData.value
-        if (isRefresh == true) {
-            currentUserTestList?.clear()
+    fun loadListChap(context: Context) {
+        ioScope.launch {
+            showLoading(true)
+
+            val string = LStoreUtil.readTxtFromAsset(context = context, assetFile = "db.sqlite")
+            Log.d(logTag, "loadListChap string $string")
+            val listChap = string.split("#")
+            listChapLiveData.postValue(listChap)
+
+            showLoading(false)
         }
-        if (currentUserTestList == null) {
-            currentUserTestList = ArrayList()
-        }
-        currentUserTestList.addAll(userTestList)
-        //LLog.d(TAG, "addUserList currentUserTestList " + LApplication.gson.toJson(currentUserTestList))
-        userTestListLiveData.post(currentUserTestList)
     }
 }
