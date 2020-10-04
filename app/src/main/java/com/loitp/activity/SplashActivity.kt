@@ -6,6 +6,8 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
+import com.annotation.LayoutId
+import com.annotation.LogTag
 import com.core.base.BaseFontActivity
 import com.core.utilities.*
 import com.interfaces.Callback2
@@ -22,6 +24,8 @@ import com.model.GG
 import kotlinx.android.synthetic.main.activity_splash.*
 import okhttp3.Call
 
+@LayoutId(R.layout.activity_splash)
+@LogTag("SplashActivity")
 class SplashActivity : BaseFontActivity() {
     private var isAnimDone = false
     private var isCheckReadyDone = false
@@ -37,7 +41,7 @@ class SplashActivity : BaseFontActivity() {
         })
         textViewVersion.text = "Version ${BuildConfig.VERSION_NAME}"
         tvPolicy.setOnClickListener {
-            LSocialUtil.openBrowserPolicy(context = activity)
+            LSocialUtil.openBrowserPolicy(context = this)
         }
     }
 
@@ -84,30 +88,18 @@ class SplashActivity : BaseFontActivity() {
 
     private fun goToHome() {
         if (isAnimDone && isCheckReadyDone) {
-            val intent = Intent(activity, MainActivity::class.java)
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
-            LActivityUtil.tranIn(activity)
+            LActivityUtil.tranIn(this)
             LUIUtil.setDelay(mls = 1000, runnable = Runnable {
                 finish()
             })
         }
     }
 
-    override fun setFullScreen(): Boolean {
-        return false
-    }
-
-    override fun setTag(): String {
-        return javaClass.simpleName
-    }
-
-    override fun setLayoutResourceId(): Int {
-        return R.layout.activity_splash
-    }
-
     private fun showSettingsDialog() {
         val alertDialog = LDialogUtil.showDialog2(
-                context = activity,
+                context = this,
                 title = getString(R.string.need_permisson),
                 msg = getString(R.string.need_permisson_to_use_app),
                 button1 = getString(R.string.setting),
@@ -130,7 +122,7 @@ class SplashActivity : BaseFontActivity() {
 
     private fun showShouldAcceptPermission() {
         val alertDialog = LDialogUtil.showDialog2(
-                context = activity,
+                context = this,
                 title = getString(R.string.need_permisson),
                 msg = getString(R.string.need_permisson_to_use_app),
                 button1 = getString(R.string.yes),
@@ -149,12 +141,12 @@ class SplashActivity : BaseFontActivity() {
 
     private fun showDialogNotReady() {
         runOnUiThread {
-            val title = if (LConnectivityUtil.isConnected(activity)) {
+            val title = if (LConnectivityUtil.isConnected()) {
                 getString(R.string.app_is_not_ready)
             } else {
                 getString(R.string.check_ur_connection)
             }
-            val alertDial = LDialogUtil.showDialog2(context = activity,
+            val alertDial = LDialogUtil.showDialog2(context = this,
                     title = getString(R.string.warning),
                     msg = title,
                     button1 = getString(R.string.exit),
@@ -181,13 +173,12 @@ class SplashActivity : BaseFontActivity() {
             }
         }
 
-        if (LPrefUtil.getCheckAppReady(activity)) {
+        if (LPrefUtil.getCheckAppReady()) {
             setReady()
             return
         }
         val linkGGDriveCheckReady = getString(R.string.link_gg_drive)
         LStoreUtil.getTextFromGGDrive(
-                context = activity,
                 linkGGDrive = linkGGDriveCheckReady,
                 ggCallback = object : GGCallback {
                     override fun onGGFailure(call: Call, e: Exception) {
@@ -200,7 +191,7 @@ class SplashActivity : BaseFontActivity() {
 
                         fun isReady(): Boolean {
                             listGG.forEach { gg ->
-                                if (activity.packageName == gg.pkg) {
+                                if (packageName == gg.pkg) {
                                     return gg.isReady
                                 }
                             }
@@ -209,7 +200,7 @@ class SplashActivity : BaseFontActivity() {
 
                         val isReady = isReady()
                         if (isReady) {
-                            LPrefUtil.setCheckAppReady(context = activity, value = true)
+                            LPrefUtil.setCheckAppReady(value = true)
                             setReady()
                         } else {
                             showDialogNotReady()

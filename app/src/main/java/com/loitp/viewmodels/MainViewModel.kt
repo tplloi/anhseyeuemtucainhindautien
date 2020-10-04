@@ -17,7 +17,7 @@ class MainViewModel : BaseViewModel() {
         ioScope.launch {
             showLoading(true)
 
-            val string = LStoreUtil.readTxtFromAsset(context = context, assetFile = "db.sqlite")
+            val string = LStoreUtil.readTxtFromAsset(assetFile = "db.sqlite")
             Log.d(logTag, "loadListChap string $string")
             val listChap = string.split("#")
             listChapLiveData.postValue(listChap)

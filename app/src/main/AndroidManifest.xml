@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppThemeAndroidO"
         tools:ignore="GoogleAppIndexingWarning"
-        tools:replace="android:allowBackup">
+        tools:replace="android:allowBackup,android:name">
 
         <activity
             android:name=".activity.SplashActivity"
