@@ -3,13 +3,17 @@ package com.loitp.fragment
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
+import com.annotation.LayoutId
+import com.annotation.LogTag
+import com.core.base.BaseApplication
 import com.core.base.BaseFragment
-import com.google.ads.interactivemedia.v3.internal.it
 import com.loitp.R
 import com.loitp.app.LApplication
 import com.loitp.viewmodels.MainViewModel
 import kotlinx.android.synthetic.main.frm_home.*
 
+@LayoutId(R.layout.frm_home)
+@LogTag("HomeFragment")
 class HomeFragment : BaseFragment() {
 
     private var mainViewModel: MainViewModel? = null
@@ -21,14 +25,6 @@ class HomeFragment : BaseFragment() {
         context?.let {
             mainViewModel?.loadListChap(context = it)
         }
-    }
-
-    override fun setLayoutResourceId(): Int {
-        return R.layout.frm_home
-    }
-
-    override fun setTag(): String? {
-        return "loitpp" + javaClass.simpleName
     }
 
     private fun setupViewModels() {
@@ -43,7 +39,7 @@ class HomeFragment : BaseFragment() {
             })
 
             mvm.listChapLiveData.observe(viewLifecycleOwner, Observer { listChap ->
-                logD("<<<listChapLiveData " + LApplication.gson.toJson(listChap))
+                logD("<<<listChapLiveData " + BaseApplication.gson.toJson(listChap))
             })
         }
 

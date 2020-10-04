@@ -4,13 +4,13 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 29
-    buildToolsVersion '29.0.3'
+    compileSdkVersion 30
+    buildToolsVersion '30.0.2'
 
     defaultConfig {
         applicationId "loitp93.anhseyeuemtucainhindautien"
         minSdkVersion 19
-        targetSdkVersion 29
+        targetSdkVersion 30
         versionCode 3
         versionName "1.0.3"
         multiDexEnabled true
@@ -74,7 +74,7 @@ repositories {
 }
 
 dependencies {
-    api 'com.github.tplloi:basemaster:4.4.13'
+    api 'com.github.tplloi:basemaster:4.4.17'
 
     //https://github.com/shiburagi/Drawer-Behavior
     api 'com.infideap.drawerbehavior:drawer-behavior:1.0.1'

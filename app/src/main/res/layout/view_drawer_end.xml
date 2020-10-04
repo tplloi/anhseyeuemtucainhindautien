@@ -3,24 +3,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/colorPrimary"
     android:orientation="vertical">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
+        android:background="@color/black"
         android:padding="@dimen/padding_medium"
         android:text="@string/app_name_vn"
         android:textColor="@color/white"
         android:textSize="@dimen/txt_medium" />
 
-<!--    <View-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="@dimen/w_1"-->
-<!--        android:layout_marginStart="@dimen/margin_medium"-->
-<!--        android:layout_marginEnd="@dimen/margin_medium"-->
-<!--        android:background="@color/whiteSmoke" />-->
+    <!--    <View-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="@dimen/w_1"-->
+    <!--        android:layout_marginStart="@dimen/margin_medium"-->
+    <!--        android:layout_marginEnd="@dimen/margin_medium"-->
+    <!--        android:background="@color/whiteSmoke" />-->
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -32,7 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/padding_medium"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="@dimen/txt_medium"
             tools:text="@string/app_name_vn" />
 

@@ -8,6 +8,8 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
+import com.annotation.LayoutId
+import com.annotation.LogTag
 import com.core.base.BaseFontActivity
 import com.core.common.Constants
 import com.core.helper.gallery.GalleryCoreSplashActivity
@@ -20,22 +22,13 @@ import kotlinx.android.synthetic.main.view_drawer_end.*
 import kotlinx.android.synthetic.main.view_drawer_main.*
 import kotlinx.android.synthetic.main.view_drawer_start.view.*
 
+@LayoutId(R.layout.activity_main)
+@LogTag("MainActivity")
 class MainActivity : BaseFontActivity(), NavigationView.OnNavigationItemSelectedListener {
-
-    override fun setFullScreen(): Boolean {
-        return false
-    }
-
-    override fun setLayoutResourceId(): Int {
-        return R.layout.activity_main
-    }
-
-    override fun setTag(): String? {
-        return javaClass.simpleName
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         LUIUtil.createAdBanner(adView)
         setSupportActionBar(toolbar)
 
@@ -53,9 +46,9 @@ class MainActivity : BaseFontActivity(), NavigationView.OnNavigationItemSelected
         drawerLayout.useCustomBehavior(Gravity.END)
 
         //cover
-        LImageUtil.load(context = activity, url = getString(R.string.link_cover), imageView = navViewStart.getHeaderView(0).ivCover)
+        LImageUtil.load(context = this, url = getString(R.string.link_cover), imageView = navViewStart.getHeaderView(0).ivCover)
 
-        tvAd.text = LStoreUtil.readTxtFromRawFolder(context = activity, nameOfRawFile = R.raw.ad)
+        tvAd.text = LStoreUtil.readTxtFromRawFolder(nameOfRawFile = R.raw.ad)
 
         switchHomeScreen()
     }
@@ -101,10 +94,10 @@ class MainActivity : BaseFontActivity(), NavigationView.OnNavigationItemSelected
         when (item.itemId) {
             R.id.navHome -> {
                 logD("onNavigationItemSelected navHome")
-                LScreenUtil.addFragment(activity, R.id.flContainer, HomeFragment(), false)
+                LScreenUtil.addFragment(this, R.id.flContainer, HomeFragment(), false)
             }
             R.id.navGallery -> {
-                val intent = Intent(activity, GalleryCoreSplashActivity::class.java)
+                val intent = Intent(this, GalleryCoreSplashActivity::class.java)
                 intent.putExtra(Constants.AD_UNIT_ID_BANNER, getString(R.string.str_b))
                 intent.putExtra(Constants.BKG_SPLASH_SCREEN, getString(R.string.link_cover))
                 intent.putExtra(Constants.BKG_ROOT_VIEW, R.drawable.bkg_black)
@@ -113,19 +106,22 @@ class MainActivity : BaseFontActivity(), NavigationView.OnNavigationItemSelected
                 removeAlbumFlickrList.add(Constants.FLICKR_ID_STICKER)
                 intent.putStringArrayListExtra(Constants.KEY_REMOVE_ALBUM_FLICKR_LIST, removeAlbumFlickrList)
                 startActivity(intent)
-                LActivityUtil.tranIn(activity)
+                LActivityUtil.tranIn(this)
+            }
+            R.id.navGallery18->{
+                //TODO
             }
             R.id.navRateApp -> {
-                LSocialUtil.rateApp(activity = activity, packageName = packageName)
+                LSocialUtil.rateApp(activity = this, packageName = packageName)
             }
             R.id.navMoreApp -> {
-                LSocialUtil.moreApp(activity)
+                LSocialUtil.moreApp(this)
             }
             R.id.navFacebookFanPage -> {
-                LSocialUtil.likeFacebookFanpage(activity)
+                LSocialUtil.likeFacebookFanpage(this)
             }
             R.id.navShareApp -> {
-                LSocialUtil.shareApp(activity)
+                LSocialUtil.shareApp(this)
             }
         }
 
