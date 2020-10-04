@@ -19,11 +19,6 @@ import com.utils.util.Utils
 
 @LogTag("LApplication")
 class LApplication : BaseApplication() {
-    private val logTag = LApplication::class.java.simpleName
-
-    companion object {
-        val gson: Gson = Gson()
-    }
 
     override fun onCreate() {
         super.onCreate()

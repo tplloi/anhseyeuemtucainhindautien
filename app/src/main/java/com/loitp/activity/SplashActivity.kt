@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.provider.Settings
 import com.annotation.LayoutId
 import com.annotation.LogTag
+import com.core.base.BaseApplication
 import com.core.base.BaseFontActivity
 import com.core.utilities.*
 import com.interfaces.Callback2
@@ -187,7 +188,7 @@ class SplashActivity : BaseFontActivity() {
                     }
 
                     override fun onGGResponse(listGG: ArrayList<GG>) {
-                        logD("getGG listGG: -> " + LApplication.gson.toJson(listGG))
+                        logD("getGG listGG: -> " + BaseApplication.gson.toJson(listGG))
 
                         fun isReady(): Boolean {
                             listGG.forEach { gg ->
