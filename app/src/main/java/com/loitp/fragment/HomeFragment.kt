@@ -12,6 +12,7 @@ import com.annotation.LogTag
 import com.core.base.BaseApplication
 import com.core.base.BaseFragment
 import com.core.utilities.LActivityUtil
+import com.data.EventBusData
 import com.loitp.R
 import com.loitp.activity.ReadActivity
 import com.loitp.adapter.ChapAdapter

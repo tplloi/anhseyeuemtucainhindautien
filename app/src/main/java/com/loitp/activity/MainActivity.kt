@@ -15,6 +15,7 @@ import com.core.base.BaseFontActivity
 import com.core.common.Constants
 import com.core.helper.gallery.GalleryCoreSplashActivity
 import com.core.utilities.*
+import com.data.EventBusData
 import com.google.android.material.navigation.NavigationView
 import com.loitp.R
 import com.loitp.fragment.HomeFragment
@@ -155,4 +156,9 @@ class MainActivity : BaseFontActivity(), NavigationView.OnNavigationItemSelected
         return super.onOptionsItemSelected(item)
     }
 
+    override fun onThemeChange(event: EventBusData.ThemeEvent) {
+        super.onThemeChange(event)
+        logD("onThemeChange")
+        //TODO
+    }
 }

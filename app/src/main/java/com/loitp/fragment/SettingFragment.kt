@@ -6,10 +6,10 @@ import android.view.View
 import com.annotation.LayoutId
 import com.annotation.LogTag
 import com.core.base.BaseFragment
-import com.core.utilities.LAppResource
+import com.core.common.Constants
 import com.core.utilities.LSharedPrefsUtil
+import com.data.EventBusData
 import com.loitp.R
-import com.loitp.constant.Constant
 import kotlinx.android.synthetic.main.frm_setting.*
 
 @LayoutId(R.layout.frm_setting)
@@ -23,24 +23,29 @@ class SettingFragment : BaseFragment() {
     }
 
     private fun setupViews() {
-        val isDarkTheme = LSharedPrefsUtil.instance.getBoolean(Constant.KEY_IS_DARK_THEME, true)
+        val isDarkTheme = LSharedPrefsUtil.instance.getBoolean(Constants.KEY_IS_DARK_THEME, true)
         swDarkTheme.isChecked = isDarkTheme
         setupTheme(isDarkTheme = isDarkTheme)
 
         swDarkTheme.setOnCheckedChangeListener { _, isOn ->
-            setupTheme(isDarkTheme = isOn)
+            EventBusData.instance.sendThemeChange(isDarkTheme = isOn)
         }
     }
 
     private fun setupTheme(isDarkTheme: Boolean) {
         if (isDarkTheme) {
-            LSharedPrefsUtil.instance.putBoolean(Constant.KEY_IS_DARK_THEME, true)
+            LSharedPrefsUtil.instance.putBoolean(Constants.KEY_IS_DARK_THEME, true)
             layoutRootView.setBackgroundColor(Color.BLACK)
             swDarkTheme.setTextColor(Color.WHITE)
         } else {
-            LSharedPrefsUtil.instance.putBoolean(Constant.KEY_IS_DARK_THEME, false)
+            LSharedPrefsUtil.instance.putBoolean(Constants.KEY_IS_DARK_THEME, false)
             layoutRootView.setBackgroundColor(Color.WHITE)
             swDarkTheme.setTextColor(Color.BLACK)
         }
+    }
+
+    override fun onThemeChange(event: EventBusData.ThemeEvent) {
+        super.onThemeChange(event)
+        setupTheme(isDarkTheme = event.isDarkTheme)
     }
 }
