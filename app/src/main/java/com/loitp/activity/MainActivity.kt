@@ -17,6 +17,7 @@ import com.core.utilities.*
 import com.google.android.material.navigation.NavigationView
 import com.loitp.R
 import com.loitp.fragment.HomeFragment
+import com.loitp.fragment.SettingFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.view_drawer_end.*
 import kotlinx.android.synthetic.main.view_drawer_main.*
@@ -93,8 +94,7 @@ class MainActivity : BaseFontActivity(), NavigationView.OnNavigationItemSelected
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.navHome -> {
-                logD("onNavigationItemSelected navHome")
-                LScreenUtil.addFragment(this, R.id.flContainer, HomeFragment(), false)
+                LScreenUtil.replaceFragment(this, R.id.flContainer, HomeFragment(), false)
             }
             R.id.navGallery -> {
                 val intent = Intent(this, GalleryCoreSplashActivity::class.java)
@@ -108,7 +108,7 @@ class MainActivity : BaseFontActivity(), NavigationView.OnNavigationItemSelected
                 startActivity(intent)
                 LActivityUtil.tranIn(this)
             }
-            R.id.navGallery18->{
+            R.id.navGallery18 -> {
                 LSocialUtil.openBrowserGirl(context = this)
             }
             R.id.navRateApp -> {
@@ -122,6 +122,9 @@ class MainActivity : BaseFontActivity(), NavigationView.OnNavigationItemSelected
             }
             R.id.navShareApp -> {
                 LSocialUtil.shareApp(this)
+            }
+            R.id.navSetting -> {
+                LScreenUtil.replaceFragment(this, R.id.flContainer, SettingFragment(), false)
             }
         }
 

@@ -34,6 +34,10 @@
             android:id="@+id/navShareApp"
             android:icon="@drawable/ic_email_black_48dp"
             android:title="@string/share_app" />
+        <item
+            android:id="@+id/navSetting"
+            android:icon="@drawable/ic_settings_black_48dp"
+            android:title="@string/setting" />
     </group>
 
 </menu>
