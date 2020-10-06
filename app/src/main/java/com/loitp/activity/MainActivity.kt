@@ -3,6 +3,7 @@ package com.loitp.activity
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
@@ -84,8 +85,8 @@ class MainActivity : BaseFontActivity(), NavigationView.OnNavigationItemSelected
                 return
             }
             this.doubleBackToExitPressedOnce = true
-            showShort(getString(R.string.press_again_to_exit))
-            Handler().postDelayed({
+            showShort(msg = getString(R.string.press_again_to_exit), isTopAnchor = false)
+            Handler(Looper.getMainLooper()).postDelayed({
                 doubleBackToExitPressedOnce = false
             }, 2000)
         }

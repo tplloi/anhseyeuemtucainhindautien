@@ -10,4 +10,8 @@
 
     <!--    <corners android:radius="@dimen/round_medium" />-->
 
+    <stroke
+        android:width="@dimen/w_1"
+        android:color="@color/gray" />
+
 </shape>
