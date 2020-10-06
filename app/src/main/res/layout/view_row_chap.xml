@@ -20,4 +20,12 @@
         android:textSize="@dimen/txt_medium"
         tools:text="@string/app_name" />
 
+    <ImageView
+        android:layout_width="@dimen/w_30"
+        android:layout_height="@dimen/w_30"
+        android:layout_gravity="center_vertical|end"
+        android:layout_marginEnd="@dimen/margin_small"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/ic_navigate_next_white_48dp" />
+
 </androidx.cardview.widget.CardView>
