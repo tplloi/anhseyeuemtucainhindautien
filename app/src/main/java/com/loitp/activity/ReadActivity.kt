@@ -1,11 +1,15 @@
 package com.loitp.activity
 
 import android.os.Bundle
+import android.view.View
 import com.annotation.IsShowAdWhenExit
 import com.annotation.LayoutId
 import com.annotation.LogTag
 import com.core.base.BaseFontActivity
+import com.core.utilities.LActivityUtil
 import com.loitp.R
+import com.views.layout.swipeback.SwipeBackLayout
+import kotlinx.android.synthetic.main.activity_read.*
 
 @LayoutId(R.layout.activity_read)
 @LogTag("loitppReadActivity")
@@ -31,7 +35,17 @@ class ReadActivity : BaseFontActivity() {
     }
 
     private fun setupViews() {
+        swipeBackLayout.setSwipeBackListener(object : SwipeBackLayout.OnSwipeBackListener {
+            override fun onViewPositionChanged(mView: View, swipeBackFraction: Float, SWIPE_BACK_FACTOR: Float) {
+            }
 
+            override fun onViewSwipeFinished(mView: View, isEnd: Boolean) {
+                if (isEnd) {
+                    finish()
+                    LActivityUtil.transActivityNoAnimation(context = this@ReadActivity)
+                }
+            }
+        })
     }
 
     private fun setupViewModels() {
