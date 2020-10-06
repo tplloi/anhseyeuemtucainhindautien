@@ -9,6 +9,7 @@ import com.core.base.BaseFontActivity
 import com.core.utilities.LActivityUtil
 import com.loitp.R
 import com.views.layout.swipeback.SwipeBackLayout
+import com.views.setSafeOnClickListener
 import kotlinx.android.synthetic.main.activity_read.*
 
 @LayoutId(R.layout.activity_read)
@@ -46,6 +47,9 @@ class ReadActivity : BaseFontActivity() {
                 }
             }
         })
+        ivBack.setSafeOnClickListener {
+            onBackPressed()
+        }
     }
 
     private fun setupViewModels() {
