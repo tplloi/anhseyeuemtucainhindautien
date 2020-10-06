@@ -16,6 +16,7 @@ import com.utils.util.Utils
 //TODO id admob
 //TODO debug const
 //TODO link link_cover string
+//TODO switch theme
 
 @LogTag("LApplication")
 class LApplication : BaseApplication() {
