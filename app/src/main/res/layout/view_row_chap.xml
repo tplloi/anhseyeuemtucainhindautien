@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:elevation="@dimen/w_3"
+    app:cardBackgroundColor="@color/dark900"
+    app:cardCornerRadius="@dimen/round_medium"
+    app:cardUseCompatPadding="true"
+    tools:ignore="UnusedAttribute">
+
+    <TextView
+        android:id="@+id/tvChap"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:foreground="?selectableItemBackground"
+        android:padding="@dimen/padding_medium"
+        android:textColor="@color/white"
+        android:textSize="@dimen/txt_medium"
+        tools:text="@string/app_name" />
+
+</androidx.cardview.widget.CardView>

@@ -9,7 +9,7 @@ import com.core.utilities.LStoreUtil
 import com.service.model.UserTest
 import kotlinx.coroutines.launch
 
-@LogTag("loitppMainViewModel")
+@LogTag("MainViewModel")
 class MainViewModel : BaseViewModel() {
 
     val listChapLiveData: MutableLiveData<List<String>> = MutableLiveData()
@@ -19,7 +19,7 @@ class MainViewModel : BaseViewModel() {
             showLoading(true)
 
             val string = LStoreUtil.readTxtFromAsset(assetFile = "db.sqlite")
-            logD("loadListChap string $string")
+//            logD("loadListChap string $string")
             val listChap = string.split("#")
             listChapLiveData.postValue(listChap)
 
