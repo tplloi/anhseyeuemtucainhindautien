@@ -51,6 +51,7 @@
             app:layout_constraintTop_toBottomOf="@+id/ivBack" />
 
         <androidx.viewpager.widget.ViewPager
+            android:id="@+id/vp"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
