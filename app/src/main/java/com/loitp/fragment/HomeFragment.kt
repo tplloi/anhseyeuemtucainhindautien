@@ -1,5 +1,6 @@
 package com.loitp.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
@@ -10,7 +11,9 @@ import com.annotation.LayoutId
 import com.annotation.LogTag
 import com.core.base.BaseApplication
 import com.core.base.BaseFragment
+import com.core.utilities.LActivityUtil
 import com.loitp.R
+import com.loitp.activity.ReadActivity
 import com.loitp.adapter.ChapAdapter
 import com.loitp.viewmodels.MainViewModel
 import com.views.setSafeOnClickListener
@@ -38,8 +41,11 @@ class HomeFragment : BaseFragment() {
         chapAdapter = ChapAdapter()
         chapAdapter?.let { ca ->
 
-            ca.onClickRootListener = { chap, position ->
-                //TODO
+            ca.onClickRootListener = { _, position ->
+                val intent = Intent(context, ReadActivity::class.java)
+                intent.putExtra(ReadActivity.KEY_POSITION_CHAP, position)
+                startActivity(intent)
+                LActivityUtil.tranIn(context)
             }
 
             val listOfAdapters = listOf<RecyclerView.Adapter<out RecyclerView.ViewHolder>>(ca)
