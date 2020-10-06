@@ -5,6 +5,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
+import androidx.viewpager.widget.ViewPager
 import com.annotation.IsShowAdWhenExit
 import com.annotation.LayoutId
 import com.annotation.LogTag
@@ -48,6 +49,8 @@ class ReadActivity : BaseFontActivity() {
         }
         logD("setupData currentPosition $currentPosition")
         logD("setupData listChap " + BaseApplication.gson.toJson(listChap))
+        vp.adapter?.notifyDataSetChanged()
+        vp.currentItem = currentPosition
     }
 
     private fun setupViews() {
@@ -67,6 +70,26 @@ class ReadActivity : BaseFontActivity() {
         }
         vp.adapter = SlidePagerAdapter(supportFragmentManager)
         vp.setPageTransformer(true, ZoomOutSlideTransformer())
+        vp.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+            override fun onPageScrollStateChanged(state: Int) {
+            }
+
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+            }
+
+            override fun onPageSelected(position: Int) {
+                currentPosition = position
+                setTextChap()
+            }
+
+        })
+    }
+
+    private fun setTextChap() {
+        if (currentPosition < 0 || currentPosition > (listChap.size - 1)) {
+            return
+        }
+        tvChap.text = listChap[currentPosition]
     }
 
     private fun setupViewModels() {
@@ -81,7 +104,7 @@ class ReadActivity : BaseFontActivity() {
         }
 
         override fun getCount(): Int {
-            return 5
+            return listChap.size
         }
     }
 }
