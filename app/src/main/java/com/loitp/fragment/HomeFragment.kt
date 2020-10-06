@@ -13,6 +13,7 @@ import com.core.base.BaseFragment
 import com.loitp.R
 import com.loitp.adapter.ChapAdapter
 import com.loitp.viewmodels.MainViewModel
+import com.views.setSafeOnClickListener
 import kotlinx.android.synthetic.main.frm_home.*
 
 @LayoutId(R.layout.frm_home)
@@ -36,11 +37,20 @@ class HomeFragment : BaseFragment() {
     private fun setupViews() {
         chapAdapter = ChapAdapter()
         chapAdapter?.let { ca ->
+
+            ca.onClickRootListener = { chap, position ->
+                //TODO
+            }
+
             val listOfAdapters = listOf<RecyclerView.Adapter<out RecyclerView.ViewHolder>>(ca)
             concatAdapter = ConcatAdapter(listOfAdapters)
         }
         rvChap.layoutManager = LinearLayoutManager(context)
         rvChap.adapter = concatAdapter
+
+        fabReadContinue.setSafeOnClickListener {
+            //TODO
+        }
     }
 
     private fun setupViewModels() {

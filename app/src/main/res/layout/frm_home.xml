@@ -25,4 +25,15 @@
         app:indicatorColor="@color/white"
         app:indicatorName="PacmanIndicator" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabReadContinue"
+        android:layout_width="@dimen/w_65"
+        android:layout_height="@dimen/w_65"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="@dimen/margin_medium"
+        android:padding="@dimen/padding_medium"
+        android:src="@drawable/ic_bookmarks_white_48dp"
+        app:backgroundTint="@color/white" />
+
 </RelativeLayout>
