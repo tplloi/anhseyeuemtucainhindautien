@@ -8,10 +8,11 @@ import androidx.fragment.app.FragmentStatePagerAdapter
 import com.annotation.IsShowAdWhenExit
 import com.annotation.LayoutId
 import com.annotation.LogTag
+import com.core.base.BaseApplication
 import com.core.base.BaseFontActivity
 import com.core.utilities.LActivityUtil
 import com.loitp.R
-import com.loitp.fragment.FrmIv
+import com.loitp.fragment.ReadFragment
 import com.views.layout.swipeback.SwipeBackLayout
 import com.views.setSafeOnClickListener
 import com.views.viewpager.viewpagertransformers.ZoomOutSlideTransformer
@@ -23,6 +24,7 @@ import kotlinx.android.synthetic.main.activity_read.*
 class ReadActivity : BaseFontActivity() {
 
     companion object {
+        const val KEY_LIST_DATA = "KEY_LIST_DATA"
         const val KEY_POSITION_CHAP = "KEY_POSITION_CHAP"
     }
 
@@ -31,13 +33,14 @@ class ReadActivity : BaseFontActivity() {
 
         setupViews()
         setupViewModels()
-
-        val position = intent?.getIntExtra(KEY_POSITION_CHAP, 0)
-        logD("onCreate position $position")
+        setupData()
     }
 
     private fun setupData() {
-
+        val position = intent?.getIntExtra(KEY_POSITION_CHAP, 0)
+        val listChap = intent?.getStringArrayListExtra(KEY_LIST_DATA)
+        logD("setupData position $position")
+        logD("setupData listChap " + BaseApplication.gson.toJson(listChap))
     }
 
     private fun setupViews() {
@@ -67,7 +70,7 @@ class ReadActivity : BaseFontActivity() {
         : FragmentStatePagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
         override fun getItem(position: Int): Fragment {
-            return FrmIv.newInstance()
+            return ReadFragment.newInstance()
         }
 
         override fun getCount(): Int {

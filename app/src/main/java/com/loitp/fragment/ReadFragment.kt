@@ -7,15 +7,15 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.loitp.R
 
-class FrmIv : Fragment() {
+class ReadFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.frm_iv, container, false)
+        return inflater.inflate(R.layout.frm_chap, container, false)
     }
 
     companion object {
-        fun newInstance(): FrmIv {
-            return FrmIv()
+        fun newInstance(): ReadFragment {
+            return ReadFragment()
         }
     }
 }

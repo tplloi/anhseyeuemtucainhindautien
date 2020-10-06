@@ -44,6 +44,10 @@ class HomeFragment : BaseFragment() {
             ca.onClickRootListener = { _, position ->
                 val intent = Intent(context, ReadActivity::class.java)
                 intent.putExtra(ReadActivity.KEY_POSITION_CHAP, position)
+                mainViewModel?.listChapLiveData?.value?.let {
+                    val list = it as ArrayList
+                    intent.putStringArrayListExtra(ReadActivity.KEY_LIST_DATA, list)
+                }
                 startActivity(intent)
                 LActivityUtil.tranIn(context)
             }
