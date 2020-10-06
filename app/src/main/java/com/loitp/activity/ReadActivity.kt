@@ -28,6 +28,9 @@ class ReadActivity : BaseFontActivity() {
         const val KEY_POSITION_CHAP = "KEY_POSITION_CHAP"
     }
 
+    private var currentPosition = 0
+    private val listChap = ArrayList<String>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -37,9 +40,13 @@ class ReadActivity : BaseFontActivity() {
     }
 
     private fun setupData() {
-        val position = intent?.getIntExtra(KEY_POSITION_CHAP, 0)
-        val listChap = intent?.getStringArrayListExtra(KEY_LIST_DATA)
-        logD("setupData position $position")
+        intent?.getIntExtra(KEY_POSITION_CHAP, 0)?.let {
+            currentPosition = it
+        }
+        intent?.getStringArrayListExtra(KEY_LIST_DATA)?.let {
+            listChap.addAll(it)
+        }
+        logD("setupData currentPosition $currentPosition")
         logD("setupData listChap " + BaseApplication.gson.toJson(listChap))
     }
 
