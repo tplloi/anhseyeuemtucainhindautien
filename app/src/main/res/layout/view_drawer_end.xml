@@ -15,13 +15,6 @@
         android:textColor="@color/white"
         android:textSize="@dimen/txt_medium" />
 
-    <!--    <View-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="@dimen/w_1"-->
-    <!--        android:layout_marginStart="@dimen/margin_medium"-->
-    <!--        android:layout_marginEnd="@dimen/margin_medium"-->
-    <!--        android:background="@color/whiteSmoke" />-->
-
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

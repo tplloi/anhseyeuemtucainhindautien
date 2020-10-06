@@ -31,6 +31,10 @@ class MainActivity : BaseFontActivity(), NavigationView.OnNavigationItemSelected
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        setupViews()
+    }
+
+    private fun setupViews(){
         LUIUtil.createAdBanner(adView)
         setSupportActionBar(toolbar)
 
@@ -150,4 +154,5 @@ class MainActivity : BaseFontActivity(), NavigationView.OnNavigationItemSelected
         }
         return super.onOptionsItemSelected(item)
     }
+
 }
