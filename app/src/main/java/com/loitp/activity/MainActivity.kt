@@ -1,6 +1,7 @@
 package com.loitp.activity
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -33,9 +34,12 @@ class MainActivity : BaseFontActivity(), NavigationView.OnNavigationItemSelected
         super.onCreate(savedInstanceState)
 
         setupViews()
+
+        val isDarkTheme = LSharedPrefsUtil.instance.getBoolean(Constants.KEY_IS_DARK_THEME, true)
+        setupTheme(isDarkTheme)
     }
 
-    private fun setupViews(){
+    private fun setupViews() {
         LUIUtil.createAdBanner(adView)
         setSupportActionBar(toolbar)
 
@@ -158,7 +162,16 @@ class MainActivity : BaseFontActivity(), NavigationView.OnNavigationItemSelected
 
     override fun onThemeChange(event: EventBusData.ThemeEvent) {
         super.onThemeChange(event)
-        logD("onThemeChange")
-        //TODO
+        setupTheme(event.isDarkTheme)
+    }
+
+    private fun setupTheme(isDarkTheme: Boolean) {
+        if (isDarkTheme) {
+            layoutViewDrawerEnd.setBackgroundColor(LAppResource.getColor(R.color.colorPrimary))
+            tvAd.setTextColor(Color.WHITE)
+        } else {
+            layoutViewDrawerEnd.setBackgroundColor(Color.WHITE)
+            tvAd.setTextColor(Color.BLACK)
+        }
     }
 }
