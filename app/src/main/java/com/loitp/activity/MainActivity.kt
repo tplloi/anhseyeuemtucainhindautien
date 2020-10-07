@@ -101,9 +101,11 @@ class MainActivity : BaseFontActivity(), NavigationView.OnNavigationItemSelected
         }
     }
 
+    private var idItemChecked = R.id.navHome
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.navHome -> {
+                idItemChecked = R.id.navHome
                 LScreenUtil.replaceFragment(this, R.id.flContainer, HomeFragment(), false)
             }
             R.id.navGallery -> {
@@ -134,13 +136,18 @@ class MainActivity : BaseFontActivity(), NavigationView.OnNavigationItemSelected
                 LSocialUtil.shareApp(this)
             }
             R.id.navSetting -> {
+                idItemChecked = R.id.navSetting
                 LScreenUtil.replaceFragment(this, R.id.flContainer, SettingFragment(), false)
             }
         }
 
         drawerLayout.closeDrawer(GravityCompat.START)
         navViewStart.postDelayed({
-            navViewStart.menu.findItem(R.id.navHome).isChecked = true//hight light navViewStart menu home
+            if (idItemChecked == R.id.navHome) {
+                navViewStart.menu.findItem(R.id.navHome).isChecked = true//hight light navViewStart menu home
+            } else if (idItemChecked == R.id.navSetting) {
+                navViewStart.menu.findItem(R.id.navSetting).isChecked = true//hight light navViewStart menu setting
+            }
         }, 500)
         return true
     }
