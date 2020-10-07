@@ -3,6 +3,7 @@ package com.loitp.activity
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
@@ -10,6 +11,7 @@ import com.annotation.LayoutId
 import com.annotation.LogTag
 import com.core.base.BaseApplication
 import com.core.base.BaseFontActivity
+import com.core.common.Constants
 import com.core.utilities.*
 import com.interfaces.Callback2
 import com.interfaces.GGCallback
@@ -36,6 +38,7 @@ class SplashActivity : BaseFontActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        setupTheme()
         LUIUtil.setDelay(mls = 1500, runnable = Runnable {
             isAnimDone = true
             goToHome()
@@ -208,5 +211,24 @@ class SplashActivity : BaseFontActivity() {
                         }
                     }
                 })
+    }
+
+    private fun setupTheme() {
+        val isDarkTheme = LSharedPrefsUtil.instance.getBoolean(Constants.KEY_IS_DARK_THEME, true)
+        if (isDarkTheme) {
+            layoutRootViewSplash.setBackgroundColor(LAppResource.getColor(R.color.colorPrimary))
+            tvCopyright.setTextColor(Color.WHITE)
+            tvAppName.setTextColor(Color.WHITE)
+            indicatorView.setIndicatorColor(Color.WHITE)
+            textViewVersion.setTextColor(Color.WHITE)
+            tvPolicy.setTextColor(Color.WHITE)
+        } else {
+            layoutRootViewSplash.setBackgroundColor(LAppResource.getColor(R.color.white))
+            tvCopyright.setTextColor(Color.BLACK)
+            tvAppName.setTextColor(Color.BLACK)
+            indicatorView.setIndicatorColor(Color.BLACK)
+            textViewVersion.setTextColor(Color.BLACK)
+            tvPolicy.setTextColor(Color.BLACK)
+        }
     }
 }
