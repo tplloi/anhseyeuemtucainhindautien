@@ -35,9 +35,11 @@ class HomeFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupViews()
+
         val isDarkTheme = LSharedPrefsUtil.instance.getBoolean(Constants.KEY_IS_DARK_THEME, true)
         setupTheme(isDarkTheme)
-        setupViews()
+
         setupViewModels()
         context?.let {
             mainViewModel?.loadListChap(context = it)
@@ -47,7 +49,6 @@ class HomeFragment : BaseFragment() {
     private fun setupViews() {
         chapAdapter = ChapAdapter()
         chapAdapter?.let { ca ->
-
             ca.onClickRootListener = { _, position ->
                 val intent = Intent(context, ReadActivity::class.java)
                 intent.putExtra(ReadActivity.KEY_POSITION_CHAP, position)
@@ -97,5 +98,6 @@ class HomeFragment : BaseFragment() {
             layoutRootViewHome.setBackgroundColor(Color.WHITE)
             indicatorView.setIndicatorColor(LAppResource.getColor(R.color.colorPrimary))
         }
+        chapAdapter?.setIsDarkTheme(isDarkTheme = isDarkTheme)
     }
 }
