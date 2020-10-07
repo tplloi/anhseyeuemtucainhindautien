@@ -1,6 +1,7 @@
 package com.loitp.fragment
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
@@ -11,7 +12,10 @@ import com.annotation.LayoutId
 import com.annotation.LogTag
 import com.core.base.BaseApplication
 import com.core.base.BaseFragment
+import com.core.common.Constants
 import com.core.utilities.LActivityUtil
+import com.core.utilities.LAppResource
+import com.core.utilities.LSharedPrefsUtil
 import com.data.EventBusData
 import com.loitp.R
 import com.loitp.activity.ReadActivity
@@ -31,6 +35,8 @@ class HomeFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val isDarkTheme = LSharedPrefsUtil.instance.getBoolean(Constants.KEY_IS_DARK_THEME, true)
+        setupTheme(isDarkTheme)
         setupViews()
         setupViewModels()
         context?.let {
@@ -81,5 +87,15 @@ class HomeFragment : BaseFragment() {
             })
         }
 
+    }
+
+    private fun setupTheme(isDarkTheme: Boolean) {
+        if (isDarkTheme) {
+            layoutRootViewHome.setBackgroundColor(Color.BLACK)
+            indicatorView.setIndicatorColor(Color.WHITE)
+        } else {
+            layoutRootViewHome.setBackgroundColor(Color.WHITE)
+            indicatorView.setIndicatorColor(LAppResource.getColor(R.color.colorPrimary))
+        }
     }
 }

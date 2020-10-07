@@ -2,9 +2,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layoutRootViewHome"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black">
+    tools:background="@color/black">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvChap"
@@ -22,8 +23,8 @@
         android:layout_height="@dimen/w_50"
         android:layout_centerInParent="true"
         android:layout_marginBottom="@dimen/margin_medium"
-        app:indicatorColor="@color/white"
-        app:indicatorName="PacmanIndicator" />
+        app:indicatorName="PacmanIndicator"
+        tools:indicatorColor="@color/white" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabReadContinue"
