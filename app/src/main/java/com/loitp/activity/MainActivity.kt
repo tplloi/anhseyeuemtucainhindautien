@@ -169,9 +169,19 @@ class MainActivity : BaseFontActivity(), NavigationView.OnNavigationItemSelected
         if (isDarkTheme) {
             layoutViewDrawerEnd.setBackgroundColor(LAppResource.getColor(R.color.colorPrimary))
             tvAd.setTextColor(Color.WHITE)
+            drawerLayout.setBackgroundColor(LAppResource.getColor(R.color.colorPrimary))
+            navViewStart.setBackgroundColor(LAppResource.getColor(R.color.colorPrimary))
+            navViewStart.itemTextColor = LAppResource.getColorStateList(R.drawable.text_white_gray)
+            navViewStart.itemIconTintList = LAppResource.getColorStateList(R.drawable.text_white_gray)
+            navViewEnd.setBackgroundColor(LAppResource.getColor(R.color.colorPrimary))
         } else {
             layoutViewDrawerEnd.setBackgroundColor(Color.WHITE)
             tvAd.setTextColor(Color.BLACK)
+            drawerLayout.setBackgroundColor(Color.WHITE)
+            navViewStart.setBackgroundColor(Color.WHITE)
+            navViewStart.itemTextColor = LAppResource.getColorStateList(R.drawable.text_black_primary)
+            navViewStart.itemIconTintList = LAppResource.getColorStateList(R.drawable.text_black_primary)
+            navViewEnd.setBackgroundColor(Color.WHITE)
         }
     }
 }
