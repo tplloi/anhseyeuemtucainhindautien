@@ -14,6 +14,8 @@ import com.annotation.LayoutId
 import com.annotation.LogTag
 import com.core.base.BaseFontActivity
 import com.core.common.Constants
+import com.core.helper.adhelper.AdHelperActivity
+import com.core.helper.donate.FrmDonate
 import com.core.helper.gallery.GalleryCoreSplashActivity
 import com.core.utilities.*
 import com.data.EventBusData
@@ -138,6 +140,23 @@ class MainActivity : BaseFontActivity(), NavigationView.OnNavigationItemSelected
             R.id.navSetting -> {
                 idItemChecked = R.id.navSetting
                 LScreenUtil.replaceFragment(this, R.id.flContainer, SettingFragment(), false)
+            }
+            R.id.navChatWithDev -> {
+                LSocialUtil.chatMessenger(this)
+            }
+            R.id.navAd -> {
+                val intent = Intent(this, AdHelperActivity::class.java)
+                intent.putExtra(Constants.AD_HELPER_IS_ENGLISH_LANGUAGE, false)
+                intent.putExtra(Constants.IS_DARK_THEME, true)
+                startActivity(intent)
+                LActivityUtil.tranIn(this)
+            }
+            R.id.navPolicy -> {
+                LSocialUtil.openBrowserPolicy(context = this)
+            }
+            R.id.navDonation -> {
+                idItemChecked = R.id.navDonation
+                LScreenUtil.replaceFragment(this, R.id.flContainer, FrmDonate(), false)
             }
         }
 
