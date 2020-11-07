@@ -75,7 +75,7 @@ class ReadActivity : BaseFontActivity() {
             onBackPressed()
         }
         vp.adapter = SlidePagerAdapter(supportFragmentManager)
-        vp.setPageTransformer(true, ZoomOutSlideTransformer())
+//        vp.setPageTransformer(true, ZoomOutSlideTransformer())
         vp.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {
             }
