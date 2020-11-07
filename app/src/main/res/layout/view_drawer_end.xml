@@ -13,7 +13,7 @@
         android:background="?attr/themeTextColor"
         android:padding="@dimen/padding_medium"
         android:text="@string/app_name_vn"
-        android:textColor="?attr/themeTextColor"
+        android:textColor="?attr/themeBackgroundColor"
         android:textSize="@dimen/txt_medium" />
 
     <androidx.core.widget.NestedScrollView

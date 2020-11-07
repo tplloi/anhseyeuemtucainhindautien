@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.annotation.IsShowAdWhenExit
+import com.annotation.IsSwipeActivity
 import com.annotation.LogTag
 import com.core.base.BaseApplication
 import com.core.base.BaseFontActivity
@@ -20,6 +21,7 @@ import kotlinx.android.synthetic.main.activity_read.*
 
 @LogTag("loitppReadActivity")
 @IsShowAdWhenExit(true)
+@IsSwipeActivity(true)
 class ReadActivity : BaseFontActivity() {
 
     companion object {
