@@ -1,7 +1,6 @@
 package com.loitp.fragment
 
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.ConcatAdapter
@@ -11,7 +10,6 @@ import com.annotation.LogTag
 import com.core.base.BaseApplication
 import com.core.base.BaseFragment
 import com.core.utilities.LActivityUtil
-import com.core.utilities.LAppResource
 import com.loitp.R
 import com.loitp.activity.ReadActivity
 import com.loitp.adapter.ChapAdapter

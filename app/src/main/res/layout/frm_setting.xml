@@ -5,8 +5,8 @@
     android:id="@+id/layoutRootView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/padding_medium"
-    tools:background="@color/white">
+    android:background="?attr/themeBackgroundColor"
+    android:padding="@dimen/padding_medium">
 
     <com.views.switchtoggle.appcompatswitch.LColorSwitchCompat
         android:id="@+id/swDarkTheme"
@@ -14,10 +14,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="@string/dark_theme"
+        android:textColor="?attr/themeTextColor"
         android:textSize="@dimen/txt_medium"
         app:bgOffColor="@color/gray"
         app:bgOnColor="@color/gray"
-        app:toggleOffColor="@color/whiteSmoke"
-        app:toggleOnColor="@color/whiteSmoke"
-        tools:textColor="@color/white" />
+        app:toggleOffColor="?attr/themeTextColor"
+        app:toggleOnColor="?attr/themeTextColor" />
 </RelativeLayout>

@@ -9,13 +9,14 @@ import com.loitp.R
 
 class ReadFragment : Fragment() {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.frm_chap, container, false)
-    }
-
     companion object {
         fun newInstance(): ReadFragment {
             return ReadFragment()
         }
     }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.frm_chap, container, false)
+    }
+
 }

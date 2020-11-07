@@ -24,7 +24,6 @@ class SettingFragment : BaseFragment() {
     private fun setupViews() {
         val isDarkTheme = LUIUtil.isDarkTheme()
         swDarkTheme.isChecked = isDarkTheme
-        LUIUtil.setDarkTheme(isDarkTheme = isDarkTheme)
 
         swDarkTheme.setOnCheckedChangeListener { _, isOn ->
             LUIUtil.setDarkTheme(isDarkTheme = isOn)
