@@ -16,6 +16,8 @@ class ReadFragment(
         val currentPosition: Int
 ) : BaseFragment() {
 
+    private var mainViewModel: MainViewModel? = null
+
     override fun setLayoutResourceId(): Int {
         return R.layout.frm_chap
     }
@@ -24,7 +26,9 @@ class ReadFragment(
         super.onViewCreated(view, savedInstanceState)
 
         setupViews()
-        setupData()
+        setupViewModels()
+
+        mainViewModel?.loadContain(position = currentPosition)
     }
 
     private fun setupViews() {
@@ -56,7 +60,16 @@ class ReadFragment(
         }
     }
 
-    private fun setupData() {
+    private fun setupViewModels() {
+        mainViewModel = getViewModel(MainViewModel::class.java)
+        mainViewModel?.let { mvm ->
+            mvm.contentLiveData.observe(viewLifecycleOwner, { content ->
+                setupData(content = content)
+            })
+        }
+    }
+
+    private fun setupData(content: String) {
         val fontSizePx = LAppResource.getDimenValue(R.dimen.txt_small)
         val paddingPx = LAppResource.getDimenValue(R.dimen.padding_small)
         val backgroundColor: String
@@ -68,7 +81,8 @@ class ReadFragment(
             backgroundColor = "white"
             textColor = "black"
         }
-        webView.loadDataString(bodyContent = getString(R.string.large_dummy_text),
+        webView.loadDataString(
+                bodyContent = content,
                 backgroundColor = backgroundColor,
                 textColor = textColor,
                 textAlign = "justify",

@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import com.annotation.LogTag
 import com.core.base.BaseViewModel
 import com.core.utilities.LStoreUtil
+import com.loitp.R
 import com.service.model.UserTest
 import kotlinx.coroutines.launch
 
@@ -13,6 +14,7 @@ import kotlinx.coroutines.launch
 class MainViewModel : BaseViewModel() {
 
     val listChapLiveData: MutableLiveData<List<String>> = MutableLiveData()
+    val contentLiveData: MutableLiveData<String> = MutableLiveData()
 
     fun loadListChap() {
         ioScope.launch {
@@ -24,6 +26,13 @@ class MainViewModel : BaseViewModel() {
             listChapLiveData.postValue(listChap)
 
             showLoading(false)
+        }
+    }
+
+    fun loadContain(position: Int) {
+        ioScope.launch {
+            val content = LStoreUtil.readTxtFromAsset(assetFile = "asyetcndt$position.db")
+            contentLiveData.postValue(content)
         }
     }
 }
