@@ -34,6 +34,26 @@
             android:id="@+id/navShareApp"
             android:icon="@drawable/ic_email_black_48dp"
             android:title="@string/share_app" />
+        <item
+            android:id="@+id/navSetting"
+            android:icon="@drawable/ic_settings_black_48dp"
+            android:title="@string/setting" />
+        <item
+            android:id="@+id/navChatWithDev"
+            android:icon="@drawable/ic_chat_black_48dp"
+            android:title="@string/chat_with_dev" />
+        <item
+            android:id="@+id/navAd"
+            android:icon="@drawable/ic_card_giftcard_black_48dp"
+            android:title="@string/why_u_see_ad_en" />
+        <item
+            android:id="@+id/navDonation"
+            android:icon="@drawable/baseline_favorite_black_24dp"
+            android:title="@string/donation" />
+        <item
+            android:id="@+id/navPolicy"
+            android:icon="@drawable/ic_edit_black_48dp"
+            android:title="@string/policy" />
     </group>
 
 </menu>

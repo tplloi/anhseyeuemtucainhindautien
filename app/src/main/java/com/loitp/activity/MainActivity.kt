@@ -1,8 +1,10 @@
 package com.loitp.activity
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
@@ -12,11 +14,15 @@ import com.annotation.LayoutId
 import com.annotation.LogTag
 import com.core.base.BaseFontActivity
 import com.core.common.Constants
+import com.core.helper.adhelper.AdHelperActivity
+import com.core.helper.donate.FrmDonate
 import com.core.helper.gallery.GalleryCoreSplashActivity
 import com.core.utilities.*
+import com.data.EventBusData
 import com.google.android.material.navigation.NavigationView
 import com.loitp.R
 import com.loitp.fragment.HomeFragment
+import com.loitp.fragment.SettingFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.view_drawer_end.*
 import kotlinx.android.synthetic.main.view_drawer_main.*
@@ -29,6 +35,13 @@ class MainActivity : BaseFontActivity(), NavigationView.OnNavigationItemSelected
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        setupViews()
+
+        val isDarkTheme = LSharedPrefsUtil.instance.getBoolean(Constants.KEY_IS_DARK_THEME, true)
+        setupTheme(isDarkTheme)
+    }
+
+    private fun setupViews() {
         LUIUtil.createAdBanner(adView)
         setSupportActionBar(toolbar)
 
@@ -83,18 +96,19 @@ class MainActivity : BaseFontActivity(), NavigationView.OnNavigationItemSelected
                 return
             }
             this.doubleBackToExitPressedOnce = true
-            showShort(getString(R.string.press_again_to_exit))
-            Handler().postDelayed({
+            showShort(msg = getString(R.string.press_again_to_exit), isTopAnchor = false)
+            Handler(Looper.getMainLooper()).postDelayed({
                 doubleBackToExitPressedOnce = false
             }, 2000)
         }
     }
 
+    private var idItemChecked = R.id.navHome
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.navHome -> {
-                logD("onNavigationItemSelected navHome")
-                LScreenUtil.addFragment(this, R.id.flContainer, HomeFragment(), false)
+                idItemChecked = R.id.navHome
+                LScreenUtil.replaceFragment(this, R.id.flContainer, HomeFragment(), false)
             }
             R.id.navGallery -> {
                 val intent = Intent(this, GalleryCoreSplashActivity::class.java)
@@ -108,8 +122,8 @@ class MainActivity : BaseFontActivity(), NavigationView.OnNavigationItemSelected
                 startActivity(intent)
                 LActivityUtil.tranIn(this)
             }
-            R.id.navGallery18->{
-                //TODO
+            R.id.navGallery18 -> {
+                LSocialUtil.openBrowserGirl(context = this)
             }
             R.id.navRateApp -> {
                 LSocialUtil.rateApp(activity = this, packageName = packageName)
@@ -123,11 +137,36 @@ class MainActivity : BaseFontActivity(), NavigationView.OnNavigationItemSelected
             R.id.navShareApp -> {
                 LSocialUtil.shareApp(this)
             }
+            R.id.navSetting -> {
+                idItemChecked = R.id.navSetting
+                LScreenUtil.replaceFragment(this, R.id.flContainer, SettingFragment(), false)
+            }
+            R.id.navChatWithDev -> {
+                LSocialUtil.chatMessenger(this)
+            }
+            R.id.navAd -> {
+                val intent = Intent(this, AdHelperActivity::class.java)
+                intent.putExtra(Constants.AD_HELPER_IS_ENGLISH_LANGUAGE, false)
+                intent.putExtra(Constants.IS_DARK_THEME, true)
+                startActivity(intent)
+                LActivityUtil.tranIn(this)
+            }
+            R.id.navPolicy -> {
+                LSocialUtil.openBrowserPolicy(context = this)
+            }
+            R.id.navDonation -> {
+                idItemChecked = R.id.navDonation
+                LScreenUtil.replaceFragment(this, R.id.flContainer, FrmDonate(), false)
+            }
         }
 
         drawerLayout.closeDrawer(GravityCompat.START)
         navViewStart.postDelayed({
-            navViewStart.menu.findItem(R.id.navHome).isChecked = true//hight light navViewStart menu home
+            if (idItemChecked == R.id.navHome) {
+                navViewStart.menu.findItem(R.id.navHome).isChecked = true//hight light navViewStart menu home
+            } else if (idItemChecked == R.id.navSetting) {
+                navViewStart.menu.findItem(R.id.navSetting).isChecked = true//hight light navViewStart menu setting
+            }
         }, 500)
         return true
     }
@@ -145,5 +184,30 @@ class MainActivity : BaseFontActivity(), NavigationView.OnNavigationItemSelected
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onThemeChange(event: EventBusData.ThemeEvent) {
+        super.onThemeChange(event)
+        setupTheme(event.isDarkTheme)
+    }
+
+    private fun setupTheme(isDarkTheme: Boolean) {
+        if (isDarkTheme) {
+            layoutViewDrawerEnd.setBackgroundColor(LAppResource.getColor(R.color.colorPrimary))
+            tvAd.setTextColor(Color.WHITE)
+            drawerLayout.setBackgroundColor(LAppResource.getColor(R.color.colorPrimary))
+            navViewStart.setBackgroundColor(LAppResource.getColor(R.color.colorPrimary))
+            navViewStart.itemTextColor = LAppResource.getColorStateList(R.drawable.text_white_gray)
+            navViewStart.itemIconTintList = LAppResource.getColorStateList(R.drawable.text_white_gray)
+            navViewEnd.setBackgroundColor(LAppResource.getColor(R.color.colorPrimary))
+        } else {
+            layoutViewDrawerEnd.setBackgroundColor(Color.WHITE)
+            tvAd.setTextColor(Color.BLACK)
+            drawerLayout.setBackgroundColor(Color.WHITE)
+            navViewStart.setBackgroundColor(Color.WHITE)
+            navViewStart.itemTextColor = LAppResource.getColorStateList(R.drawable.text_black_primary)
+            navViewStart.itemIconTintList = LAppResource.getColorStateList(R.drawable.text_black_primary)
+            navViewEnd.setBackgroundColor(Color.WHITE)
+        }
     }
 }

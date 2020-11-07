@@ -2,21 +2,24 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layoutRootViewSplash"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary">
+    tools:background="@color/colorPrimary">
 
     <TextView
+        android:id="@+id/tvCopyright"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:gravity="center"
         android:padding="@dimen/padding_medium"
         android:text="@string/copyright"
-        android:textColor="@color/white"
-        android:textSize="@dimen/txt_medium" />
+        android:textSize="@dimen/txt_medium"
+        tools:textColor="@color/white" />
 
     <TextView
+        android:id="@+id/tvAppName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
@@ -24,8 +27,8 @@
         android:gravity="center"
         android:padding="@dimen/padding_medium"
         android:text="@string/app_name"
-        android:textColor="@color/white"
-        android:textSize="@dimen/txt_40" />
+        android:textSize="@dimen/txt_40"
+        tools:textColor="@color/white" />
 
     <com.wang.avi.AVLoadingIndicatorView
         android:id="@+id/indicatorView"
@@ -36,8 +39,8 @@
         android:layout_centerHorizontal="true"
         android:layout_gravity="center"
         android:layout_marginBottom="@dimen/margin_medium"
-        app:indicatorColor="@color/white"
-        app:indicatorName="PacmanIndicator" />
+        app:indicatorName="PacmanIndicator"
+        tools:indicatorColor="@color/white" />
 
     <TextView
         android:id="@+id/textViewVersion"
@@ -45,19 +48,20 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/tvPolicy"
         android:gravity="center"
-        android:textColor="@color/white"
         android:textSize="@dimen/txt_medium"
         android:textStyle="bold"
-        tools:text="Version 69" />
+        tools:text="Version 69"
+        tools:textColor="@color/white" />
 
     <TextView
         android:id="@+id/tvPolicy"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:background="?selectableItemBackground"
         android:gravity="center"
         android:padding="@dimen/padding_medium"
         android:text="@string/policy"
-        android:textColor="@drawable/text_white_blue"
-        android:textSize="@dimen/txt_medium" />
+        android:textSize="@dimen/txt_medium"
+        tools:textColor="@color/white" />
 </RelativeLayout>

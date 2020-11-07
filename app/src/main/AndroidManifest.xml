@@ -27,6 +27,10 @@
         <activity
             android:name=".activity.MainActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />
+        <activity
+            android:name=".activity.ReadActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/Theme.Swipe.Back.NoActionBar" />
     </application>
 
 </manifest>
