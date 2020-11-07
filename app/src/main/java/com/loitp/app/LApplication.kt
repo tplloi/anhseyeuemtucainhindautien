@@ -10,8 +10,9 @@ import com.loitp.R
 
 //TODO id admob
 //TODO debug const
+
+//done
 //TODO link link_cover string
-//TODO switch theme
 
 @LogTag("LApplication")
 class LApplication : BaseApplication() {

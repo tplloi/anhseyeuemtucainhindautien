@@ -9,7 +9,6 @@ import androidx.viewpager.widget.ViewPager
 import com.annotation.IsShowAdWhenExit
 import com.annotation.IsSwipeActivity
 import com.annotation.LogTag
-import com.core.base.BaseApplication
 import com.core.base.BaseFontActivity
 import com.core.utilities.LActivityUtil
 import com.loitp.R
@@ -52,9 +51,12 @@ class ReadActivity : BaseFontActivity() {
             listChap.addAll(it)
         }
         logD("setupData currentPosition $currentPosition")
-        logD("setupData listChap " + BaseApplication.gson.toJson(listChap))
+//        logD("setupData listChap " + BaseApplication.gson.toJson(listChap))
         vp.adapter?.notifyDataSetChanged()
         vp.currentItem = currentPosition
+        if (currentPosition == 0) {
+            setTextChap()
+        }
     }
 
     private fun setupViews() {
@@ -90,6 +92,7 @@ class ReadActivity : BaseFontActivity() {
     }
 
     private fun setTextChap() {
+        logD("setTextChap currentPosition $currentPosition")
         if (currentPosition < 0 || currentPosition > (listChap.size - 1)) {
             return
         }
