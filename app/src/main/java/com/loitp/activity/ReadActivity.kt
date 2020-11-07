@@ -107,7 +107,7 @@ class ReadActivity : BaseFontActivity() {
         : FragmentStatePagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
         override fun getItem(position: Int): Fragment {
-            return ReadFragment.newInstance()
+            return ReadFragment(currentPosition = position)
         }
 
         override fun getCount(): Int {

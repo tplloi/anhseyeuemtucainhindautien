@@ -1,22 +1,39 @@
 package com.loitp.fragment
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import com.annotation.LogTag
+import com.core.base.BaseFragment
 import com.loitp.R
+import com.loitp.viewmodels.MainViewModel
 
-class ReadFragment : Fragment() {
+@LogTag("loitppReadFragment")
+class ReadFragment(
+        val currentPosition: Int
+) : BaseFragment() {
 
-    companion object {
-        fun newInstance(): ReadFragment {
-            return ReadFragment()
-        }
+    private var mainViewModel: MainViewModel? = null
+
+    override fun setLayoutResourceId(): Int {
+        return R.layout.frm_chap
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.frm_chap, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        setupViews()
+        setupViewModels()
+    }
+
+    private fun setupViews() {
+        logD("setupViews currentPosition $currentPosition")
+    }
+
+    private fun setupViewModels() {
+        mainViewModel = getViewModel(MainViewModel::class.java)
+        mainViewModel?.let { mvm ->
+
+        }
     }
 
 }
