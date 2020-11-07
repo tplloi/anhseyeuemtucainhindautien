@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.frm_chap.*
 
 @LogTag("loitppReadFragment")
 class ReadFragment(
-        val currentPosition: Int
+    val currentPosition: Int
 ) : BaseFragment() {
 
     private var mainViewModel: MainViewModel? = null
@@ -61,15 +61,21 @@ class ReadFragment(
     }
 
     private fun setupViewModels() {
-        mainViewModel = getViewModel(MainViewModel::class.java)
+        mainViewModel = getSelfViewModel(MainViewModel::class.java)
         mainViewModel?.let { mvm ->
-            mvm.contentLiveData.observe(viewLifecycleOwner, { content ->
-                setupData(content = content)
+            mvm.contentLiveData.observe(viewLifecycleOwner, { map ->
+//                logD("<<<contentLiveData $currentPosition")
+                if (map.containsKey(currentPosition)) {
+                    val value = map[currentPosition] ?: getString(R.string.no_data)
+//                    logD("<<<contentLiveData $currentPosition $value")
+                    setupData(content = value)
+                }
             })
         }
     }
 
     private fun setupData(content: String) {
+        logD("<<<setupData $currentPosition $content")
         val fontSizePx = LAppResource.getDimenValue(R.dimen.txt_small)
         val paddingPx = LAppResource.getDimenValue(R.dimen.padding_small)
         val backgroundColor: String
@@ -82,12 +88,12 @@ class ReadFragment(
             textColor = "black"
         }
         webView.loadDataString(
-                bodyContent = content,
-                backgroundColor = backgroundColor,
-                textColor = textColor,
-                textAlign = "justify",
-                fontSizePx = fontSizePx,
-                paddingPx = paddingPx
+            bodyContent = content,
+            backgroundColor = backgroundColor,
+            textColor = textColor,
+            textAlign = "justify",
+            fontSizePx = fontSizePx,
+            paddingPx = paddingPx
         )
     }
 

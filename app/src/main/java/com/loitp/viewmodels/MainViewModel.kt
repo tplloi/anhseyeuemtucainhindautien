@@ -1,20 +1,17 @@
 package com.loitp.viewmodels
 
-import android.content.Context
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.annotation.LogTag
 import com.core.base.BaseViewModel
 import com.core.utilities.LStoreUtil
-import com.loitp.R
-import com.service.model.UserTest
+import com.service.livedata.SingleLiveEvent
 import kotlinx.coroutines.launch
 
 @LogTag("MainViewModel")
 class MainViewModel : BaseViewModel() {
 
     val listChapLiveData: MutableLiveData<List<String>> = MutableLiveData()
-    val contentLiveData: MutableLiveData<String> = MutableLiveData()
+    val contentLiveData: MutableLiveData<Map<Int, String>> = MutableLiveData()
 
     fun loadListChap() {
         ioScope.launch {
@@ -32,7 +29,9 @@ class MainViewModel : BaseViewModel() {
     fun loadContain(position: Int) {
         ioScope.launch {
             val content = LStoreUtil.readTxtFromAsset(assetFile = "asyetcndt$position.db")
-            contentLiveData.postValue(content)
+            val map = HashMap<Int, String>()
+            map[position] = content
+            contentLiveData.postValue(map)
         }
     }
 }
