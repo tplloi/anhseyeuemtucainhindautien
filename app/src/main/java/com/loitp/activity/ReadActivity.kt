@@ -7,7 +7,6 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.annotation.IsShowAdWhenExit
-import com.annotation.LayoutId
 import com.annotation.LogTag
 import com.core.base.BaseApplication
 import com.core.base.BaseFontActivity
@@ -19,7 +18,6 @@ import com.views.setSafeOnClickListener
 import com.views.viewpager.viewpagertransformers.ZoomOutSlideTransformer
 import kotlinx.android.synthetic.main.activity_read.*
 
-@LayoutId(R.layout.activity_read)
 @LogTag("loitppReadActivity")
 @IsShowAdWhenExit(true)
 class ReadActivity : BaseFontActivity() {
@@ -31,6 +29,10 @@ class ReadActivity : BaseFontActivity() {
 
     private var currentPosition = 0
     private val listChap = ArrayList<String>()
+
+    override fun setLayoutResourceId(): Int {
+        return R.layout.activity_read
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -96,7 +98,7 @@ class ReadActivity : BaseFontActivity() {
 
     }
 
-    private inner class SlidePagerAdapter internal constructor(fm: FragmentManager)
+    private inner class SlidePagerAdapter(fm: FragmentManager)
         : FragmentStatePagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
         override fun getItem(position: Int): Fragment {

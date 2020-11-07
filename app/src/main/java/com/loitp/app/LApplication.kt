@@ -1,17 +1,12 @@
 package com.loitp.app
 
-import androidx.multidex.MultiDexApplication
 import com.annotation.LogTag
 import com.core.base.BaseApplication
 import com.core.common.Constants
 import com.core.utilities.LUIUtil
 import com.data.ActivityData
 import com.data.AdmobData
-import com.github.piasy.biv.BigImageViewer
-import com.github.piasy.biv.loader.glide.GlideImageLoader
-import com.google.gson.Gson
 import com.loitp.R
-import com.utils.util.Utils
 
 //TODO id admob
 //TODO debug const

@@ -14,7 +14,7 @@ class MainViewModel : BaseViewModel() {
 
     val listChapLiveData: MutableLiveData<List<String>> = MutableLiveData()
 
-    fun loadListChap(context: Context) {
+    fun loadListChap() {
         ioScope.launch {
             showLoading(true)
 
