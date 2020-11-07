@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 class MainViewModel : BaseViewModel() {
 
     val listChapLiveData: MutableLiveData<List<String>> = MutableLiveData()
-    val contentLiveData: MutableLiveData<Map<Int, String>> = MutableLiveData()
+    val contentLiveData: MutableLiveData<String> = MutableLiveData()
 
     fun loadListChap() {
         ioScope.launch {
@@ -29,9 +29,7 @@ class MainViewModel : BaseViewModel() {
     fun loadContain(position: Int) {
         ioScope.launch {
             val content = LStoreUtil.readTxtFromAsset(assetFile = "asyetcndt$position.db")
-            val map = HashMap<Int, String>()
-            map[position] = content
-            contentLiveData.postValue(map)
+            contentLiveData.postValue(content)
         }
     }
 }

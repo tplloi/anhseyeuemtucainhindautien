@@ -63,13 +63,9 @@ class ReadFragment(
     private fun setupViewModels() {
         mainViewModel = getSelfViewModel(MainViewModel::class.java)
         mainViewModel?.let { mvm ->
-            mvm.contentLiveData.observe(viewLifecycleOwner, { map ->
+            mvm.contentLiveData.observe(viewLifecycleOwner, { content ->
 //                logD("<<<contentLiveData $currentPosition")
-                if (map.containsKey(currentPosition)) {
-                    val value = map[currentPosition] ?: getString(R.string.no_data)
-//                    logD("<<<contentLiveData $currentPosition $value")
-                    setupData(content = value)
-                }
+                setupData(content = content)
             })
         }
     }
