@@ -3,14 +3,12 @@ package com.loitp.activity
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
 import com.annotation.LogTag
 import com.core.base.BaseApplication
 import com.core.base.BaseFontActivity
-import com.core.common.Constants
 import com.core.utilities.*
 import com.interfaces.Callback2
 import com.interfaces.GGCallback
@@ -35,10 +33,14 @@ class SplashActivity : BaseFontActivity() {
         return R.layout.activity_splash
     }
 
-    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        setupViews()
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun setupViews() {
         LUIUtil.setDelay(mls = 1500, runnable = {
             isAnimDone = true
             goToHome()
