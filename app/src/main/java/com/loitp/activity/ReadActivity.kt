@@ -74,6 +74,12 @@ class ReadActivity : BaseFontActivity() {
         ivBack.setSafeOnClickListener {
             onBackPressed()
         }
+        btZoomIn.setSafeOnClickListener {
+//TODO
+        }
+        btZoomOut.setSafeOnClickListener {
+//TODO
+        }
         vp.adapter = SlidePagerAdapter(supportFragmentManager)
 //        vp.setPageTransformer(true, ZoomOutSlideTransformer())
         vp.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {

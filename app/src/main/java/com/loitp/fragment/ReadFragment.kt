@@ -47,11 +47,15 @@ class ReadFragment(
 
             override fun onProgressChanged(progress: Int) {
                 logD("onProgressChanged $progress")
-                pb.progress = progress
-                if (progress == 100) {
-                    pb.visibility = View.GONE
-                } else {
-                    pb.visibility = View.VISIBLE
+                //warning show check null here for better
+                pb?.let {
+                    it.progress = progress
+                    if (it.progress == 100) {
+                        it.visibility = View.GONE
+                        webView?.visibility = View.VISIBLE
+                    } else {
+                        it.visibility = View.VISIBLE
+                    }
                 }
             }
 

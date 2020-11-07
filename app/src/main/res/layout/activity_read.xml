@@ -36,10 +36,38 @@
             android:textColor="?attr/themeTextColor"
             android:textSize="@dimen/txt_medium"
             app:layout_constraintBottom_toBottomOf="@+id/ivBack"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btZoomIn"
             app:layout_constraintStart_toEndOf="@+id/ivBack"
             app:layout_constraintTop_toTopOf="@+id/ivBack"
             tools:text="@string/app_name" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btZoomIn"
+            android:layout_width="?android:attr/actionBarSize"
+            android:layout_height="?android:attr/actionBarSize"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/app_name"
+            android:padding="@dimen/padding_medium"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_add_black_48dp"
+            app:layout_constraintBottom_toBottomOf="@+id/ivBack"
+            app:layout_constraintEnd_toStartOf="@+id/btZoomOut"
+            app:layout_constraintTop_toTopOf="@+id/ivBack"
+            app:tint="?attr/themeTextColor" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btZoomOut"
+            android:layout_width="?android:attr/actionBarSize"
+            android:layout_height="?android:attr/actionBarSize"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/app_name"
+            android:padding="@dimen/padding_medium"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_remove_black_48dp"
+            app:layout_constraintBottom_toBottomOf="@+id/ivBack"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/ivBack"
+            app:tint="?attr/themeTextColor" />
 
         <View
             android:id="@+id/line"
