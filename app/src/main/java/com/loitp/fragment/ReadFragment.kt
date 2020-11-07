@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.frm_chap.*
 
 @LogTag("loitppReadFragment")
 class ReadFragment(
-    val currentPosition: Int
+        val currentPosition: Int
 ) : BaseFragment() {
 
     private var mainViewModel: MainViewModel? = null
@@ -88,12 +88,12 @@ class ReadFragment(
             textColor = "black"
         }
         webView.loadDataString(
-            bodyContent = content,
-            backgroundColor = backgroundColor,
-            textColor = textColor,
-            textAlign = "justify",
-            fontSizePx = fontSizePx,
-            paddingPx = paddingPx
+                bodyContent = content,
+                backgroundColor = backgroundColor,
+                textColor = textColor,
+                textAlign = "justify",
+                fontSizePx = fontSizePx,
+                paddingPx = paddingPx
         )
     }
 
