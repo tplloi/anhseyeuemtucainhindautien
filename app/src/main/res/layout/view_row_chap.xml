@@ -5,6 +5,8 @@
     android:id="@+id/cardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/margin_small"
+    android:layout_marginEnd="@dimen/margin_small"
     android:elevation="@dimen/w_3"
     app:cardBackgroundColor="?attr/themeBackgroundColorMedium"
     app:cardCornerRadius="@dimen/round_medium"
@@ -28,6 +30,7 @@
         android:layout_gravity="center_vertical|end"
         android:layout_marginEnd="@dimen/margin_small"
         android:contentDescription="@string/app_name"
-        android:src="@drawable/ic_navigate_next_white_48dp" />
+        android:src="@drawable/ic_navigate_next_white_48dp"
+        app:tint="?attr/themeTextColor" />
 
 </androidx.cardview.widget.CardView>
