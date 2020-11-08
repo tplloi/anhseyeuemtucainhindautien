@@ -12,14 +12,14 @@ import com.annotation.LogTag
 import com.core.base.BaseFontActivity
 import com.core.utilities.LActivityUtil
 import com.core.utilities.LAnimationUtil
+import com.core.utilities.LSharedPrefsUtil
 import com.daimajia.androidanimations.library.Techniques
-import com.function.epub.core.PageFragment
 import com.loitp.R
+import com.loitp.app.AppConstant
 import com.loitp.fragment.ReadFragment
 import com.views.layout.swipeback.SwipeBackLayout
 import com.views.setSafeOnClickListener
 import kotlinx.android.synthetic.main.activity_read.*
-import kotlin.collections.ArrayList
 
 @LogTag("loitppReadActivity")
 @IsShowAdWhenExit(true)
@@ -170,5 +170,17 @@ class ReadActivity : BaseFontActivity() {
                 e.printStackTrace()
             }
         }
+    }
+
+    override fun onBackPressed() {
+        val readFragment = vp.adapter?.instantiateItem(vp, vp.currentItem)
+        if (readFragment is ReadFragment) {
+            val onScroll = readFragment.onScroll
+            logD("onBackPressed onScroll $onScroll, currentItem: " + vp.currentItem)
+            LSharedPrefsUtil.instance.putInt(AppConstant.KEY_CURRENT_POSITION, vp.currentItem)
+            LSharedPrefsUtil.instance.putInt(AppConstant.KEY_SCROLL, onScroll)
+        }
+        showShortInformation(getString(R.string.book_mark_success))
+        super.onBackPressed()
     }
 }

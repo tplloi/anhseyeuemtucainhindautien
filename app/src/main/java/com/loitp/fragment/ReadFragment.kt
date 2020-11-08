@@ -20,6 +20,7 @@ class ReadFragment(
 ) : BaseFragment() {
 
     private var mainViewModel: MainViewModel? = null
+    var onScroll = 0
 
     override fun setLayoutResourceId(): Int {
         return R.layout.frm_chap
@@ -38,18 +39,20 @@ class ReadFragment(
         logD("setupViews currentPosition $currentPosition")
         webView.callback = object : LWebView.Callback {
             override fun onScroll(l: Int, t: Int, oldl: Int, oldt: Int) {
+                logD("onScroll $t")
+                onScroll = t
             }
 
             override fun onScrollTopToBottom() {
-                logD("onScrollTopToBottom")
+//                logD("onScrollTopToBottom")
             }
 
             override fun onScrollBottomToTop() {
-                logD("onScrollBottomToTop")
+//                logD("onScrollBottomToTop")
             }
 
             override fun onProgressChanged(progress: Int) {
-                logD("onProgressChanged $progress")
+//                logD("onProgressChanged $progress")
                 //warning show check null here for better
                 pb?.let {
                     it.progress = progress
