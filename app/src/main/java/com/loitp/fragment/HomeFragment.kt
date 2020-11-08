@@ -19,7 +19,7 @@ import com.loitp.viewmodels.MainViewModel
 import com.views.setSafeOnClickListener
 import kotlinx.android.synthetic.main.frm_home.*
 
-@LogTag("loitppHomeFragment")
+@LogTag("HomeFragment")
 class HomeFragment : BaseFragment() {
 
     private var mainViewModel: MainViewModel? = null

@@ -22,7 +22,7 @@ import com.views.layout.swipeback.SwipeBackLayout
 import com.views.setSafeOnClickListener
 import kotlinx.android.synthetic.main.activity_read.*
 
-@LogTag("loitppReadActivity")
+@LogTag("ReadActivity")
 @IsShowAdWhenExit(true)
 @IsSwipeActivity(true)
 class ReadActivity : BaseFontActivity() {

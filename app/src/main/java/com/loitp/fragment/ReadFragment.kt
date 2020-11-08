@@ -14,7 +14,7 @@ import com.loitp.viewmodels.MainViewModel
 import com.views.LWebView
 import kotlinx.android.synthetic.main.frm_chap.*
 
-@LogTag("loitppReadFragment")
+@LogTag("ReadFragment")
 class ReadFragment(
         val currentPosition: Int
 ) : BaseFragment() {
