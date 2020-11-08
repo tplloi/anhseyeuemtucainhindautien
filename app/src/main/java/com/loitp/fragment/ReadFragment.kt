@@ -1,10 +1,13 @@
 package com.loitp.fragment
 
+import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.webkit.WebSettings
 import com.annotation.LogTag
 import com.core.base.BaseFragment
 import com.core.utilities.LAppResource
+import com.core.utilities.LPrefUtil
 import com.core.utilities.LUIUtil
 import com.loitp.R
 import com.loitp.viewmodels.MainViewModel
@@ -76,7 +79,6 @@ class ReadFragment(
 
     private fun setupData(content: String) {
         logD("<<<setupData $currentPosition $content")
-        val fontSizePx = LAppResource.getDimenValue(R.dimen.txt_small)
         val paddingPx = LAppResource.getDimenValue(R.dimen.padding_small)
         val backgroundColor: String
         val textColor: String
@@ -92,9 +94,44 @@ class ReadFragment(
                 backgroundColor = backgroundColor,
                 textColor = textColor,
                 textAlign = "justify",
-                fontSizePx = fontSizePx,
+                fontSizePx = LAppResource.getDimenValue(R.dimen.txt_small),
                 paddingPx = paddingPx
         )
+        webView.setTextSize(sizePercent = LPrefUtil.getTextSizePercentEpub())
+    }
+
+    @Suppress("DEPRECATION")
+    fun zoomIn() {
+        logD("zoomIn")
+        val settings = webView.settings
+        val currentApiVersion = Build.VERSION.SDK_INT
+        if (currentApiVersion <= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+            settings.textSize = WebSettings.TextSize.LARGER
+        } else {
+            var size = (settings.textZoom * 1.1).toInt()
+            if (size > 250) {
+                size = 250
+            }
+            LPrefUtil.setTextSizePercentEpub(value = size)
+            webView.setTextSize(sizePercent = size)
+        }
+    }
+
+    @Suppress("DEPRECATION")
+    fun zoomOut() {
+        logD("zoomOut")
+        val settings = webView.settings
+        val currentAiVersion = Build.VERSION.SDK_INT
+        if (currentAiVersion <= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+            settings.textSize = WebSettings.TextSize.SMALLEST
+        } else {
+            var size = (settings.textZoom / 1.1).toInt()
+            if (size < 50) {
+                size = 50
+            }
+            LPrefUtil.setTextSizePercentEpub(value = size)
+            webView.setTextSize(sizePercent = size)
+        }
     }
 
 }

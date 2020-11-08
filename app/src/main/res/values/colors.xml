@@ -4,4 +4,6 @@
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#000000</color>
     <color name="colorEdgeEffect">#000000</color>
+    <color name="ripple_material_dark">#80FFFFFF</color>
+    <color name="ripple_material_light">#80000000</color>
 </resources>

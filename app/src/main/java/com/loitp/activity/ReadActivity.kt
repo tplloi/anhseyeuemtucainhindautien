@@ -11,12 +11,15 @@ import com.annotation.IsSwipeActivity
 import com.annotation.LogTag
 import com.core.base.BaseFontActivity
 import com.core.utilities.LActivityUtil
+import com.core.utilities.LAnimationUtil
+import com.daimajia.androidanimations.library.Techniques
+import com.function.epub.core.PageFragment
 import com.loitp.R
 import com.loitp.fragment.ReadFragment
 import com.views.layout.swipeback.SwipeBackLayout
 import com.views.setSafeOnClickListener
-import com.views.viewpager.viewpagertransformers.ZoomOutSlideTransformer
 import kotlinx.android.synthetic.main.activity_read.*
+import kotlin.collections.ArrayList
 
 @LogTag("loitppReadActivity")
 @IsShowAdWhenExit(true)
@@ -74,11 +77,11 @@ class ReadActivity : BaseFontActivity() {
         ivBack.setSafeOnClickListener {
             onBackPressed()
         }
-        btZoomIn.setSafeOnClickListener {
-//TODO
+        btZoomIn.setOnClickListener {
+            handleZoomIn()
         }
-        btZoomOut.setSafeOnClickListener {
-//TODO
+        btZoomOut.setOnClickListener {
+            handleZoomOut()
         }
         vp.adapter = SlidePagerAdapter(supportFragmentManager)
 //        vp.setPageTransformer(true, ZoomOutSlideTransformer())
@@ -106,7 +109,7 @@ class ReadActivity : BaseFontActivity() {
     }
 
     private fun setupViewModels() {
-
+        //do nothing
     }
 
     private inner class SlidePagerAdapter(fm: FragmentManager)
@@ -118,6 +121,54 @@ class ReadActivity : BaseFontActivity() {
 
         override fun getCount(): Int {
             return listChap.size
+        }
+    }
+
+    private fun handleZoomIn() {
+        LAnimationUtil.play(view = btZoomIn, techniques = Techniques.Pulse)
+        vp.adapter?.let { adapter ->
+            try {
+                val readFragment = adapter.instantiateItem(vp, vp.currentItem)
+                if (readFragment is ReadFragment) {
+                    readFragment.zoomIn()
+                }
+
+                val readFragmentNext = adapter.instantiateItem(vp, vp.currentItem + 1)
+                if (readFragmentNext is ReadFragment) {
+                    readFragmentNext.zoomIn()
+                }
+
+                val readFragmentPrev = adapter.instantiateItem(vp, vp.currentItem - 1)
+                if (readFragmentPrev is ReadFragment) {
+                    readFragmentPrev.zoomIn()
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+    }
+
+    private fun handleZoomOut() {
+        LAnimationUtil.play(view = btZoomOut, techniques = Techniques.Pulse)
+        vp.adapter?.let { adapter ->
+            try {
+                val readFragment = adapter.instantiateItem(vp, vp.currentItem)
+                if (readFragment is ReadFragment) {
+                    readFragment.zoomOut()
+                }
+
+                val readFragmentNext = adapter.instantiateItem(vp, vp.currentItem + 1)
+                if (readFragmentNext is ReadFragment) {
+                    readFragmentNext.zoomOut()
+                }
+
+                val readFragmentPrev = adapter.instantiateItem(vp, vp.currentItem - 1)
+                if (readFragmentPrev is ReadFragment) {
+                    readFragmentPrev.zoomOut()
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
     }
 }

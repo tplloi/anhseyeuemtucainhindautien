@@ -25,7 +25,8 @@
             android:src="@drawable/ic_keyboard_backspace_white_48dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:tint="?attr/themeTextColor" />
+            app:tint="?attr/themeTextColor"
+            tools:ignore="UnusedAttribute" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvChap"
@@ -53,7 +54,8 @@
             app:layout_constraintBottom_toBottomOf="@+id/ivBack"
             app:layout_constraintEnd_toStartOf="@+id/btZoomOut"
             app:layout_constraintTop_toTopOf="@+id/ivBack"
-            app:tint="?attr/themeTextColor" />
+            app:tint="?attr/themeTextColor"
+            tools:ignore="UnusedAttribute" />
 
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/btZoomOut"
@@ -67,7 +69,8 @@
             app:layout_constraintBottom_toBottomOf="@+id/ivBack"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/ivBack"
-            app:tint="?attr/themeTextColor" />
+            app:tint="?attr/themeTextColor"
+            tools:ignore="UnusedAttribute" />
 
         <View
             android:id="@+id/line"
