@@ -36,7 +36,7 @@ class ReadFragment(
     }
 
     private fun setupViews() {
-        logD("setupViews currentPosition $currentPosition")
+//        logD("setupViews currentPosition $currentPosition")
         webView.callback = object : LWebView.Callback {
             override fun onScroll(l: Int, t: Int, oldl: Int, oldt: Int) {
                 logD("onScroll $t")

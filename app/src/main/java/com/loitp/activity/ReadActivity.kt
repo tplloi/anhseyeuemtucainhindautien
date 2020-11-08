@@ -53,7 +53,7 @@ class ReadActivity : BaseFontActivity() {
         intent?.getStringArrayListExtra(KEY_LIST_DATA)?.let {
             listChap.addAll(it)
         }
-        logD("setupData currentPosition $currentPosition")
+//        logD("setupData currentPosition $currentPosition")
 //        logD("setupData listChap " + BaseApplication.gson.toJson(listChap))
         vp.adapter?.notifyDataSetChanged()
         vp.currentItem = currentPosition
@@ -101,7 +101,7 @@ class ReadActivity : BaseFontActivity() {
     }
 
     private fun setTextChap() {
-        logD("setTextChap currentPosition $currentPosition")
+//        logD("setTextChap currentPosition $currentPosition")
         if (currentPosition < 0 || currentPosition > (listChap.size - 1)) {
             return
         }
@@ -176,11 +176,11 @@ class ReadActivity : BaseFontActivity() {
         val readFragment = vp.adapter?.instantiateItem(vp, vp.currentItem)
         if (readFragment is ReadFragment) {
             val onScroll = readFragment.onScroll
-            logD("onBackPressed onScroll $onScroll, currentItem: " + vp.currentItem)
+//            logD("onBackPressed onScroll $onScroll, currentItem: " + vp.currentItem)
             LSharedPrefsUtil.instance.putInt(AppConstant.KEY_CURRENT_POSITION, vp.currentItem)
             LSharedPrefsUtil.instance.putInt(AppConstant.KEY_SCROLL, onScroll)
+            showShortInformation(getString(R.string.book_mark_success))
         }
-        showShortInformation(getString(R.string.book_mark_success))
         super.onBackPressed()
     }
 }

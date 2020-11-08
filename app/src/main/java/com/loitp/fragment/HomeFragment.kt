@@ -10,11 +10,14 @@ import com.annotation.LogTag
 import com.core.base.BaseApplication
 import com.core.base.BaseFragment
 import com.core.utilities.LActivityUtil
+import com.core.utilities.LSharedPrefsUtil
 import com.loitp.R
 import com.loitp.activity.ReadActivity
 import com.loitp.adapter.ChapAdapter
+import com.loitp.app.AppConstant
 import com.loitp.viewmodels.MainViewModel
 import com.views.setSafeOnClickListener
+import kotlinx.android.synthetic.main.activity_read.*
 import kotlinx.android.synthetic.main.frm_home.*
 
 @LogTag("loitppHomeFragment")
@@ -58,7 +61,9 @@ class HomeFragment : BaseFragment() {
         rvChap.adapter = concatAdapter
 
         fabReadContinue.setSafeOnClickListener {
-            //TODO
+            val currentItem = LSharedPrefsUtil.instance.getInt(AppConstant.KEY_CURRENT_POSITION)
+            val scroll = LSharedPrefsUtil.instance.getInt(AppConstant.KEY_SCROLL)
+            logD("fabReadContinue currentItem $currentItem, scroll $scroll")
         }
     }
 
