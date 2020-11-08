@@ -81,7 +81,7 @@ class ReadFragment(
     }
 
     private fun setupData(content: String) {
-        logD("<<<setupData $currentPosition $content")
+//        logD("<<<setupData $currentPosition $content")
         val paddingPx = LAppResource.getDimenValue(R.dimen.padding_small)
         val backgroundColor: String
         val textColor: String
@@ -135,6 +135,11 @@ class ReadFragment(
             LPrefUtil.setTextSizePercentEpub(value = size)
             webView.setTextSize(sizePercent = size)
         }
+    }
+
+    fun scrollToPosition(scroll: Int) {
+        logD(">>>scrollToPosition scroll $scroll")
+        webView.scrollTo(0, scroll)
     }
 
 }

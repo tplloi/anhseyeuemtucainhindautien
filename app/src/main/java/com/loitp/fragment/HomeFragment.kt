@@ -17,7 +17,6 @@ import com.loitp.adapter.ChapAdapter
 import com.loitp.app.AppConstant
 import com.loitp.viewmodels.MainViewModel
 import com.views.setSafeOnClickListener
-import kotlinx.android.synthetic.main.activity_read.*
 import kotlinx.android.synthetic.main.frm_home.*
 
 @LogTag("loitppHomeFragment")
@@ -44,14 +43,7 @@ class HomeFragment : BaseFragment() {
         chapAdapter = ChapAdapter()
         chapAdapter?.let { ca ->
             ca.onClickRootListener = { _, position ->
-                val intent = Intent(context, ReadActivity::class.java)
-                intent.putExtra(ReadActivity.KEY_POSITION_CHAP, position)
-                mainViewModel?.listChapLiveData?.value?.let {
-                    val list = it as ArrayList
-                    intent.putStringArrayListExtra(ReadActivity.KEY_LIST_DATA, list)
-                }
-                startActivity(intent)
-                LActivityUtil.tranIn(context)
+                goToReadScreen(position = position, scroll = 0)
             }
 
             val listOfAdapters = listOf<RecyclerView.Adapter<out RecyclerView.ViewHolder>>(ca)
@@ -63,8 +55,21 @@ class HomeFragment : BaseFragment() {
         fabReadContinue.setSafeOnClickListener {
             val currentItem = LSharedPrefsUtil.instance.getInt(AppConstant.KEY_CURRENT_POSITION)
             val scroll = LSharedPrefsUtil.instance.getInt(AppConstant.KEY_SCROLL)
-            logD("fabReadContinue currentItem $currentItem, scroll $scroll")
+//            logD("fabReadContinue currentItem $currentItem, scroll $scroll")
+            goToReadScreen(position = currentItem, scroll = scroll)
         }
+    }
+
+    private fun goToReadScreen(position: Int, scroll: Int) {
+        val intent = Intent(context, ReadActivity::class.java)
+        intent.putExtra(ReadActivity.KEY_POSITION_CHAP, position)
+        intent.putExtra(ReadActivity.KEY_SCROLL, scroll)
+        mainViewModel?.listChapLiveData?.value?.let {
+            val list = it as ArrayList
+            intent.putStringArrayListExtra(ReadActivity.KEY_LIST_DATA, list)
+        }
+        startActivity(intent)
+        LActivityUtil.tranIn(context)
     }
 
     private fun setupViewModels() {
@@ -79,7 +84,7 @@ class HomeFragment : BaseFragment() {
             })
 
             mvm.listChapLiveData.observe(viewLifecycleOwner, { listChap ->
-                logD("<<<listChapLiveData " + BaseApplication.gson.toJson(listChap))
+//                logD("<<<listChapLiveData " + BaseApplication.gson.toJson(listChap))
                 chapAdapter?.setData(listChap)
             })
         }

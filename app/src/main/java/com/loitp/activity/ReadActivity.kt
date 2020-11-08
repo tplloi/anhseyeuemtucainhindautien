@@ -14,6 +14,7 @@ import com.core.utilities.LActivityUtil
 import com.core.utilities.LAnimationUtil
 import com.core.utilities.LSharedPrefsUtil
 import com.daimajia.androidanimations.library.Techniques
+import com.google.ads.interactivemedia.v3.internal.it
 import com.loitp.R
 import com.loitp.app.AppConstant
 import com.loitp.fragment.ReadFragment
@@ -29,6 +30,7 @@ class ReadActivity : BaseFontActivity() {
     companion object {
         const val KEY_LIST_DATA = "KEY_LIST_DATA"
         const val KEY_POSITION_CHAP = "KEY_POSITION_CHAP"
+        const val KEY_SCROLL = "KEY_SCROLL"
     }
 
     private var currentPosition = 0
@@ -59,6 +61,18 @@ class ReadActivity : BaseFontActivity() {
         vp.currentItem = currentPosition
         if (currentPosition == 0) {
             setTextChap()
+        }
+
+        //book mark scroll
+        intent?.getIntExtra(KEY_SCROLL, 0)?.let { scroll ->
+            logD("setupData scroll $scroll")
+            vp.post {
+                val readFragment = vp.adapter?.instantiateItem(vp, vp.currentItem)
+                if (readFragment is ReadFragment) {
+                    logD("readFragment is ReadFragment setupData scroll $scroll")
+                    readFragment.scrollToPosition(scroll = scroll)
+                }
+            }
         }
     }
 
