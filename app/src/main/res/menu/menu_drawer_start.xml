@@ -13,10 +13,10 @@
             android:icon="@drawable/ic_insert_photo_black_48dp"
             android:title="@string/gallery" />
 
-        <item
-            android:id="@+id/navGallery18"
-            android:icon="@drawable/ic_insert_photo_black_48dp"
-            android:title="@string/gallery_18" />
+<!--        <item-->
+<!--            android:id="@+id/navGallery18"-->
+<!--            android:icon="@drawable/ic_insert_photo_black_48dp"-->
+<!--            android:title="@string/gallery_18" />-->
 
         <item
             android:id="@+id/navRateApp"

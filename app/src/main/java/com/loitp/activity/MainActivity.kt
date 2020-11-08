@@ -122,9 +122,9 @@ class MainActivity : BaseFontActivity(), NavigationView.OnNavigationItemSelected
                 startActivity(intent)
                 LActivityUtil.tranIn(this)
             }
-            R.id.navGallery18 -> {
-                LSocialUtil.openBrowserGirl(context = this)
-            }
+//            R.id.navGallery18 -> {
+//                LSocialUtil.openBrowserGirl(context = this)
+//            }
             R.id.navRateApp -> {
                 LSocialUtil.rateApp(activity = this, packageName = packageName)
             }
