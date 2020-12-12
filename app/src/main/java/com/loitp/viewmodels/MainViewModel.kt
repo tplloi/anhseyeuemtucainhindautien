@@ -18,7 +18,6 @@ class MainViewModel : BaseViewModel() {
             showLoading(true)
 
             val string = LStoreUtil.readTxtFromAsset(assetFile = "db.sqlite")
-//            logD("loadListChap string $string")
             val listChap = string.split("#")
             listChapLiveData.postValue(listChap)
 
