@@ -82,7 +82,7 @@ class ReadFragment(
 
     private fun setupData(content: String) {
 //        logD("<<<setupData $currentPosition $content")
-        val paddingPx = LAppResource.getDimenValue(R.dimen.padding_small)
+        val paddingPx = LAppResource.getDimenValue(R.dimen.padding_3)
         val backgroundColor: String
         val textColor: String
         if (LUIUtil.isDarkTheme()) {
@@ -97,7 +97,7 @@ class ReadFragment(
                 backgroundColor = backgroundColor,
                 textColor = textColor,
                 textAlign = "justify",
-                fontSizePx = LAppResource.getDimenValue(R.dimen.txt_small),
+//                fontSizePx = LAppResource.getDimenValue(R.dimen.txt_8),
                 paddingPx = paddingPx
         )
         webView.setTextSize(sizePercent = LPrefUtil.getTextSizePercentEpub())
