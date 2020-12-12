@@ -14,7 +14,6 @@ import com.core.utilities.LActivityUtil
 import com.core.utilities.LAnimationUtil
 import com.core.utilities.LSharedPrefsUtil
 import com.daimajia.androidanimations.library.Techniques
-import com.google.ads.interactivemedia.v3.internal.it
 import com.loitp.R
 import com.loitp.app.AppConstant
 import com.loitp.fragment.ReadFragment
@@ -78,10 +77,10 @@ class ReadActivity : BaseFontActivity() {
 
     private fun setupViews() {
         swipeBackLayout.setSwipeBackListener(object : SwipeBackLayout.OnSwipeBackListener {
-            override fun onViewPositionChanged(mView: View, swipeBackFraction: Float, SWIPE_BACK_FACTOR: Float) {
+            override fun onViewPositionChanged(mView: View?, swipeBackFraction: Float, swipeBackFactor: Float) {
             }
 
-            override fun onViewSwipeFinished(mView: View, isEnd: Boolean) {
+            override fun onViewSwipeFinished(mView: View?, isEnd: Boolean) {
                 if (isEnd) {
                     finish()
                     LActivityUtil.transActivityNoAnimation(context = this@ReadActivity)

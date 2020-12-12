@@ -19,8 +19,6 @@ class LApplication : BaseApplication() {
     override fun onCreate() {
         super.onCreate()
 
-        Constants.setIsDebug(false)
-
         //config admob id
         AdmobData.instance.idAdmobFull = getString(R.string.str_f)
 

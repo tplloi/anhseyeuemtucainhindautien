@@ -26,6 +26,7 @@ class SettingFragment : BaseFragment() {
         swDarkTheme.isChecked = isDarkTheme
 
         swDarkTheme.setOnCheckedChangeListener { _, isOn ->
+            //TODO
             LUIUtil.setDarkTheme(isDarkTheme = isOn)
         }
     }
