@@ -95,9 +95,7 @@ class SplashActivity : BaseFontActivity() {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             LActivityUtil.tranIn(this)
-            LUIUtil.setDelay(mls = 1000, runnable = {
-                finish()
-            })
+            finishAfterTransition()
         }
     }
 

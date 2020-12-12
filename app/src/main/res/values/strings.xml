@@ -35,4 +35,5 @@
     <string name="right_drawer">Right Drawer</string>
     <string name="dark_theme">Chủ đề tối</string>
     <string name="book_mark_success">Đã đánh dấu vị trí đọc thành công</string>
+    <string name="app_will_be_restart">Ứng dụng sẽ được khởi động lại</string>
 </resources>
