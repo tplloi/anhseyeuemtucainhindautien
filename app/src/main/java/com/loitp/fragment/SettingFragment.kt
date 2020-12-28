@@ -1,20 +1,24 @@
 package com.loitp.fragment
 
-import android.graphics.Color
+import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import com.annotation.LayoutId
 import com.annotation.LogTag
 import com.core.base.BaseFragment
-import com.core.common.Constants
-import com.core.utilities.LSharedPrefsUtil
-import com.data.EventBusData
+import com.core.utilities.LActivityUtil
+import com.core.utilities.LDialogUtil
+import com.core.utilities.LUIUtil
 import com.loitp.R
+import com.loitp.activity.MainActivity
 import kotlinx.android.synthetic.main.frm_setting.*
 
-@LayoutId(R.layout.frm_setting)
 @LogTag("SettingFragment")
 class SettingFragment : BaseFragment() {
+
+    override fun setLayoutResourceId(): Int {
+        return R.layout.frm_setting
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -22,30 +26,51 @@ class SettingFragment : BaseFragment() {
         setupViews()
     }
 
+    private var dialog: AlertDialog? = null
     private fun setupViews() {
-        val isDarkTheme = LSharedPrefsUtil.instance.getBoolean(Constants.KEY_IS_DARK_THEME, true)
-        swDarkTheme.isChecked = isDarkTheme
-        setupTheme(isDarkTheme = isDarkTheme)
+        fun setData() {
+            val isDarkTheme = LUIUtil.isDarkTheme()
+            swDarkTheme?.isChecked = isDarkTheme
+        }
+
+        setData()
+        var isValid = true
 
         swDarkTheme.setOnCheckedChangeListener { _, isOn ->
-            EventBusData.instance.sendThemeChange(isDarkTheme = isOn)
+            activity?.let { a ->
+                if (isValid) {
+                    dialog = LDialogUtil.showDialog2(
+                            context = a,
+                            title = getString(R.string.warning_vn),
+                            msg = getString(R.string.app_will_be_restart),
+                            button1 = getString(R.string.ok),
+                            button2 = getString(R.string.cancel),
+                            onClickButton1 = {
+                                LUIUtil.setDarkTheme(isDarkTheme = isOn)
+                                val intent = Intent(activity, MainActivity::class.java)
+                                a.startActivity(intent)
+                                LActivityUtil.tranIn(a)
+                                a.finishAfterTransition()
+                            },
+                            onClickButton2 = {
+                                isValid = false
+                                setData()
+                            }
+                    )
+                    dialog?.setCancelable(true)
+                    dialog?.setOnCancelListener {
+                        isValid = false
+                        setData()
+                    }
+                } else {
+                    isValid = true
+                }
+            }
         }
     }
 
-    private fun setupTheme(isDarkTheme: Boolean) {
-        if (isDarkTheme) {
-            LSharedPrefsUtil.instance.putBoolean(Constants.KEY_IS_DARK_THEME, true)
-            layoutRootView.setBackgroundColor(Color.BLACK)
-            swDarkTheme.setTextColor(Color.WHITE)
-        } else {
-            LSharedPrefsUtil.instance.putBoolean(Constants.KEY_IS_DARK_THEME, false)
-            layoutRootView.setBackgroundColor(Color.WHITE)
-            swDarkTheme.setTextColor(Color.BLACK)
-        }
-    }
-
-    override fun onThemeChange(event: EventBusData.ThemeEvent) {
-        super.onThemeChange(event)
-        setupTheme(isDarkTheme = event.isDarkTheme)
+    override fun onDestroyView() {
+        dialog?.cancel()
+        super.onDestroyView()
     }
 }

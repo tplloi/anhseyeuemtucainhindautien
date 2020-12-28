@@ -5,9 +5,9 @@
     android:id="@+id/layoutRootViewSplash"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:background="@color/colorPrimary">
+    android:background="?attr/themeBackgroundColor">
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvCopyright"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,20 +15,20 @@
         android:gravity="center"
         android:padding="@dimen/padding_medium"
         android:text="@string/copyright"
-        android:textSize="@dimen/txt_medium"
-        tools:textColor="@color/white" />
+        android:textColor="?attr/themeTextColor"
+        android:textSize="@dimen/txt_medium" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvAppName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:contentDescription="@string/app_name"
+        android:contentDescription="@string/app_name_vn"
         android:gravity="center"
         android:padding="@dimen/padding_medium"
-        android:text="@string/app_name"
-        android:textSize="@dimen/txt_40"
-        tools:textColor="@color/white" />
+        android:text="@string/app_name_vn"
+        android:textColor="?attr/themeTextColor"
+        android:textSize="@dimen/txt_40" />
 
     <com.wang.avi.AVLoadingIndicatorView
         android:id="@+id/indicatorView"
@@ -39,21 +39,21 @@
         android:layout_centerHorizontal="true"
         android:layout_gravity="center"
         android:layout_marginBottom="@dimen/margin_medium"
-        app:indicatorName="PacmanIndicator"
-        tools:indicatorColor="@color/white" />
+        app:indicatorColor="?attr/themeTextColor"
+        app:indicatorName="PacmanIndicator" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textViewVersion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/tvPolicy"
         android:gravity="center"
+        android:textColor="?attr/themeTextColor"
         android:textSize="@dimen/txt_medium"
         android:textStyle="bold"
-        tools:text="Version 69"
-        tools:textColor="@color/white" />
+        tools:text="Version 69" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvPolicy"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -62,6 +62,6 @@
         android:gravity="center"
         android:padding="@dimen/padding_medium"
         android:text="@string/policy"
-        android:textSize="@dimen/txt_medium"
-        tools:textColor="@color/white" />
+        android:textColor="?attr/themeTextColor"
+        android:textSize="@dimen/txt_medium" />
 </RelativeLayout>

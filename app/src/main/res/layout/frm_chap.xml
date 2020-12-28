@@ -1,13 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary">
+    android:background="?attr/themeBackgroundColor">
 
-    <TextView
+    <com.views.LWebView
+        android:id="@+id/webView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/app_name"
-        android:textColor="@color/white" />
+        android:background="?attr/themeBackgroundColor"
+        android:visibility="invisible"
+        tools:visibility="visible" />
+
+    <ProgressBar
+        android:id="@+id/pb"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminateOnly="false"
+        android:progressTint="?attr/themeTextColor"
+        tools:progress="50" />
 
 </RelativeLayout>

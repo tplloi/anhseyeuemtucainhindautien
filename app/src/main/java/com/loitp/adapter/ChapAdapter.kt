@@ -18,12 +18,6 @@ class ChapAdapter : AnimationAdapter() {
 
     private var listChap = ArrayList<String>()
     var onClickRootListener: ((String, Int) -> Unit)? = null
-    private var isDarkTheme: Boolean = false
-
-    fun setIsDarkTheme(isDarkTheme: Boolean) {
-        this.isDarkTheme = isDarkTheme
-        notifyDataSetChanged()
-    }
 
     fun setData(listChap: List<String>) {
         this.listChap.clear()
@@ -35,16 +29,6 @@ class ChapAdapter : AnimationAdapter() {
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(chap: String) {
-
-            if (isDarkTheme) {
-                itemView.cardView.setCardBackgroundColor(LAppResource.getColor(R.color.dark900))
-                itemView.tvChap.setTextColor(Color.WHITE)
-                itemView.ivNext.setColorFilter(Color.WHITE)
-            } else {
-                itemView.cardView.setCardBackgroundColor(Color.WHITE)
-                itemView.tvChap.setTextColor(Color.BLACK)
-                itemView.ivNext.setColorFilter(Color.BLACK)
-            }
 
             itemView.tvChap.text = chap
             itemView.tvChap.setSafeOnClickListener {

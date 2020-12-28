@@ -5,8 +5,8 @@
     android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/themeBackgroundColor"
     android:fitsSystemWindows="true"
-    tools:background="@color/colorPrimary"
     tools:openDrawer="start">
 
     <com.google.android.material.navigation.NavigationView
@@ -14,12 +14,12 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:background="?attr/themeBackgroundColor"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/view_drawer_start"
-        app:menu="@menu/menu_drawer_start"
-        tools:background="@color/colorPrimary"
-        tools:itemIconTint="@color/white"
-        tools:itemTextColor="@color/white" />
+        app:itemIconTint="?attr/themeTextColor"
+        app:itemTextColor="?attr/themeTextColor"
+        app:menu="@menu/menu_drawer_start" />
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navViewEnd"
@@ -27,7 +27,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="end"
         android:fitsSystemWindows="false"
-        tools:background="@color/colorPrimary">
+        android:background="?attr/themeBackgroundColor">
 
         <include layout="@layout/view_drawer_end" />
     </com.google.android.material.navigation.NavigationView>

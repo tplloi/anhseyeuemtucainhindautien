@@ -9,10 +9,10 @@ android {
 
     defaultConfig {
         applicationId "loitp93.anhseyeuemtucainhindautien"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 30
-        versionCode 3
-        versionName "1.0.3"
+        versionCode 4
+        versionName "1.0.4"
         multiDexEnabled true
 
         renderscriptTargetApi 19
@@ -54,7 +54,7 @@ android {
 
     android.applicationVariants.all { variant ->
         variant.outputs.all {
-            outputFileName = "BaseMaster_" + buildType.name + "_" + defaultConfig.versionName + "_" + defaultConfig.versionCode + ".apk"
+            outputFileName = "App_" + buildType.name + "_" + defaultConfig.versionName + "_" + defaultConfig.versionCode + ".apk"
         }
     }
 
@@ -74,7 +74,7 @@ repositories {
 }
 
 dependencies {
-    api 'com.github.tplloi:basemaster:4.4.20'
+    api 'com.github.tplloi:basemaster:4.4.31'
 
     //https://github.com/shiburagi/Drawer-Behavior
     api 'com.infideap.drawerbehavior:drawer-behavior:1.0.1'

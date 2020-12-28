@@ -1,7 +1,6 @@
 package com.loitp.activity
 
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -10,7 +9,6 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
-import com.annotation.LayoutId
 import com.annotation.LogTag
 import com.core.base.BaseFontActivity
 import com.core.common.Constants
@@ -18,7 +16,6 @@ import com.core.helper.adhelper.AdHelperActivity
 import com.core.helper.donate.FrmDonate
 import com.core.helper.gallery.GalleryCoreSplashActivity
 import com.core.utilities.*
-import com.data.EventBusData
 import com.google.android.material.navigation.NavigationView
 import com.loitp.R
 import com.loitp.fragment.HomeFragment
@@ -28,17 +25,17 @@ import kotlinx.android.synthetic.main.view_drawer_end.*
 import kotlinx.android.synthetic.main.view_drawer_main.*
 import kotlinx.android.synthetic.main.view_drawer_start.view.*
 
-@LayoutId(R.layout.activity_main)
 @LogTag("MainActivity")
 class MainActivity : BaseFontActivity(), NavigationView.OnNavigationItemSelectedListener {
+
+    override fun setLayoutResourceId(): Int {
+        return R.layout.activity_main
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setupViews()
-
-        val isDarkTheme = LSharedPrefsUtil.instance.getBoolean(Constants.KEY_IS_DARK_THEME, true)
-        setupTheme(isDarkTheme)
     }
 
     private fun setupViews() {
@@ -59,7 +56,10 @@ class MainActivity : BaseFontActivity(), NavigationView.OnNavigationItemSelected
         drawerLayout.useCustomBehavior(Gravity.END)
 
         //cover
-        LImageUtil.load(context = this, url = getString(R.string.link_cover), imageView = navViewStart.getHeaderView(0).ivCover)
+        LImageUtil.load(
+                context = this,
+                any = getString(R.string.link_cover),
+                imageView = navViewStart.getHeaderView(0).ivCover)
 
         tvAd.text = LStoreUtil.readTxtFromRawFolder(nameOfRawFile = R.raw.ad)
 
@@ -96,7 +96,7 @@ class MainActivity : BaseFontActivity(), NavigationView.OnNavigationItemSelected
                 return
             }
             this.doubleBackToExitPressedOnce = true
-            showShort(msg = getString(R.string.press_again_to_exit), isTopAnchor = false)
+            showShortInformation(msg = getString(R.string.press_again_to_exit), isTopAnchor = false)
             Handler(Looper.getMainLooper()).postDelayed({
                 doubleBackToExitPressedOnce = false
             }, 2000)
@@ -122,9 +122,9 @@ class MainActivity : BaseFontActivity(), NavigationView.OnNavigationItemSelected
                 startActivity(intent)
                 LActivityUtil.tranIn(this)
             }
-            R.id.navGallery18 -> {
-                LSocialUtil.openBrowserGirl(context = this)
-            }
+//            R.id.navGallery18 -> {
+//                LSocialUtil.openBrowserGirl(context = this)
+//            }
             R.id.navRateApp -> {
                 LSocialUtil.rateApp(activity = this, packageName = packageName)
             }
@@ -147,7 +147,6 @@ class MainActivity : BaseFontActivity(), NavigationView.OnNavigationItemSelected
             R.id.navAd -> {
                 val intent = Intent(this, AdHelperActivity::class.java)
                 intent.putExtra(Constants.AD_HELPER_IS_ENGLISH_LANGUAGE, false)
-                intent.putExtra(Constants.IS_DARK_THEME, true)
                 startActivity(intent)
                 LActivityUtil.tranIn(this)
             }
@@ -184,30 +183,5 @@ class MainActivity : BaseFontActivity(), NavigationView.OnNavigationItemSelected
             }
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    override fun onThemeChange(event: EventBusData.ThemeEvent) {
-        super.onThemeChange(event)
-        setupTheme(event.isDarkTheme)
-    }
-
-    private fun setupTheme(isDarkTheme: Boolean) {
-        if (isDarkTheme) {
-            layoutViewDrawerEnd.setBackgroundColor(LAppResource.getColor(R.color.colorPrimary))
-            tvAd.setTextColor(Color.WHITE)
-            drawerLayout.setBackgroundColor(LAppResource.getColor(R.color.colorPrimary))
-            navViewStart.setBackgroundColor(LAppResource.getColor(R.color.colorPrimary))
-            navViewStart.itemTextColor = LAppResource.getColorStateList(R.drawable.text_white_gray)
-            navViewStart.itemIconTintList = LAppResource.getColorStateList(R.drawable.text_white_gray)
-            navViewEnd.setBackgroundColor(LAppResource.getColor(R.color.colorPrimary))
-        } else {
-            layoutViewDrawerEnd.setBackgroundColor(Color.WHITE)
-            tvAd.setTextColor(Color.BLACK)
-            drawerLayout.setBackgroundColor(Color.WHITE)
-            navViewStart.setBackgroundColor(Color.WHITE)
-            navViewStart.itemTextColor = LAppResource.getColorStateList(R.drawable.text_black_primary)
-            navViewStart.itemIconTintList = LAppResource.getColorStateList(R.drawable.text_black_primary)
-            navViewEnd.setBackgroundColor(Color.WHITE)
-        }
     }
 }

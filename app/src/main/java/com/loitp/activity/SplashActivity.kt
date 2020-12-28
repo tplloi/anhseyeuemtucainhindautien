@@ -3,18 +3,13 @@ package com.loitp.activity
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
-import com.annotation.LayoutId
 import com.annotation.LogTag
 import com.core.base.BaseApplication
 import com.core.base.BaseFontActivity
-import com.core.common.Constants
 import com.core.utilities.*
-import com.interfaces.Callback2
-import com.interfaces.GGCallback
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
@@ -22,24 +17,29 @@ import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.loitp.BuildConfig
 import com.loitp.R
-import com.loitp.app.LApplication
 import com.model.GG
 import kotlinx.android.synthetic.main.activity_splash.*
 import okhttp3.Call
 
-@LayoutId(R.layout.activity_splash)
 @LogTag("SplashActivity")
 class SplashActivity : BaseFontActivity() {
     private var isAnimDone = false
     private var isCheckReadyDone = false
     private var isShowDialogCheck = false
 
-    @SuppressLint("SetTextI18n")
+    override fun setLayoutResourceId(): Int {
+        return R.layout.activity_splash
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setupTheme()
-        LUIUtil.setDelay(mls = 1500, runnable = Runnable {
+        setupViews()
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun setupViews() {
+        LUIUtil.setDelay(mls = 1500, runnable = {
             isAnimDone = true
             goToHome()
         })
@@ -58,7 +58,7 @@ class SplashActivity : BaseFontActivity() {
 
     private fun checkPermission() {
         isShowDialogCheck = true
-        Dexter.withActivity(this)
+        Dexter.withContext(this)
                 .withPermissions(
                         Manifest.permission.WRITE_EXTERNAL_STORAGE,
                         Manifest.permission.ACCESS_FINE_LOCATION
@@ -95,9 +95,7 @@ class SplashActivity : BaseFontActivity() {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             LActivityUtil.tranIn(this)
-            LUIUtil.setDelay(mls = 1000, runnable = Runnable {
-                finish()
-            })
+            finishAfterTransition()
         }
     }
 
@@ -108,19 +106,17 @@ class SplashActivity : BaseFontActivity() {
                 msg = getString(R.string.need_permisson_to_use_app),
                 button1 = getString(R.string.setting),
                 button2 = getString(R.string.deny),
-                callback2 = object : Callback2 {
-                    override fun onClick1() {
-                        isShowDialogCheck = false
-                        val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-                        val uri = Uri.fromParts("package", packageName, null)
-                        intent.data = uri
-                        startActivityForResult(intent, 101)
-                    }
-
-                    override fun onClick2() {
-                        onBackPressed()
-                    }
-                })
+                onClickButton1 = {
+                    isShowDialogCheck = false
+                    val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                    val uri = Uri.fromParts("package", packageName, null)
+                    intent.data = uri
+                    startActivityForResult(intent, 101)
+                },
+                onClickButton2 = {
+                    onBackPressed()
+                }
+        )
         alertDialog.setCancelable(false)
     }
 
@@ -131,15 +127,13 @@ class SplashActivity : BaseFontActivity() {
                 msg = getString(R.string.need_permisson_to_use_app),
                 button1 = getString(R.string.yes),
                 button2 = getString(R.string.deny),
-                callback2 = object : Callback2 {
-                    override fun onClick1() {
-                        checkPermission()
-                    }
-
-                    override fun onClick2() {
-                        onBackPressed()
-                    }
-                })
+                onClickButton1 = {
+                    checkPermission()
+                },
+                onClickButton2 = {
+                    onBackPressed()
+                }
+        )
         alertDialog.setCancelable(false)
     }
 
@@ -155,15 +149,13 @@ class SplashActivity : BaseFontActivity() {
                     msg = title,
                     button1 = getString(R.string.exit),
                     button2 = getString(R.string.try_again),
-                    callback2 = object : Callback2 {
-                        override fun onClick1() {
-                            onBackPressed()
-                        }
-
-                        override fun onClick2() {
-                            checkReady()
-                        }
-                    })
+                    onClickButton1 = {
+                        onBackPressed()
+                    },
+                    onClickButton2 = {
+                        checkReady()
+                    }
+            )
             alertDial.setCancelable(false)
         }
     }
@@ -184,51 +176,30 @@ class SplashActivity : BaseFontActivity() {
         val linkGGDriveCheckReady = getString(R.string.link_gg_drive)
         LStoreUtil.getTextFromGGDrive(
                 linkGGDrive = linkGGDriveCheckReady,
-                ggCallback = object : GGCallback {
-                    override fun onGGFailure(call: Call, e: Exception) {
-                        e.printStackTrace()
+                onGGFailure = { _: Call, e: Exception ->
+                    e.printStackTrace()
+                    showDialogNotReady()
+                },
+                onGGResponse = { listGG: ArrayList<GG> ->
+                    logD("getGG listGG: -> " + BaseApplication.gson.toJson(listGG))
+
+                    fun isReady(): Boolean {
+                        listGG.forEach { gg ->
+                            if (packageName == gg.pkg) {
+                                return gg.isReady
+                            }
+                        }
+                        return false
+                    }
+
+                    val isReady = isReady()
+                    if (isReady) {
+                        LPrefUtil.setCheckAppReady(value = true)
+                        setReady()
+                    } else {
                         showDialogNotReady()
                     }
-
-                    override fun onGGResponse(listGG: ArrayList<GG>) {
-                        logD("getGG listGG: -> " + BaseApplication.gson.toJson(listGG))
-
-                        fun isReady(): Boolean {
-                            listGG.forEach { gg ->
-                                if (packageName == gg.pkg) {
-                                    return gg.isReady
-                                }
-                            }
-                            return false
-                        }
-
-                        val isReady = isReady()
-                        if (isReady) {
-                            LPrefUtil.setCheckAppReady(value = true)
-                            setReady()
-                        } else {
-                            showDialogNotReady()
-                        }
-                    }
-                })
-    }
-
-    private fun setupTheme() {
-        val isDarkTheme = LSharedPrefsUtil.instance.getBoolean(Constants.KEY_IS_DARK_THEME, true)
-        if (isDarkTheme) {
-            layoutRootViewSplash.setBackgroundColor(LAppResource.getColor(R.color.colorPrimary))
-            tvCopyright.setTextColor(Color.WHITE)
-            tvAppName.setTextColor(Color.WHITE)
-            indicatorView.setIndicatorColor(Color.WHITE)
-            textViewVersion.setTextColor(Color.WHITE)
-            tvPolicy.setTextColor(Color.WHITE)
-        } else {
-            layoutRootViewSplash.setBackgroundColor(LAppResource.getColor(R.color.white))
-            tvCopyright.setTextColor(Color.BLACK)
-            tvAppName.setTextColor(Color.BLACK)
-            indicatorView.setIndicatorColor(Color.BLACK)
-            textViewVersion.setTextColor(Color.BLACK)
-            tvPolicy.setTextColor(Color.BLACK)
-        }
+                }
+        )
     }
 }

@@ -5,14 +5,15 @@
     android:id="@+id/layoutRootViewHome"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:background="@color/black">
+    android:background="?attr/themeBackgroundColor">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvChap"
         style="@style/ScrollVertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/padding_medium"
+        android:paddingTop="@dimen/padding_small"
+        android:paddingBottom="@dimen/padding_small"
         tools:itemCount="5"
         tools:listitem="@layout/view_row_chap" />
 
@@ -23,8 +24,8 @@
         android:layout_height="@dimen/w_50"
         android:layout_centerInParent="true"
         android:layout_marginBottom="@dimen/margin_medium"
-        app:indicatorName="PacmanIndicator"
-        tools:indicatorColor="@color/white" />
+        app:indicatorColor="?attr/themeTextColor"
+        app:indicatorName="PacmanIndicator" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabReadContinue"
@@ -33,6 +34,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_margin="@dimen/margin_medium"
+        android:contentDescription="@string/app_name"
         android:padding="@dimen/padding_medium"
         android:src="@drawable/ic_bookmarks_white_48dp"
         app:backgroundTint="@color/white" />
