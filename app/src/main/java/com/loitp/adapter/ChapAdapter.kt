@@ -1,20 +1,17 @@
 package com.loitp.adapter
 
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.annotation.LogTag
-import com.core.adapter.AnimationAdapter
-import com.core.base.BaseApplication
-import com.core.utilities.LAppResource
+import com.core.adapter.BaseAdapter
 import com.loitp.R
 import com.views.setSafeOnClickListener
 import kotlinx.android.synthetic.main.view_row_chap.view.*
 
 @LogTag("ChapAdapter")
-class ChapAdapter : AnimationAdapter() {
+class ChapAdapter : BaseAdapter() {
 
     private var listChap = ArrayList<String>()
     var onClickRootListener: ((String, Int) -> Unit)? = null
@@ -34,7 +31,6 @@ class ChapAdapter : AnimationAdapter() {
             itemView.tvChap.setSafeOnClickListener {
                 onClickRootListener?.invoke(chap, bindingAdapterPosition)
             }
-            setAnimation(viewToAnimate = itemView, position = bindingAdapterPosition)
         }
     }
 
