@@ -174,6 +174,7 @@ class SplashActivity : BaseFontActivity() {
             return
         }
         val linkGGDriveCheckReady = getString(R.string.link_gg_drive)
+        logD("<<<linkGGDriveCheckReady $linkGGDriveCheckReady")
         LStoreUtil.getTextFromGGDrive(
                 linkGGDrive = linkGGDriveCheckReady,
                 onGGFailure = { _: Call, e: Exception ->
@@ -181,15 +182,12 @@ class SplashActivity : BaseFontActivity() {
                     showDialogNotReady()
                 },
                 onGGResponse = { listGG: ArrayList<GG> ->
-                    logD("getGG listGG: -> " + BaseApplication.gson.toJson(listGG))
+                    logD(">>>getGG listGG: -> " + BaseApplication.gson.toJson(listGG))
 
                     fun isReady(): Boolean {
-                        listGG.forEach { gg ->
-                            if (packageName == gg.pkg) {
-                                return gg.isReady
-                            }
+                        return listGG.any {
+                            it.pkg == packageName
                         }
-                        return false
                     }
 
                     val isReady = isReady()
