@@ -9,9 +9,8 @@ import com.data.AdmobData
 import com.loitp.R
 
 //done
-//TODO link link_cover string
-//TODO debug const
-//TODO id admob
+//TODO done link link_cover string
+//TODO done id admob
 
 @LogTag("LApplication")
 class LApplication : BaseApplication() {
