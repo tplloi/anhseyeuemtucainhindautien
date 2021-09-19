@@ -13,7 +13,6 @@ import com.annotation.LogTag
 import com.core.base.BaseFontActivity
 import com.core.common.Constants
 import com.core.helper.adhelper.AdHelperActivity
-import com.core.helper.donate.FrmDonate
 import com.core.helper.gallery.GalleryCoreSplashActivity
 import com.core.utilities.*
 import com.google.android.material.navigation.NavigationView
@@ -152,10 +151,6 @@ class MainActivity : BaseFontActivity(), NavigationView.OnNavigationItemSelected
             }
             R.id.navPolicy -> {
                 LSocialUtil.openBrowserPolicy(context = this)
-            }
-            R.id.navDonation -> {
-                idItemChecked = R.id.navDonation
-                LScreenUtil.replaceFragment(this, R.id.flContainer, FrmDonate(), false)
             }
         }
 

@@ -7,9 +7,9 @@ import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.annotation.LogTag
-import com.core.base.BaseApplication
 import com.core.base.BaseFragment
 import com.core.utilities.LActivityUtil
+import com.core.utilities.LDialogUtil
 import com.core.utilities.LSharedPrefsUtil
 import com.loitp.R
 import com.loitp.activity.ReadActivity
@@ -77,9 +77,9 @@ class HomeFragment : BaseFragment() {
         mainViewModel?.let { mvm ->
             mvm.eventLoading.observe(viewLifecycleOwner, { isLoading ->
                 if (isLoading) {
-                    indicatorView.smoothToShow()
+                    LDialogUtil.showProgress(indicatorView)
                 } else {
-                    indicatorView.smoothToHide()
+                    LDialogUtil.hideProgress(indicatorView)
                 }
             })
 
