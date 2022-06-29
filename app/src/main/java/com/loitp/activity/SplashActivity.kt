@@ -3,6 +3,7 @@ package com.loitp.activity
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
@@ -10,17 +11,14 @@ import com.annotation.LogTag
 import com.core.base.BaseApplication
 import com.core.base.BaseFontActivity
 import com.core.utilities.*
-import com.karumi.dexter.Dexter
-import com.karumi.dexter.MultiplePermissionsReport
-import com.karumi.dexter.PermissionToken
-import com.karumi.dexter.listener.PermissionRequest
-import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.loitp.BuildConfig
 import com.loitp.R
 import com.model.GG
+import com.permissionx.guolindev.PermissionX
 import kotlinx.android.synthetic.main.activity_splash.*
 import okhttp3.Call
 
+@SuppressLint("CustomSplashScreen")
 @LogTag("SplashActivity")
 class SplashActivity : BaseFontActivity() {
     private var isAnimDone = false
@@ -57,37 +55,75 @@ class SplashActivity : BaseFontActivity() {
     }
 
     private fun checkPermission() {
-        isShowDialogCheck = true
-        Dexter.withContext(this)
-            .withPermissions(
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,
-//                Manifest.permission.ACCESS_FINE_LOCATION
-            )
-            .withListener(object : MultiplePermissionsListener {
-                override fun onPermissionsChecked(report: MultiplePermissionsReport) {
-                    // check if all permissions are granted
-                    if (report.areAllPermissionsGranted()) {
-                        checkReady()
+
+        fun checkPer() {
+            isShowDialogCheck = true
+            val color = if (LUIUtil.isDarkTheme()) {
+                Color.WHITE
+            } else {
+                Color.BLACK
+            }
+            PermissionX.init(this)
+                .permissions(
+//                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.READ_EXTERNAL_STORAGE,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                )
+                .setDialogTintColor(color, color)
+                .onExplainRequestReason { scope, deniedList, _ ->
+                    val message = getString(R.string.app_name) + getString(R.string.needs_per)
+                    scope.showRequestReasonDialog(
+                        permissions = deniedList,
+                        message = message,
+                        positiveText = getString(R.string.allow),
+                        negativeText = getString(R.string.deny)
+                    )
+                }
+                .onForwardToSettings { scope, deniedList ->
+                    scope.showForwardToSettingsDialog(
+                        permissions = deniedList,
+                        message = getString(R.string.per_manually_msg),
+                        positiveText = getString(R.string.ok),
+                        negativeText = getString(R.string.cancel)
+                    )
+                }
+                .request { allGranted, _, _ ->
+                    if (allGranted) {
+                        isCheckReadyDone = true
+                        goToHome()
                     } else {
-                        showShouldAcceptPermission()
+                        finish()
+                        LActivityUtil.tranOut(this)
                     }
-
-                    // check for permanent denial of any permission
-                    if (report.isAnyPermissionPermanentlyDenied) {
-                        showSettingsDialog()
-                    }
-                    isShowDialogCheck = true
+                    isShowDialogCheck = false
                 }
+        }
 
-                override fun onPermissionRationaleShouldBeShown(
-                    permissions: List<PermissionRequest>,
-                    token: PermissionToken
-                ) {
-                    token.continuePermissionRequest()
-                }
-            })
-            .onSameThread()
-            .check()
+//        val isCanWriteSystem = LScreenUtil.checkSystemWritePermission()
+//        if (isCanWriteSystem) {
+//            checkPer()
+//        } else {
+//            val alertDialog = LDialogUtil.showDialog2(
+//                context = this,
+//                title = "Need Permissions",
+//                msg = "This app needs permission to allow modifying system settings",
+//                button1 = getString(R.string.ok),
+//                button2 = getString(R.string.cancel),
+//                onClickButton1 = {
+//                    val intent = Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS)
+//                    intent.data = Uri.parse("package:$packageName")
+//                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+//                    startActivity(intent)
+//                    LActivityUtil.tranIn(this@SplashActivity)
+//                },
+//                onClickButton2 = {
+//                    onBackPressed()
+//                }
+//            )
+//            alertDialog.setCancelable(false)
+//        }
+
+        checkPer()
     }
 
     private fun goToHome() {
@@ -97,44 +133,6 @@ class SplashActivity : BaseFontActivity() {
             LActivityUtil.tranIn(this)
             finishAfterTransition()
         }
-    }
-
-    private fun showSettingsDialog() {
-        val alertDialog = LDialogUtil.showDialog2(
-            context = this,
-            title = getString(R.string.need_permisson),
-            msg = getString(R.string.need_permisson_to_use_app),
-            button1 = getString(R.string.setting),
-            button2 = getString(R.string.deny),
-            onClickButton1 = {
-                isShowDialogCheck = false
-                val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-                val uri = Uri.fromParts("package", packageName, null)
-                intent.data = uri
-                startActivityForResult(intent, 101)
-            },
-            onClickButton2 = {
-                onBackPressed()
-            }
-        )
-        alertDialog.setCancelable(false)
-    }
-
-    private fun showShouldAcceptPermission() {
-        val alertDialog = LDialogUtil.showDialog2(
-            context = this,
-            title = getString(R.string.need_permisson),
-            msg = getString(R.string.need_permisson_to_use_app),
-            button1 = getString(R.string.yes),
-            button2 = getString(R.string.deny),
-            onClickButton1 = {
-                checkPermission()
-            },
-            onClickButton2 = {
-                onBackPressed()
-            }
-        )
-        alertDialog.setCancelable(false)
     }
 
     private fun showDialogNotReady() {

@@ -11,7 +11,7 @@ import com.core.utilities.LPrefUtil
 import com.core.utilities.LUIUtil
 import com.loitp.R
 import com.loitp.viewmodels.MainViewModel
-import com.views.LWebView
+import com.views.LWebViewAdblock
 import kotlinx.android.synthetic.main.frm_chap.*
 
 @LogTag("ReadFragment")
@@ -37,7 +37,7 @@ class ReadFragment(
 
     private fun setupViews() {
 //        logD("setupViews currentPosition $currentPosition")
-        webView.callback = object : LWebView.Callback {
+        webView.callback = object : LWebViewAdblock.Callback {
             override fun onScroll(l: Int, t: Int, oldl: Int, oldt: Int) {
                 logD("onScroll $t")
                 onScroll = t
@@ -82,7 +82,7 @@ class ReadFragment(
 
     private fun setupData(content: String) {
 //        logD("<<<setupData $currentPosition $content")
-        val paddingPx = LAppResource.getDimenValue(R.dimen.padding_3)
+        val paddingPx = LAppResource.getDimenValue(R.dimen.margin_padding_small)
         val backgroundColor: String
         val textColor: String
         if (LUIUtil.isDarkTheme()) {
