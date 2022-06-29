@@ -26,8 +26,8 @@
         android:layout_width="@dimen/w_300"
         android:layout_height="match_parent"
         android:layout_gravity="end"
-        android:fitsSystemWindows="false"
-        android:background="?attr/themeBackgroundColor">
+        android:background="?attr/themeBackgroundColor"
+        android:fitsSystemWindows="false">
 
         <include layout="@layout/view_drawer_end" />
     </com.google.android.material.navigation.NavigationView>
