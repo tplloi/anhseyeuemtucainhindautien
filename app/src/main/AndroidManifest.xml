@@ -16,6 +16,7 @@
         <activity
             android:name=".activity.SplashActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,10 +26,12 @@
 
         <activity
             android:name=".activity.MainActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize" />
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true" />
         <activity
             android:name=".activity.ReadActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
             android:theme="@style/SwipeTheme" />
     </application>
 
