@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.frm_chap.*
 
 @LogTag("ReadFragment")
 class ReadFragment(
-        val currentPosition: Int
+    val currentPosition: Int
 ) : BaseFragment() {
 
     private var mainViewModel: MainViewModel? = null
@@ -73,10 +73,10 @@ class ReadFragment(
     private fun setupViewModels() {
         mainViewModel = getSelfViewModel(MainViewModel::class.java)
         mainViewModel?.let { mvm ->
-            mvm.contentLiveData.observe(viewLifecycleOwner, { content ->
+            mvm.contentLiveData.observe(viewLifecycleOwner) { content ->
 //                logD("<<<contentLiveData $currentPosition")
                 setupData(content = content)
-            })
+            }
         }
     }
 
@@ -93,12 +93,12 @@ class ReadFragment(
             textColor = "black"
         }
         webView.loadDataString(
-                bodyContent = content,
-                backgroundColor = backgroundColor,
-                textColor = textColor,
-                textAlign = "justify",
+            bodyContent = content,
+            backgroundColor = backgroundColor,
+            textColor = textColor,
+            textAlign = "justify",
 //                fontSizePx = LAppResource.getDimenValue(R.dimen.txt_8),
-                paddingPx = paddingPx
+            paddingPx = paddingPx
         )
         webView.setTextSize(sizePercent = LPrefUtil.getTextSizePercentEpub())
     }

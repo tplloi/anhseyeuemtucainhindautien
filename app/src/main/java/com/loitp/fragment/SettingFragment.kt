@@ -40,22 +40,22 @@ class SettingFragment : BaseFragment() {
             activity?.let { a ->
                 if (isValid) {
                     dialog = LDialogUtil.showDialog2(
-                            context = a,
-                            title = getString(R.string.warning_vn),
-                            msg = getString(R.string.app_will_be_restart),
-                            button1 = getString(R.string.ok),
-                            button2 = getString(R.string.cancel),
-                            onClickButton1 = {
-                                LUIUtil.setDarkTheme(isDarkTheme = isOn)
-                                val intent = Intent(activity, MainActivity::class.java)
-                                a.startActivity(intent)
-                                LActivityUtil.tranIn(a)
-                                a.finishAfterTransition()
-                            },
-                            onClickButton2 = {
-                                isValid = false
-                                setData()
-                            }
+                        context = a,
+                        title = getString(R.string.warning_vn),
+                        msg = getString(R.string.app_will_be_restart),
+                        button1 = getString(R.string.ok),
+                        button2 = getString(R.string.cancel),
+                        onClickButton1 = {
+                            LUIUtil.setDarkTheme(isDarkTheme = isOn)
+                            val intent = Intent(activity, MainActivity::class.java)
+                            a.startActivity(intent)
+                            LActivityUtil.tranIn(a)
+                            a.finishAfterTransition()
+                        },
+                        onClickButton2 = {
+                            isValid = false
+                            setData()
+                        }
                     )
                     dialog?.setCancelable(true)
                     dialog?.setOnCancelListener {

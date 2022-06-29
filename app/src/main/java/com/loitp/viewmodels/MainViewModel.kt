@@ -4,7 +4,6 @@ import androidx.lifecycle.MutableLiveData
 import com.annotation.LogTag
 import com.core.base.BaseViewModel
 import com.core.utilities.LStoreUtil
-import com.service.livedata.SingleLiveEvent
 import kotlinx.coroutines.launch
 
 @LogTag("MainViewModel")

@@ -75,18 +75,18 @@ class HomeFragment : BaseFragment() {
     private fun setupViewModels() {
         mainViewModel = getViewModel(MainViewModel::class.java)
         mainViewModel?.let { mvm ->
-            mvm.eventLoading.observe(viewLifecycleOwner, { isLoading ->
+            mvm.eventLoading.observe(viewLifecycleOwner) { isLoading ->
                 if (isLoading) {
                     LDialogUtil.showProgress(indicatorView)
                 } else {
                     LDialogUtil.hideProgress(indicatorView)
                 }
-            })
+            }
 
-            mvm.listChapLiveData.observe(viewLifecycleOwner, { listChap ->
+            mvm.listChapLiveData.observe(viewLifecycleOwner) { listChap ->
 //                logD("<<<listChapLiveData " + BaseApplication.gson.toJson(listChap))
                 chapAdapter?.setData(listChap)
-            })
+            }
         }
 
     }
