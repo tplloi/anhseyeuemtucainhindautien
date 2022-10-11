@@ -6,12 +6,12 @@ import com.loitpcore.core.common.Constants
 import com.loitpcore.core.utilities.LUIUtil
 import com.loitpcore.data.ActivityData
 
-//TODO keystore
 //TODO ic_laucher
 
 //done
 //pkg name 2022.10.11
 //valid gg drive 2022.10.11
+//keystore
 
 @LogTag("LApplication")
 class LApplication : BaseApplication() {
