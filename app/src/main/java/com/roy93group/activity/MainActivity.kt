@@ -17,6 +17,7 @@ import com.loitpcore.core.helper.adHelper.AdHelperActivity
 import com.loitpcore.core.helper.gallery.GalleryCoreSplashActivity
 import com.loitpcore.core.utilities.*
 import com.roy93group.R
+import com.roy93group.app.LApplication
 import com.roy93group.fragment.HomeFrm
 import com.roy93group.fragment.SettingFrm
 import kotlinx.android.synthetic.main.activity_main.*
@@ -33,6 +34,7 @@ import kotlinx.android.synthetic.main.view_drawer_start.view.*
  */
 @LogTag("MainActivity")
 class MainActivity : BaseFontActivity(), NavigationView.OnNavigationItemSelectedListener {
+    private val isFullData = LApplication.isFullData()
 
     override fun setLayoutResourceId(): Int {
         return R.layout.activity_main
@@ -74,7 +76,11 @@ class MainActivity : BaseFontActivity(), NavigationView.OnNavigationItemSelected
 
     private fun switchHomeScreen() {
         navViewStart.menu.performIdentifierAction(R.id.navHome, 0)
-        navViewStart.menu.findItem(R.id.navHome).isChecked = true
+        if (isFullData) {
+            navViewStart.menu.findItem(R.id.navHome).isChecked = true
+        } else {
+            navViewStart.menu.findItem(R.id.navSetting).isChecked = true
+        }
     }
 
     private var doubleBackToExitPressedOnce = false
@@ -107,18 +113,22 @@ class MainActivity : BaseFontActivity(), NavigationView.OnNavigationItemSelected
                 )
             }
             R.id.navGallery -> {
-                val intent = Intent(this, GalleryCoreSplashActivity::class.java)
-                intent.putExtra(Constants.BKG_SPLASH_SCREEN, getString(R.string.link_cover))
-                intent.putExtra(Constants.BKG_ROOT_VIEW, R.drawable.bkg_black)
-                //neu muon remove albumn nao thi cu pass id cua albumn do
-                val removeAlbumFlickrList = ArrayList<String>()
-                removeAlbumFlickrList.add(Constants.FLICKR_ID_STICKER)
-                intent.putStringArrayListExtra(
-                    Constants.KEY_REMOVE_ALBUM_FLICKR_LIST,
-                    removeAlbumFlickrList
-                )
-                startActivity(intent)
-                LActivityUtil.tranIn(this)
+                if (isFullData) {
+                    val intent = Intent(this, GalleryCoreSplashActivity::class.java)
+                    intent.putExtra(Constants.BKG_SPLASH_SCREEN, getString(R.string.link_cover))
+                    intent.putExtra(Constants.BKG_ROOT_VIEW, R.drawable.bkg_black)
+                    //neu muon remove albumn nao thi cu pass id cua albumn do
+                    val removeAlbumFlickrList = ArrayList<String>()
+                    removeAlbumFlickrList.add(Constants.FLICKR_ID_STICKER)
+                    intent.putStringArrayListExtra(
+                        Constants.KEY_REMOVE_ALBUM_FLICKR_LIST,
+                        removeAlbumFlickrList
+                    )
+                    startActivity(intent)
+                    LActivityUtil.tranIn(this)
+                } else {
+                    showShortInformation(getString(R.string.err_unknown))
+                }
             }
             R.id.navRateApp -> {
                 LSocialUtil.rateApp(activity = this, packageName = packageName)
@@ -134,16 +144,25 @@ class MainActivity : BaseFontActivity(), NavigationView.OnNavigationItemSelected
             }
             R.id.navSetting -> {
                 idItemChecked = R.id.navSetting
-                LScreenUtil.replaceFragment(this, R.id.flContainer, SettingFrm(), false)
+                LScreenUtil.replaceFragment(
+                    activity = this,
+                    containerFrameLayoutIdRes = R.id.flContainer,
+                    fragment = SettingFrm(),
+                    isAddToBackStack = false
+                )
             }
             R.id.navChatWithDev -> {
                 LSocialUtil.chatMessenger(this)
             }
             R.id.navAd -> {
-                val intent = Intent(this, AdHelperActivity::class.java)
-                intent.putExtra(Constants.AD_HELPER_IS_ENGLISH_LANGUAGE, false)
-                startActivity(intent)
-                LActivityUtil.tranIn(this)
+                if (isFullData) {
+                    val intent = Intent(this, AdHelperActivity::class.java)
+                    intent.putExtra(Constants.AD_HELPER_IS_ENGLISH_LANGUAGE, false)
+                    startActivity(intent)
+                    LActivityUtil.tranIn(this)
+                } else {
+                    showShortInformation(getString(R.string.err_unknown))
+                }
             }
             R.id.navPolicy -> {
                 LSocialUtil.openBrowserPolicy(context = this)

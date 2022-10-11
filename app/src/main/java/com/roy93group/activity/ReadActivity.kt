@@ -138,7 +138,7 @@ class ReadActivity : BaseFontActivity() {
         //do nothing
     }
 
-    //TODO viewpager2
+    //TODO migrate viewpager2
     private inner class SlidePagerAdapter(fm: FragmentManager) :
         FragmentStatePagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
