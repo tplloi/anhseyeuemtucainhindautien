@@ -7,7 +7,7 @@ android {
     compileSdk 33
 
     defaultConfig {
-        applicationId "loitp93.anhseyeuemtucainhindautien"
+        applicationId "com.roy93group.asyetcndt"
         minSdkVersion 24
         targetSdkVersion 33
         versionCode 20221011
@@ -64,7 +64,7 @@ repositories {
 }
 
 dependencies {
-    api 'com.github.tplloi:basemaster:4.4.91'
+    api 'com.github.tplloi:base:4.4.93'
     //https://github.com/shiburagi/Drawer-Behavior
     api 'com.infideap.drawerbehavior:drawer-behavior:1.0.1'
     api 'com.daimajia.androidanimations:library:2.4@aar'
