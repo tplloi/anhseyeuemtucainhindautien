@@ -120,7 +120,7 @@ class MainActivity : BaseFontActivity(), NavigationView.OnNavigationItemSelected
             R.id.navGallery -> {
                 if (isFullData) {
                     val intent = Intent(this, GalleryCoreSplashActivity::class.java)
-                    intent.putExtra(Constants.BKG_SPLASH_SCREEN, getString(R.string.link_cover))
+                    intent.putExtra(Constants.BKG_SPLASH_SCREEN, getString(R.string.link_cover_flickr))
                     intent.putExtra(Constants.BKG_ROOT_VIEW, R.drawable.bkg_black)
                     //neu muon remove albumn nao thi cu pass id cua albumn do
                     val removeAlbumFlickrList = ArrayList<String>()
