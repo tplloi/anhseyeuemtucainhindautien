@@ -10,6 +10,8 @@ import com.loitp.R
 
 //TODO keystore
 //TODO ic_laucher
+//TODO pkg name
+//TODO valid gg drive
 
 @LogTag("LApplication")
 class LApplication : BaseApplication() {
