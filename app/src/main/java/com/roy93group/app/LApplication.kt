@@ -1,4 +1,4 @@
-package com.loitp.app
+package com.roy93group.app
 
 import com.loitpcore.annotation.LogTag
 import com.loitpcore.core.base.BaseApplication

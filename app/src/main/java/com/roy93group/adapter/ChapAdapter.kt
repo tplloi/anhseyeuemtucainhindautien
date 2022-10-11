@@ -1,10 +1,10 @@
-package com.loitp.adapter
+package com.roy93group.adapter
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.loitp.R
+import com.roy93group.R
 import com.loitpcore.annotation.LogTag
 import com.loitpcore.core.adapter.BaseAdapter
 import com.loitpcore.views.setSafeOnClickListener

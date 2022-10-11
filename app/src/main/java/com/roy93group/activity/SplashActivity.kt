@@ -1,4 +1,4 @@
-package com.loitp.activity
+package com.roy93group.activity
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -7,8 +7,8 @@ import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
-import com.loitp.BuildConfig
-import com.loitp.R
+import com.roy93group.BuildConfig
+import com.roy93group.R
 import com.loitpcore.annotation.LogTag
 import com.loitpcore.core.base.BaseApplication
 import com.loitpcore.core.base.BaseFontActivity

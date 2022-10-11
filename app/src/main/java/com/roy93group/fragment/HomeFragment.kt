@@ -1,4 +1,4 @@
-package com.loitp.fragment
+package com.roy93group.fragment
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,11 +6,11 @@ import android.view.View
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.loitp.R
-import com.loitp.activity.ReadActivity
-import com.loitp.adapter.ChapAdapter
-import com.loitp.app.AppConstant
-import com.loitp.viewmodels.MainViewModel
+import com.roy93group.R
+import com.roy93group.activity.ReadActivity
+import com.roy93group.adapter.ChapAdapter
+import com.roy93group.app.AppConstant
+import com.roy93group.viewmodels.MainViewModel
 import com.loitpcore.annotation.LogTag
 import com.loitpcore.core.base.BaseFragment
 import com.loitpcore.core.utilities.LActivityUtil

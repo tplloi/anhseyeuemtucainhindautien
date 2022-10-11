@@ -1,11 +1,11 @@
-package com.loitp.fragment
+package com.roy93group.fragment
 
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import com.loitp.R
-import com.loitp.activity.MainActivity
+import com.roy93group.R
+import com.roy93group.activity.MainActivity
 import com.loitpcore.annotation.LogTag
 import com.loitpcore.core.base.BaseFragment
 import com.loitpcore.core.utilities.LActivityUtil

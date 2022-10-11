@@ -1,4 +1,4 @@
-package com.loitp.activity
+package com.roy93group.activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,9 +10,9 @@ import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import com.google.android.material.navigation.NavigationView
-import com.loitp.R
-import com.loitp.fragment.HomeFragment
-import com.loitp.fragment.SettingFragment
+import com.roy93group.R
+import com.roy93group.fragment.HomeFragment
+import com.roy93group.fragment.SettingFragment
 import com.loitpcore.annotation.LogTag
 import com.loitpcore.core.base.BaseFontActivity
 import com.loitpcore.core.common.Constants

@@ -1,4 +1,4 @@
-package com.loitp.activity
+package com.roy93group.activity
 
 import android.os.Bundle
 import android.view.View
@@ -7,9 +7,9 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.daimajia.androidanimations.library.Techniques
-import com.loitp.R
-import com.loitp.app.AppConstant
-import com.loitp.fragment.ReadFragment
+import com.roy93group.R
+import com.roy93group.app.AppConstant
+import com.roy93group.fragment.ReadFragment
 import com.loitpcore.annotation.IsSwipeActivity
 import com.loitpcore.annotation.LogTag
 import com.loitpcore.core.base.BaseFontActivity

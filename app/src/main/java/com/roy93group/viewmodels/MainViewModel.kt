@@ -1,4 +1,4 @@
-package com.loitp.viewmodels
+package com.roy93group.viewmodels
 
 import androidx.lifecycle.MutableLiveData
 import com.loitpcore.annotation.LogTag

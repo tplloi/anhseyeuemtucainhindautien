@@ -1,12 +1,12 @@
-package com.loitp.fragment
+package com.roy93group.fragment
 
 import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.webkit.WebSettings
 import android.webkit.WebView
-import com.loitp.R
-import com.loitp.viewmodels.MainViewModel
+import com.roy93group.R
+import com.roy93group.viewmodels.MainViewModel
 import com.loitpcore.annotation.LogTag
 import com.loitpcore.core.base.BaseFragment
 import com.loitpcore.core.utilities.LAppResource
