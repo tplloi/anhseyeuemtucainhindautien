@@ -1,13 +1,14 @@
 package com.roy93group.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.roy93group.R
 import com.loitpcore.annotation.LogTag
 import com.loitpcore.core.adapter.BaseAdapter
 import com.loitpcore.views.setSafeOnClickListener
+import com.roy93group.R
 import kotlinx.android.synthetic.main.view_row_chap.view.*
 
 /**
@@ -23,10 +24,10 @@ class ChapAdapter : BaseAdapter() {
     private var listChap = ArrayList<String>()
     var onClickRootListener: ((String, Int) -> Unit)? = null
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setData(listChap: List<String>) {
         this.listChap.clear()
         this.listChap.addAll(listChap)
-//        logD("setData " + BaseApplication.gson.toJson(this.listChap))
         notifyDataSetChanged()
     }
 
@@ -34,18 +35,22 @@ class ChapAdapter : BaseAdapter() {
 
         fun bind(chap: String) {
 
-            itemView.tvChap.text = chap
-            itemView.tvChap.setSafeOnClickListener {
-                onClickRootListener?.invoke(chap, bindingAdapterPosition)
+            itemView.tvChap.apply {
+                text = chap
+                setSafeOnClickListener {
+                    onClickRootListener?.invoke(chap, bindingAdapterPosition)
+                }
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-            ViewHolder(LayoutInflater.from(parent.context).inflate(
-                    R.layout.view_row_chap, parent,
-                    false
-            ))
+        ViewHolder(
+            LayoutInflater.from(parent.context).inflate(
+                R.layout.view_row_chap, parent,
+                false
+            )
+        )
 
     override fun getItemCount(): Int = listChap.size
 
