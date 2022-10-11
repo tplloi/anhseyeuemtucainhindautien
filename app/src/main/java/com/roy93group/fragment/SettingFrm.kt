@@ -4,13 +4,13 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import com.roy93group.R
-import com.roy93group.activity.MainActivity
 import com.loitpcore.annotation.LogTag
 import com.loitpcore.core.base.BaseFragment
 import com.loitpcore.core.utilities.LActivityUtil
 import com.loitpcore.core.utilities.LDialogUtil
 import com.loitpcore.core.utilities.LUIUtil
+import com.roy93group.R
+import com.roy93group.activity.MainActivity
 import kotlinx.android.synthetic.main.frm_setting.*
 
 /**
@@ -20,8 +20,10 @@ import kotlinx.android.synthetic.main.frm_setting.*
  * +840766040293
  * freuss47@gmail.com
  */
-@LogTag("SettingFragment")
-class SettingFragment : BaseFragment() {
+@LogTag("SettingFrm")
+class SettingFrm : BaseFragment() {
+
+    private var dialog: AlertDialog? = null
 
     override fun setLayoutResourceId(): Int {
         return R.layout.frm_setting
@@ -33,7 +35,6 @@ class SettingFragment : BaseFragment() {
         setupViews()
     }
 
-    private var dialog: AlertDialog? = null
     private fun setupViews() {
         fun setData() {
             val isDarkTheme = LUIUtil.isDarkTheme()

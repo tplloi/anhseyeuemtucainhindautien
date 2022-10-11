@@ -11,8 +11,8 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import com.google.android.material.navigation.NavigationView
 import com.roy93group.R
-import com.roy93group.fragment.HomeFragment
-import com.roy93group.fragment.SettingFragment
+import com.roy93group.fragment.HomeFrm
+import com.roy93group.fragment.SettingFrm
 import com.loitpcore.annotation.LogTag
 import com.loitpcore.core.base.BaseFontActivity
 import com.loitpcore.core.common.Constants
@@ -99,7 +99,7 @@ class MainActivity : BaseFontActivity(), NavigationView.OnNavigationItemSelected
         when (item.itemId) {
             R.id.navHome -> {
                 idItemChecked = R.id.navHome
-                LScreenUtil.replaceFragment(this, R.id.flContainer, HomeFragment(), false)
+                LScreenUtil.replaceFragment(this, R.id.flContainer, HomeFrm(), false)
             }
             R.id.navGallery -> {
                 val intent = Intent(this, GalleryCoreSplashActivity::class.java)
@@ -132,7 +132,7 @@ class MainActivity : BaseFontActivity(), NavigationView.OnNavigationItemSelected
             }
             R.id.navSetting -> {
                 idItemChecked = R.id.navSetting
-                LScreenUtil.replaceFragment(this, R.id.flContainer, SettingFragment(), false)
+                LScreenUtil.replaceFragment(this, R.id.flContainer, SettingFrm(), false)
             }
             R.id.navChatWithDev -> {
                 LSocialUtil.chatMessenger(this)

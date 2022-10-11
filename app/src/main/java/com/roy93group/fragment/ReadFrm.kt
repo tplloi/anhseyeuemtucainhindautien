@@ -22,8 +22,8 @@ import kotlinx.android.synthetic.main.frm_chap.*
  * +840766040293
  * freuss47@gmail.com
  */
-@LogTag("ReadFragment")
-class ReadFragment(
+@LogTag("ReadFrm")
+class ReadFrm(
     val currentPosition: Int
 ) : BaseFragment() {
 

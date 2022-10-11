@@ -9,7 +9,7 @@ import androidx.viewpager.widget.ViewPager
 import com.daimajia.androidanimations.library.Techniques
 import com.roy93group.R
 import com.roy93group.common.AppConstant
-import com.roy93group.fragment.ReadFragment
+import com.roy93group.fragment.ReadFrm
 import com.loitpcore.annotation.IsSwipeActivity
 import com.loitpcore.annotation.LogTag
 import com.loitpcore.core.base.BaseFontActivity
@@ -72,7 +72,7 @@ class ReadActivity : BaseFontActivity() {
             logD("setupData scroll $scroll")
             vp.post {
                 val readFragment = vp.adapter?.instantiateItem(vp, vp.currentItem)
-                if (readFragment is ReadFragment) {
+                if (readFragment is ReadFrm) {
                     logD("readFragment is ReadFragment setupData scroll $scroll")
                     readFragment.scrollToPosition(scroll = scroll)
                 }
@@ -134,7 +134,7 @@ class ReadActivity : BaseFontActivity() {
         : FragmentStatePagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
         override fun getItem(position: Int): Fragment {
-            return ReadFragment(currentPosition = position)
+            return ReadFrm(currentPosition = position)
         }
 
         override fun getCount(): Int {
@@ -147,17 +147,17 @@ class ReadActivity : BaseFontActivity() {
         vp.adapter?.let { adapter ->
             try {
                 val readFragment = adapter.instantiateItem(vp, vp.currentItem)
-                if (readFragment is ReadFragment) {
+                if (readFragment is ReadFrm) {
                     readFragment.zoomIn()
                 }
 
                 val readFragmentNext = adapter.instantiateItem(vp, vp.currentItem + 1)
-                if (readFragmentNext is ReadFragment) {
+                if (readFragmentNext is ReadFrm) {
                     readFragmentNext.zoomIn()
                 }
 
                 val readFragmentPrev = adapter.instantiateItem(vp, vp.currentItem - 1)
-                if (readFragmentPrev is ReadFragment) {
+                if (readFragmentPrev is ReadFrm) {
                     readFragmentPrev.zoomIn()
                 }
             } catch (e: Exception) {
@@ -171,17 +171,17 @@ class ReadActivity : BaseFontActivity() {
         vp.adapter?.let { adapter ->
             try {
                 val readFragment = adapter.instantiateItem(vp, vp.currentItem)
-                if (readFragment is ReadFragment) {
+                if (readFragment is ReadFrm) {
                     readFragment.zoomOut()
                 }
 
                 val readFragmentNext = adapter.instantiateItem(vp, vp.currentItem + 1)
-                if (readFragmentNext is ReadFragment) {
+                if (readFragmentNext is ReadFrm) {
                     readFragmentNext.zoomOut()
                 }
 
                 val readFragmentPrev = adapter.instantiateItem(vp, vp.currentItem - 1)
-                if (readFragmentPrev is ReadFragment) {
+                if (readFragmentPrev is ReadFrm) {
                     readFragmentPrev.zoomOut()
                 }
             } catch (e: Exception) {
@@ -192,7 +192,7 @@ class ReadActivity : BaseFontActivity() {
 
     override fun onBackPressed() {
         val readFragment = vp.adapter?.instantiateItem(vp, vp.currentItem)
-        if (readFragment is ReadFragment) {
+        if (readFragment is ReadFrm) {
             val onScroll = readFragment.onScroll
 //            logD("onBackPressed onScroll $onScroll, currentItem: " + vp.currentItem)
             LSharedPrefsUtil.instance.putInt(AppConstant.KEY_CURRENT_POSITION, vp.currentItem)

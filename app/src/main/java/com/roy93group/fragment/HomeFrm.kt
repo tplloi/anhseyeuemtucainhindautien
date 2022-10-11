@@ -26,8 +26,8 @@ import kotlinx.android.synthetic.main.frm_home.*
  * +840766040293
  * freuss47@gmail.com
  */
-@LogTag("HomeFragment")
-class HomeFragment : BaseFragment() {
+@LogTag("HomeFrm")
+class HomeFrm : BaseFragment() {
 
     private var mainViewModel: MainViewModel? = null
     private var concatAdapter: ConcatAdapter? = null
