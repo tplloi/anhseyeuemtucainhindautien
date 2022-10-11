@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">Anh Se Yeu Em Tu Cai Nhin Dau Tien</string>
-    <string name="app_name_vn">Anh Sẽ Yêu Em Từ Cái Nhìn Đầu Tiên</string>
+    <string name="app_name">Anh Sẽ Yêu Em Từ Cái Nhìn Đầu Tiên</string>
+<!--    <string name="app_name_vn">Anh Sẽ Yêu Em Từ Cái Nhìn Đầu Tiên</string>-->
     <string name="link_cover"><![CDATA[https://live.staticflickr.com/424/31772800263_34a9c83453_c.jpg]]></string>
     <string name="link_cover_flickr"><![CDATA[https://live.staticflickr.com/8020/29405872016_0ee1bb23ea_b.jpg]]></string>
     <string name="deny">Từ chối</string>
