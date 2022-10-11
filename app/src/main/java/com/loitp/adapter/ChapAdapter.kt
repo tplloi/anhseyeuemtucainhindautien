@@ -4,10 +4,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.annotation.LogTag
-import com.core.adapter.BaseAdapter
 import com.loitp.R
-import com.views.setSafeOnClickListener
+import com.loitpcore.annotation.LogTag
+import com.loitpcore.core.adapter.BaseAdapter
+import com.loitpcore.views.setSafeOnClickListener
 import kotlinx.android.synthetic.main.view_row_chap.view.*
 
 @LogTag("ChapAdapter")

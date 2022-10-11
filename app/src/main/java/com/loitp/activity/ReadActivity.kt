@@ -6,23 +6,21 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.ViewPager
-import com.annotation.IsShowAdWhenExit
-import com.annotation.IsSwipeActivity
-import com.annotation.LogTag
-import com.core.base.BaseFontActivity
-import com.core.utilities.LActivityUtil
-import com.core.utilities.LAnimationUtil
-import com.core.utilities.LSharedPrefsUtil
 import com.daimajia.androidanimations.library.Techniques
 import com.loitp.R
 import com.loitp.app.AppConstant
 import com.loitp.fragment.ReadFragment
-import com.views.layout.swipeback.SwipeBackLayout
-import com.views.setSafeOnClickListener
+import com.loitpcore.annotation.IsSwipeActivity
+import com.loitpcore.annotation.LogTag
+import com.loitpcore.core.base.BaseFontActivity
+import com.loitpcore.core.utilities.LActivityUtil
+import com.loitpcore.core.utilities.LAnimationUtil
+import com.loitpcore.core.utilities.LSharedPrefsUtil
+import com.loitpcore.views.layout.swipeBack.SwipeBackLayout
+import com.loitpcore.views.setSafeOnClickListener
 import kotlinx.android.synthetic.main.activity_read.*
 
 @LogTag("ReadActivity")
-@IsShowAdWhenExit(true)
 @IsSwipeActivity(true)
 class ReadActivity : BaseFontActivity() {
 

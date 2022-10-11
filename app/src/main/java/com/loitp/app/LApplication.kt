@@ -1,17 +1,18 @@
 package com.loitp.app
 
-import com.annotation.LogTag
-import com.core.base.BaseApplication
-import com.core.common.Constants
-import com.core.utilities.LUIUtil
-import com.data.ActivityData
-import com.data.AdmobData
-import com.loitp.R
+import com.loitpcore.annotation.LogTag
+import com.loitpcore.core.base.BaseApplication
+import com.loitpcore.core.common.Constants
+import com.loitpcore.core.utilities.LUIUtil
+import com.loitpcore.data.ActivityData
 
 //TODO keystore
 //TODO ic_laucher
 //TODO pkg name
 //TODO valid gg drive
+//TODO pkg name
+
+//done
 
 @LogTag("LApplication")
 class LApplication : BaseApplication() {
@@ -19,11 +20,8 @@ class LApplication : BaseApplication() {
     override fun onCreate() {
         super.onCreate()
 
-        //config admob id
-        AdmobData.instance.idAdmobFull = getString(R.string.str_f)
-
         //config activity transition default
-        ActivityData.instance.type = Constants.TYPE_ACTIVITY_TRANSITION_SLIDELEFT
+        ActivityData.instance.type = Constants.TYPE_ACTIVITY_TRANSITION_SLIDE_LEFT
 
         //config font
         LUIUtil.fontForAll = Constants.FONT_PATH

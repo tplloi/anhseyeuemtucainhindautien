@@ -4,14 +4,15 @@ import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.webkit.WebSettings
-import com.annotation.LogTag
-import com.core.base.BaseFragment
-import com.core.utilities.LAppResource
-import com.core.utilities.LPrefUtil
-import com.core.utilities.LUIUtil
+import android.webkit.WebView
 import com.loitp.R
 import com.loitp.viewmodels.MainViewModel
-import com.views.LWebViewAdblock
+import com.loitpcore.annotation.LogTag
+import com.loitpcore.core.base.BaseFragment
+import com.loitpcore.core.utilities.LAppResource
+import com.loitpcore.core.utilities.LPrefUtil
+import com.loitpcore.core.utilities.LUIUtil
+import com.loitpcore.views.LWebViewAdblock
 import kotlinx.android.synthetic.main.frm_chap.*
 
 @LogTag("ReadFragment")
@@ -49,6 +50,9 @@ class ReadFragment(
 
             override fun onScrollBottomToTop() {
 //                logD("onScrollBottomToTop")
+            }
+
+            override fun onPageFinished(view: WebView?, url: String?) {
             }
 
             override fun onProgressChanged(progress: Int) {

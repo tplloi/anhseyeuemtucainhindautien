@@ -6,17 +6,17 @@ import android.view.View
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.annotation.LogTag
-import com.core.base.BaseFragment
-import com.core.utilities.LActivityUtil
-import com.core.utilities.LDialogUtil
-import com.core.utilities.LSharedPrefsUtil
 import com.loitp.R
 import com.loitp.activity.ReadActivity
 import com.loitp.adapter.ChapAdapter
 import com.loitp.app.AppConstant
 import com.loitp.viewmodels.MainViewModel
-import com.views.setSafeOnClickListener
+import com.loitpcore.annotation.LogTag
+import com.loitpcore.core.base.BaseFragment
+import com.loitpcore.core.utilities.LActivityUtil
+import com.loitpcore.core.utilities.LDialogUtil
+import com.loitpcore.core.utilities.LSharedPrefsUtil
+import com.loitpcore.views.setSafeOnClickListener
 import kotlinx.android.synthetic.main.frm_home.*
 
 @LogTag("HomeFragment")

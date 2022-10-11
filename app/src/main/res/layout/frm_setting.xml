@@ -7,7 +7,7 @@
     android:background="?attr/themeBackgroundColor"
     android:padding="@dimen/margin_padding_medium">
 
-    <com.views.switchtoggle.appcompatswitch.LColorSwitchCompat
+    <com.loitpcore.views.switchToggle.appcompatSwitch.LColorSwitchCompat
         android:id="@+id/swDarkTheme"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

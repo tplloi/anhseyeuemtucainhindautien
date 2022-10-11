@@ -9,16 +9,16 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
-import com.annotation.LogTag
-import com.core.base.BaseFontActivity
-import com.core.common.Constants
-import com.core.helper.adhelper.AdHelperActivity
-import com.core.helper.gallery.GalleryCoreSplashActivity
-import com.core.utilities.*
 import com.google.android.material.navigation.NavigationView
 import com.loitp.R
 import com.loitp.fragment.HomeFragment
 import com.loitp.fragment.SettingFragment
+import com.loitpcore.annotation.LogTag
+import com.loitpcore.core.base.BaseFontActivity
+import com.loitpcore.core.common.Constants
+import com.loitpcore.core.helper.adHelper.AdHelperActivity
+import com.loitpcore.core.helper.gallery.GalleryCoreSplashActivity
+import com.loitpcore.core.utilities.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.view_drawer_end.*
 import kotlinx.android.synthetic.main.view_drawer_main.*
@@ -38,15 +38,14 @@ class MainActivity : BaseFontActivity(), NavigationView.OnNavigationItemSelected
     }
 
     private fun setupViews() {
-        LUIUtil.createAdBanner(adView)
         setSupportActionBar(toolbar)
 
         val toggle = ActionBarDrawerToggle(
-                this,
-                drawerLayout,
-                toolbar,
-                R.string.navigation_drawer_open,
-                R.string.navigation_drawer_close
+            this,
+            drawerLayout,
+            toolbar,
+            R.string.navigation_drawer_open,
+            R.string.navigation_drawer_close
         )
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
@@ -56,9 +55,10 @@ class MainActivity : BaseFontActivity(), NavigationView.OnNavigationItemSelected
 
         //cover
         LImageUtil.load(
-                context = this,
-                any = getString(R.string.link_cover),
-                imageView = navViewStart.getHeaderView(0).ivCover)
+            context = this,
+            any = getString(R.string.link_cover),
+            imageView = navViewStart.getHeaderView(0).ivCover
+        )
 
         tvAd.text = LStoreUtil.readTxtFromRawFolder(nameOfRawFile = R.raw.ad)
 
@@ -68,21 +68,6 @@ class MainActivity : BaseFontActivity(), NavigationView.OnNavigationItemSelected
     private fun switchHomeScreen() {
         navViewStart.menu.performIdentifierAction(R.id.navHome, 0)
         navViewStart.menu.findItem(R.id.navHome).isChecked = true
-    }
-
-    public override fun onPause() {
-        adView.pause()
-        super.onPause()
-    }
-
-    public override fun onResume() {
-        adView.resume()
-        super.onResume()
-    }
-
-    public override fun onDestroy() {
-        adView.destroy()
-        super.onDestroy()
     }
 
     private var doubleBackToExitPressedOnce = false
@@ -111,13 +96,15 @@ class MainActivity : BaseFontActivity(), NavigationView.OnNavigationItemSelected
             }
             R.id.navGallery -> {
                 val intent = Intent(this, GalleryCoreSplashActivity::class.java)
-                intent.putExtra(Constants.AD_UNIT_ID_BANNER, getString(R.string.str_b))
                 intent.putExtra(Constants.BKG_SPLASH_SCREEN, getString(R.string.link_cover))
                 intent.putExtra(Constants.BKG_ROOT_VIEW, R.drawable.bkg_black)
                 //neu muon remove albumn nao thi cu pass id cua albumn do
                 val removeAlbumFlickrList = ArrayList<String>()
                 removeAlbumFlickrList.add(Constants.FLICKR_ID_STICKER)
-                intent.putStringArrayListExtra(Constants.KEY_REMOVE_ALBUM_FLICKR_LIST, removeAlbumFlickrList)
+                intent.putStringArrayListExtra(
+                    Constants.KEY_REMOVE_ALBUM_FLICKR_LIST,
+                    removeAlbumFlickrList
+                )
                 startActivity(intent)
                 LActivityUtil.tranIn(this)
             }
@@ -157,9 +144,11 @@ class MainActivity : BaseFontActivity(), NavigationView.OnNavigationItemSelected
         drawerLayout.closeDrawer(GravityCompat.START)
         navViewStart.postDelayed({
             if (idItemChecked == R.id.navHome) {
-                navViewStart.menu.findItem(R.id.navHome).isChecked = true//hight light navViewStart menu home
+                navViewStart.menu.findItem(R.id.navHome).isChecked =
+                    true//hight light navViewStart menu home
             } else if (idItemChecked == R.id.navSetting) {
-                navViewStart.menu.findItem(R.id.navSetting).isChecked = true//hight light navViewStart menu setting
+                navViewStart.menu.findItem(R.id.navSetting).isChecked =
+                    true//hight light navViewStart menu setting
             }
         }, 500)
         return true

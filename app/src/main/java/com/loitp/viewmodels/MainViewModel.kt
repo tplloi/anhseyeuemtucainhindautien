@@ -1,9 +1,9 @@
 package com.loitp.viewmodels
 
 import androidx.lifecycle.MutableLiveData
-import com.annotation.LogTag
-import com.core.base.BaseViewModel
-import com.core.utilities.LStoreUtil
+import com.loitpcore.annotation.LogTag
+import com.loitpcore.core.base.BaseViewModel
+import com.loitpcore.core.utilities.LStoreUtil
 import kotlinx.coroutines.launch
 
 @LogTag("MainViewModel")
