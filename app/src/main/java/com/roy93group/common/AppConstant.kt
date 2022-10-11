@@ -1,4 +1,4 @@
-package com.roy93group.app
+package com.roy93group.common
 
 object AppConstant {
     const val KEY_CURRENT_POSITION = "KEY_CURRENT_POSITION"

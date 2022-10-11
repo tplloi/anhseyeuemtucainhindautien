@@ -8,7 +8,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.daimajia.androidanimations.library.Techniques
 import com.roy93group.R
-import com.roy93group.app.AppConstant
+import com.roy93group.common.AppConstant
 import com.roy93group.fragment.ReadFragment
 import com.loitpcore.annotation.IsSwipeActivity
 import com.loitpcore.annotation.LogTag

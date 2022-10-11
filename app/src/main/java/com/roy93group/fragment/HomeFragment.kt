@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.roy93group.R
 import com.roy93group.activity.ReadActivity
 import com.roy93group.adapter.ChapAdapter
-import com.roy93group.app.AppConstant
+import com.roy93group.common.AppConstant
 import com.roy93group.viewmodels.MainViewModel
 import com.loitpcore.annotation.LogTag
 import com.loitpcore.core.base.BaseFragment
