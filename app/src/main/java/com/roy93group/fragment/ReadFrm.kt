@@ -5,14 +5,15 @@ import android.os.Bundle
 import android.view.View
 import android.webkit.WebSettings
 import android.webkit.WebView
-import com.roy93group.R
-import com.roy93group.viewmodels.MainViewModel
+import androidx.core.view.isVisible
 import com.loitpcore.annotation.LogTag
 import com.loitpcore.core.base.BaseFragment
 import com.loitpcore.core.utilities.LAppResource
 import com.loitpcore.core.utilities.LPrefUtil
 import com.loitpcore.core.utilities.LUIUtil
 import com.loitpcore.views.LWebViewAdblock
+import com.roy93group.R
+import com.roy93group.viewmodels.MainViewModel
 import kotlinx.android.synthetic.main.frm_chap.*
 
 /**
@@ -45,9 +46,9 @@ class ReadFrm(
 
     private fun setupViews() {
 //        logD("setupViews currentPosition $currentPosition")
-        webView.callback = object : LWebViewAdblock.Callback {
+        wv.callback = object : LWebViewAdblock.Callback {
             override fun onScroll(l: Int, t: Int, oldl: Int, oldt: Int) {
-                logD("onScroll $t")
+//                logD("onScroll $t")
                 onScroll = t
             }
 
@@ -64,14 +65,13 @@ class ReadFrm(
 
             override fun onProgressChanged(progress: Int) {
 //                logD("onProgressChanged $progress")
-                //warning show check null here for better
                 pb?.let {
                     it.progress = progress
                     if (it.progress == 100) {
-                        it.visibility = View.GONE
-                        webView?.visibility = View.VISIBLE
+                        it.isVisible = false
+                        wv.isVisible = true
                     } else {
-                        it.visibility = View.VISIBLE
+                        it.isVisible = true
                     }
                 }
             }
@@ -103,7 +103,7 @@ class ReadFrm(
             backgroundColor = "white"
             textColor = "black"
         }
-        webView.loadDataString(
+        wv.loadDataString(
             bodyContent = content,
             backgroundColor = backgroundColor,
             textColor = textColor,
@@ -111,13 +111,13 @@ class ReadFrm(
 //                fontSizePx = LAppResource.getDimenValue(R.dimen.txt_8),
             paddingPx = paddingPx
         )
-        webView.setTextSize(sizePercent = LPrefUtil.getTextSizePercentEpub())
+        wv.setTextSize(sizePercent = LPrefUtil.getTextSizePercentEpub())
     }
 
     @Suppress("DEPRECATION")
     fun zoomIn() {
         logD("zoomIn")
-        val settings = webView.settings
+        val settings = wv.settings
         val currentApiVersion = Build.VERSION.SDK_INT
         if (currentApiVersion <= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
             settings.textSize = WebSettings.TextSize.LARGER
@@ -127,14 +127,14 @@ class ReadFrm(
                 size = 250
             }
             LPrefUtil.setTextSizePercentEpub(value = size)
-            webView.setTextSize(sizePercent = size)
+            wv.setTextSize(sizePercent = size)
         }
     }
 
     @Suppress("DEPRECATION")
     fun zoomOut() {
         logD("zoomOut")
-        val settings = webView.settings
+        val settings = wv.settings
         val currentAiVersion = Build.VERSION.SDK_INT
         if (currentAiVersion <= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
             settings.textSize = WebSettings.TextSize.SMALLEST
@@ -144,13 +144,13 @@ class ReadFrm(
                 size = 50
             }
             LPrefUtil.setTextSizePercentEpub(value = size)
-            webView.setTextSize(sizePercent = size)
+            wv.setTextSize(sizePercent = size)
         }
     }
 
     fun scrollToPosition(scroll: Int) {
         logD(">>>scrollToPosition scroll $scroll")
-        webView.scrollTo(0, scroll)
+        wv.scrollTo(0, scroll)
     }
 
 }

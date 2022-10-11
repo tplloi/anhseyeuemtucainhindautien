@@ -14,6 +14,8 @@ import com.loitpcore.data.ActivityData
  * freuss47@gmail.com
  */
 
+//TODO isFullData
+
 //done
 //pkg name 2022.10.11
 //valid gg drive 2022.10.11
