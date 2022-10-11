@@ -20,6 +20,13 @@ import com.loitpcore.views.layout.swipeBack.SwipeBackLayout
 import com.loitpcore.views.setSafeOnClickListener
 import kotlinx.android.synthetic.main.activity_read.*
 
+/**
+ * Created by Loitp on 2022.10.11
+ * Galaxy One company,
+ * Vietnam
+ * +840766040293
+ * freuss47@gmail.com
+ */
 @LogTag("ReadActivity")
 @IsSwipeActivity(true)
 class ReadActivity : BaseFontActivity() {

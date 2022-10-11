@@ -15,6 +15,13 @@ import com.loitpcore.core.utilities.LUIUtil
 import com.loitpcore.views.LWebViewAdblock
 import kotlinx.android.synthetic.main.frm_chap.*
 
+/**
+ * Created by Loitp on 2022.10.11
+ * Galaxy One company,
+ * Vietnam
+ * +840766040293
+ * freuss47@gmail.com
+ */
 @LogTag("ReadFragment")
 class ReadFragment(
     val currentPosition: Int
@@ -33,7 +40,7 @@ class ReadFragment(
         setupViews()
         setupViewModels()
 
-        mainViewModel?.loadContain(position = currentPosition)
+        mainViewModel?.loadChapIndex(position = currentPosition)
     }
 
     private fun setupViews() {

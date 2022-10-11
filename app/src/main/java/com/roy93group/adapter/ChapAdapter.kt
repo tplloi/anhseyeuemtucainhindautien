@@ -10,6 +10,13 @@ import com.loitpcore.core.adapter.BaseAdapter
 import com.loitpcore.views.setSafeOnClickListener
 import kotlinx.android.synthetic.main.view_row_chap.view.*
 
+/**
+ * Created by Loitp on 2022.10.11
+ * Galaxy One company,
+ * Vietnam
+ * +840766040293
+ * freuss47@gmail.com
+ */
 @LogTag("ChapAdapter")
 class ChapAdapter : BaseAdapter() {
 

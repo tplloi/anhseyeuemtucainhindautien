@@ -7,18 +7,25 @@ import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
-import com.roy93group.BuildConfig
-import com.roy93group.R
 import com.loitpcore.annotation.LogTag
 import com.loitpcore.core.base.BaseApplication
 import com.loitpcore.core.base.BaseFontActivity
 import com.loitpcore.core.utilities.*
 import com.loitpcore.model.App
 import com.permissionx.guolindev.PermissionX
+import com.roy93group.BuildConfig
+import com.roy93group.R
 import kotlinx.android.synthetic.main.activity_splash.*
 import okhttp3.Call
 import java.io.IOException
 
+/**
+ * Created by Loitp on 2022.10.11
+ * Galaxy One company,
+ * Vietnam
+ * +840766040293
+ * freuss47@gmail.com
+ */
 @SuppressLint("CustomSplashScreen")
 @LogTag("SplashActivity")
 class SplashActivity : BaseFontActivity() {
