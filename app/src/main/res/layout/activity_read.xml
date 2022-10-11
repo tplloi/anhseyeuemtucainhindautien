@@ -10,85 +10,74 @@
     app:maskAlpha="125"
     app:swipeBackFactor="0.5">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimary">
+        android:orientation="vertical">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/ivBack"
-            android:layout_width="?android:attr/actionBarSize"
-            android:layout_height="?android:attr/actionBarSize"
-            android:background="?selectableItemBackgroundBorderless"
-            android:contentDescription="@string/app_name"
-            android:padding="@dimen/margin_padding_medium"
-            android:src="@drawable/ic_keyboard_backspace_white_48dp"
-            android:tint="@color/white"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="UnusedAttribute" />
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvChap"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:gravity="center_vertical"
-            android:singleLine="true"
-            android:textColor="@color/white"
-            android:textSize="@dimen/txt_medium"
-            app:layout_constraintBottom_toBottomOf="@+id/ivBack"
-            app:layout_constraintEnd_toStartOf="@+id/btZoomIn"
-            app:layout_constraintStart_toEndOf="@+id/ivBack"
-            app:layout_constraintTop_toTopOf="@+id/ivBack"
-            tools:text="@string/app_name" />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivBack"
+                android:layout_width="?android:attr/actionBarSize"
+                android:layout_height="?android:attr/actionBarSize"
+                android:background="?selectableItemBackgroundBorderless"
+                android:contentDescription="@string/app_name"
+                android:padding="@dimen/margin_padding_medium"
+                android:src="@drawable/ic_keyboard_backspace_white_48dp"
+                android:tint="@color/white"
+                tools:ignore="UnusedAttribute" />
 
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/btZoomIn"
-            android:layout_width="?android:attr/actionBarSize"
-            android:layout_height="?android:attr/actionBarSize"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="@string/app_name"
-            android:padding="@dimen/margin_padding_medium"
-            android:scaleType="centerInside"
-            android:src="@drawable/ic_add_black_48dp"
-            app:layout_constraintBottom_toBottomOf="@+id/ivBack"
-            app:layout_constraintEnd_toStartOf="@+id/btZoomOut"
-            app:layout_constraintTop_toTopOf="@+id/ivBack"
-            app:tint="@color/white"
-            tools:ignore="UnusedAttribute" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvChap"
+                android:layout_width="0dp"
+                android:layout_height="?android:attr/actionBarSize"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:textColor="@color/white"
+                android:textSize="@dimen/txt_medium"
+                tools:text="@string/app_name" />
 
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/btZoomOut"
-            android:layout_width="?android:attr/actionBarSize"
-            android:layout_height="?android:attr/actionBarSize"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="@string/app_name"
-            android:padding="@dimen/margin_padding_medium"
-            android:scaleType="centerInside"
-            android:src="@drawable/ic_remove_black_48dp"
-            app:layout_constraintBottom_toBottomOf="@+id/ivBack"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/ivBack"
-            app:tint="@color/white"
-            tools:ignore="UnusedAttribute" />
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/btZoomIn"
+                android:layout_width="?android:attr/actionBarSize"
+                android:layout_height="?android:attr/actionBarSize"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/app_name"
+                android:padding="@dimen/margin_padding_medium"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_add_black_48dp"
+                app:tint="@color/white"
+                tools:ignore="UnusedAttribute" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/btZoomOut"
+                android:layout_width="?android:attr/actionBarSize"
+                android:layout_height="?android:attr/actionBarSize"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/app_name"
+                android:padding="@dimen/margin_padding_medium"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_remove_black_48dp"
+                app:tint="@color/white"
+                tools:ignore="UnusedAttribute" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
         <View
             android:id="@+id/line"
             android:layout_width="match_parent"
             android:layout_height="@dimen/w_1"
-            android:background="@color/gray"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ivBack" />
+            android:background="@color/gray" />
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/vp"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/line" />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
 </com.loitpcore.views.layout.swipeBack.SwipeBackLayout>
