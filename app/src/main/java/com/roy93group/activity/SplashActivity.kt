@@ -1,21 +1,32 @@
-package com.loitp.activity
+package com.roy93group.activity
 
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
-import com.annotation.LogTag
-import com.core.base.BaseApplication
-import com.core.base.BaseFontActivity
-import com.core.utilities.*
-import com.loitp.BuildConfig
-import com.loitp.R
-import com.model.GG
+import android.provider.Settings
+import com.loitpcore.annotation.LogTag
+import com.loitpcore.core.base.BaseApplication
+import com.loitpcore.core.base.BaseFontActivity
+import com.loitpcore.core.utilities.*
+import com.loitpcore.model.App
+import com.loitpcore.views.setSafeOnClickListener
 import com.permissionx.guolindev.PermissionX
+import com.roy93group.BuildConfig
+import com.roy93group.R
 import kotlinx.android.synthetic.main.activity_splash.*
 import okhttp3.Call
+import java.io.IOException
 
+/**
+ * Created by Loitp on 2022.10.11
+ * Galaxy One company,
+ * Vietnam
+ * +840766040293
+ * freuss47@gmail.com
+ */
 @SuppressLint("CustomSplashScreen")
 @LogTag("SplashActivity")
 class SplashActivity : BaseFontActivity() {
@@ -39,8 +50,8 @@ class SplashActivity : BaseFontActivity() {
             isAnimDone = true
             goToHome()
         })
-        textViewVersion.text = "Version ${BuildConfig.VERSION_NAME}"
-        tvPolicy.setOnClickListener {
+        textViewVersion.text = "Phiên bản ${BuildConfig.VERSION_NAME}"
+        tvPolicy.setSafeOnClickListener {
             LSocialUtil.openBrowserPolicy(context = this)
         }
     }
@@ -64,8 +75,8 @@ class SplashActivity : BaseFontActivity() {
             PermissionX.init(this)
                 .permissions(
 //                    Manifest.permission.ACCESS_FINE_LOCATION,
-                    Manifest.permission.READ_EXTERNAL_STORAGE,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
+//                    Manifest.permission.READ_EXTERNAL_STORAGE,
+//                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 )
                 .setDialogTintColor(color, color)
                 .onExplainRequestReason { scope, deniedList, _ ->
@@ -87,8 +98,13 @@ class SplashActivity : BaseFontActivity() {
                 }
                 .request { allGranted, _, _ ->
                     if (allGranted) {
-                        isCheckReadyDone = true
-                        goToHome()
+                        val isNeedCheckReady = true
+                        if (isNeedCheckReady) {
+                            checkReady()
+                        } else {
+                            isCheckReadyDone = true
+                            goToHome()
+                        }
                     } else {
                         finish()
                         LActivityUtil.tranOut(this)
@@ -97,6 +113,7 @@ class SplashActivity : BaseFontActivity() {
                 }
         }
 
+        checkPer()
 //        val isCanWriteSystem = LScreenUtil.checkSystemWritePermission()
 //        if (isCanWriteSystem) {
 //            checkPer()
@@ -115,13 +132,11 @@ class SplashActivity : BaseFontActivity() {
 //                    LActivityUtil.tranIn(this@SplashActivity)
 //                },
 //                onClickButton2 = {
-//                    onBackPressed()
+//                    onBaseBackPressed()
 //                }
 //            )
 //            alertDialog.setCancelable(false)
 //        }
-
-        checkPer()
     }
 
     private fun goToHome() {
@@ -129,7 +144,7 @@ class SplashActivity : BaseFontActivity() {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             LActivityUtil.tranIn(this)
-            finishAfterTransition()
+            this.finishAfterTransition()
         }
     }
 
@@ -140,13 +155,14 @@ class SplashActivity : BaseFontActivity() {
             } else {
                 getString(R.string.check_ur_connection)
             }
-            val alertDial = LDialogUtil.showDialog2(context = this,
+            val alertDial = LDialogUtil.showDialog2(
+                context = this,
                 title = getString(R.string.warning),
                 msg = title,
                 button1 = getString(R.string.exit),
                 button2 = getString(R.string.try_again),
                 onClickButton1 = {
-                    onBackPressed()
+                    onBaseBackPressed()
                 },
                 onClickButton2 = {
                     checkReady()
@@ -157,41 +173,34 @@ class SplashActivity : BaseFontActivity() {
     }
 
     private fun checkReady() {
-
-        fun setReady() {
-            runOnUiThread {
+        if (LPrefUtil.getCheckAppReady()) {
+            val app = LPrefUtil.getGGAppSetting()
+            val isFullData = app.config?.isFullData == true
+            if (isFullData) {
                 isCheckReadyDone = true
                 goToHome()
+                return
+            } else {
+                //continue to download config from drive
             }
         }
-
-        if (LPrefUtil.getCheckAppReady()) {
-            setReady()
-            return
-        }
-        val linkGGDriveCheckReady = getString(R.string.link_gg_drive)
-        logD("<<<linkGGDriveCheckReady $linkGGDriveCheckReady")
-        LStoreUtil.getTextFromGGDrive(
-            linkGGDrive = linkGGDriveCheckReady,
-            onGGFailure = { _: Call, e: Exception ->
-                e.printStackTrace()
+        //https://drive.google.com/drive/u/0/folders/1fBHp13gaIebFCaeiUoCuijjw-TvvAtDI
+        val linkGGDriveConfigSetting =
+            "https://drive.google.com/uc?export=download&id=1bjIaEuvDJhrdlP__LNEf43__pkEVV75D"
+        LStoreUtil.getSettingFromGGDrive(
+            linkGGDriveSetting = linkGGDriveConfigSetting,
+            onGGFailure = { _: Call, _: IOException ->
                 showDialogNotReady()
             },
-            onGGResponse = { listGG: ArrayList<GG> ->
-                logD(">>>getGG listGG: -> " + BaseApplication.gson.toJson(listGG))
-
-                fun isReady(): Boolean {
-                    return listGG.any {
-                        it.pkg == packageName && it.isReady
-                    }
-                }
-
-                val isReady = isReady()
-                if (isReady) {
-                    LPrefUtil.setCheckAppReady(value = true)
-                    setReady()
-                } else {
+            onGGResponse = { app: App? ->
+                logD(">>>checkReady " + BaseApplication.gson.toJson(app))
+                if (app == null || app.config?.isReady == false) {
                     showDialogNotReady()
+                } else {
+                    LPrefUtil.setCheckAppReady(true)
+                    LPrefUtil.setGGAppSetting(app)
+                    isCheckReadyDone = true
+                    goToHome()
                 }
             }
         )

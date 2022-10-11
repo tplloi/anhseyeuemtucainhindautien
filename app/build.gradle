@@ -1,3 +1,10 @@
+/**
+ * Created by Loitp on 2022.10.11
+ * Galaxy One company,
+ * Vietnam
+ * +840766040293
+ * freuss47@gmail.com
+ */
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
@@ -7,21 +14,16 @@ android {
     compileSdk 33
 
     defaultConfig {
-        applicationId "loitp93.anhseyeuemtucainhindautien"
+        applicationId "com.roy93group.asyetcndt"
         minSdkVersion 24
         targetSdkVersion 33
-        versionCode 7
-        versionName "1.0.7"
+        versionCode 20221011
+        versionName "2022.10.11"
         multiDexEnabled true
 
         renderscriptTargetApi 19
-        renderscriptSupportModeEnabled true    // Enable RS support
+        renderscriptSupportModeEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-//        javaCompileOptions {
-//            annotationProcessorOptions {
-//                includeCompileClasspath true
-//            }
-//        }
     }
 
     dataBinding {
@@ -31,14 +33,15 @@ android {
     signingConfigs {
         release {
             storeFile file("keystore.jks")
-            storePassword "04021993"
-            keyAlias "loi"
-            keyPassword "04021993"
+            storePassword KS_PW
+            keyAlias KS_ALIAS
+            keyPassword KS_PW
         }
     }
 
     buildTypes {
         release {
+            debuggable false
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
@@ -59,6 +62,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    namespace 'com.roy93group'
 }
 
 repositories {
@@ -67,8 +71,8 @@ repositories {
 }
 
 dependencies {
-    api 'com.github.tplloi:basemaster:4.4.71'
-
+    api 'com.github.tplloi:base:4.4.93'
     //https://github.com/shiburagi/Drawer-Behavior
     api 'com.infideap.drawerbehavior:drawer-behavior:1.0.1'
+    api 'com.daimajia.androidanimations:library:2.4@aar'
 }

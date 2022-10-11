@@ -1,21 +1,30 @@
-package com.loitp.fragment
+package com.roy93group.fragment
 
 import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.webkit.WebSettings
-import com.annotation.LogTag
-import com.core.base.BaseFragment
-import com.core.utilities.LAppResource
-import com.core.utilities.LPrefUtil
-import com.core.utilities.LUIUtil
-import com.loitp.R
-import com.loitp.viewmodels.MainViewModel
-import com.views.LWebViewAdblock
+import android.webkit.WebView
+import androidx.core.view.isVisible
+import com.loitpcore.annotation.LogTag
+import com.loitpcore.core.base.BaseFragment
+import com.loitpcore.core.utilities.LAppResource
+import com.loitpcore.core.utilities.LPrefUtil
+import com.loitpcore.core.utilities.LUIUtil
+import com.loitpcore.views.LWebViewAdblock
+import com.roy93group.R
+import com.roy93group.viewmodels.MainViewModel
 import kotlinx.android.synthetic.main.frm_chap.*
 
-@LogTag("ReadFragment")
-class ReadFragment(
+/**
+ * Created by Loitp on 2022.10.11
+ * Galaxy One company,
+ * Vietnam
+ * +840766040293
+ * freuss47@gmail.com
+ */
+@LogTag("ReadFrm")
+class ReadFrm(
     val currentPosition: Int
 ) : BaseFragment() {
 
@@ -32,14 +41,14 @@ class ReadFragment(
         setupViews()
         setupViewModels()
 
-        mainViewModel?.loadContain(position = currentPosition)
+        mainViewModel?.loadChapIndex(position = currentPosition)
     }
 
     private fun setupViews() {
 //        logD("setupViews currentPosition $currentPosition")
-        webView.callback = object : LWebViewAdblock.Callback {
+        wv.callback = object : LWebViewAdblock.Callback {
             override fun onScroll(l: Int, t: Int, oldl: Int, oldt: Int) {
-                logD("onScroll $t")
+//                logD("onScroll $t")
                 onScroll = t
             }
 
@@ -51,16 +60,18 @@ class ReadFragment(
 //                logD("onScrollBottomToTop")
             }
 
+            override fun onPageFinished(view: WebView?, url: String?) {
+            }
+
             override fun onProgressChanged(progress: Int) {
 //                logD("onProgressChanged $progress")
-                //warning show check null here for better
                 pb?.let {
                     it.progress = progress
                     if (it.progress == 100) {
-                        it.visibility = View.GONE
-                        webView?.visibility = View.VISIBLE
+                        it.isVisible = false
+                        wv.isVisible = true
                     } else {
-                        it.visibility = View.VISIBLE
+                        it.isVisible = true
                     }
                 }
             }
@@ -92,7 +103,7 @@ class ReadFragment(
             backgroundColor = "white"
             textColor = "black"
         }
-        webView.loadDataString(
+        wv.loadDataString(
             bodyContent = content,
             backgroundColor = backgroundColor,
             textColor = textColor,
@@ -100,13 +111,13 @@ class ReadFragment(
 //                fontSizePx = LAppResource.getDimenValue(R.dimen.txt_8),
             paddingPx = paddingPx
         )
-        webView.setTextSize(sizePercent = LPrefUtil.getTextSizePercentEpub())
+        wv.setTextSize(sizePercent = LPrefUtil.getTextSizePercentEpub())
     }
 
     @Suppress("DEPRECATION")
     fun zoomIn() {
         logD("zoomIn")
-        val settings = webView.settings
+        val settings = wv.settings
         val currentApiVersion = Build.VERSION.SDK_INT
         if (currentApiVersion <= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
             settings.textSize = WebSettings.TextSize.LARGER
@@ -116,14 +127,14 @@ class ReadFragment(
                 size = 250
             }
             LPrefUtil.setTextSizePercentEpub(value = size)
-            webView.setTextSize(sizePercent = size)
+            wv.setTextSize(sizePercent = size)
         }
     }
 
     @Suppress("DEPRECATION")
     fun zoomOut() {
         logD("zoomOut")
-        val settings = webView.settings
+        val settings = wv.settings
         val currentAiVersion = Build.VERSION.SDK_INT
         if (currentAiVersion <= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
             settings.textSize = WebSettings.TextSize.SMALLEST
@@ -133,13 +144,13 @@ class ReadFragment(
                 size = 50
             }
             LPrefUtil.setTextSizePercentEpub(value = size)
-            webView.setTextSize(sizePercent = size)
+            wv.setTextSize(sizePercent = size)
         }
     }
 
     fun scrollToPosition(scroll: Int) {
         logD(">>>scrollToPosition scroll $scroll")
-        webView.scrollTo(0, scroll)
+        wv.scrollTo(0, scroll)
     }
 
 }

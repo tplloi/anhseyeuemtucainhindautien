@@ -1,20 +1,29 @@
-package com.loitp.fragment
+package com.roy93group.fragment
 
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import com.annotation.LogTag
-import com.core.base.BaseFragment
-import com.core.utilities.LActivityUtil
-import com.core.utilities.LDialogUtil
-import com.core.utilities.LUIUtil
-import com.loitp.R
-import com.loitp.activity.MainActivity
+import com.loitpcore.annotation.LogTag
+import com.loitpcore.core.base.BaseFragment
+import com.loitpcore.core.utilities.LActivityUtil
+import com.loitpcore.core.utilities.LDialogUtil
+import com.loitpcore.core.utilities.LUIUtil
+import com.roy93group.R
+import com.roy93group.activity.MainActivity
 import kotlinx.android.synthetic.main.frm_setting.*
 
-@LogTag("SettingFragment")
-class SettingFragment : BaseFragment() {
+/**
+ * Created by Loitp on 2022.10.11
+ * Galaxy One company,
+ * Vietnam
+ * +840766040293
+ * freuss47@gmail.com
+ */
+@LogTag("SettingFrm")
+class SettingFrm : BaseFragment() {
+
+    private var dialog: AlertDialog? = null
 
     override fun setLayoutResourceId(): Int {
         return R.layout.frm_setting
@@ -26,7 +35,6 @@ class SettingFragment : BaseFragment() {
         setupViews()
     }
 
-    private var dialog: AlertDialog? = null
     private fun setupViews() {
         fun setData() {
             val isDarkTheme = LUIUtil.isDarkTheme()

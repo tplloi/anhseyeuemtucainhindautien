@@ -22,7 +22,6 @@
         app:menu="@menu/menu_drawer_start" />
 
     <com.google.android.material.navigation.NavigationView
-        android:id="@+id/navViewEnd"
         android:layout_width="@dimen/w_300"
         android:layout_height="match_parent"
         android:layout_gravity="end"
