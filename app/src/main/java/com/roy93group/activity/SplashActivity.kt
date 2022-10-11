@@ -12,6 +12,7 @@ import com.loitpcore.core.base.BaseApplication
 import com.loitpcore.core.base.BaseFontActivity
 import com.loitpcore.core.utilities.*
 import com.loitpcore.model.App
+import com.loitpcore.views.setSafeOnClickListener
 import com.permissionx.guolindev.PermissionX
 import com.roy93group.BuildConfig
 import com.roy93group.R
@@ -49,8 +50,8 @@ class SplashActivity : BaseFontActivity() {
             isAnimDone = true
             goToHome()
         })
-        textViewVersion.text = "Version ${BuildConfig.VERSION_NAME}"
-        tvPolicy.setOnClickListener {
+        textViewVersion.text = "Phiên bản ${BuildConfig.VERSION_NAME}"
+        tvPolicy.setSafeOnClickListener {
             LSocialUtil.openBrowserPolicy(context = this)
         }
     }
@@ -130,7 +131,7 @@ class SplashActivity : BaseFontActivity() {
                     LActivityUtil.tranIn(this@SplashActivity)
                 },
                 onClickButton2 = {
-                    onBackPressed()
+                    onBaseBackPressed()
                 }
             )
             alertDialog.setCancelable(false)
@@ -160,7 +161,7 @@ class SplashActivity : BaseFontActivity() {
                 button1 = getString(R.string.exit),
                 button2 = getString(R.string.try_again),
                 onClickButton1 = {
-                    onBackPressed()
+                    onBaseBackPressed()
                 },
                 onClickButton2 = {
                     checkReady()

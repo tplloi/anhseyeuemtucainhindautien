@@ -7,9 +7,6 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.daimajia.androidanimations.library.Techniques
-import com.roy93group.R
-import com.roy93group.common.AppConstant
-import com.roy93group.fragment.ReadFrm
 import com.loitpcore.annotation.IsSwipeActivity
 import com.loitpcore.annotation.LogTag
 import com.loitpcore.core.base.BaseFontActivity
@@ -18,6 +15,9 @@ import com.loitpcore.core.utilities.LAnimationUtil
 import com.loitpcore.core.utilities.LSharedPrefsUtil
 import com.loitpcore.views.layout.swipeBack.SwipeBackLayout
 import com.loitpcore.views.setSafeOnClickListener
+import com.roy93group.R
+import com.roy93group.common.AppConstant
+import com.roy93group.fragment.ReadFrm
 import kotlinx.android.synthetic.main.activity_read.*
 
 /**
@@ -53,14 +53,14 @@ class ReadActivity : BaseFontActivity() {
     }
 
     private fun setupData() {
-        intent?.getIntExtra(KEY_POSITION_CHAP, 0)?.let {
-            currentPosition = it
+        intent?.apply {
+            getIntExtra(KEY_POSITION_CHAP, 0).let {
+                currentPosition = it
+            }
+            getStringArrayListExtra(KEY_LIST_DATA)?.let {
+                listChap.addAll(it)
+            }
         }
-        intent?.getStringArrayListExtra(KEY_LIST_DATA)?.let {
-            listChap.addAll(it)
-        }
-//        logD("setupData currentPosition $currentPosition")
-//        logD("setupData listChap " + BaseApplication.gson.toJson(listChap))
         vp.adapter?.notifyDataSetChanged()
         vp.currentItem = currentPosition
         if (currentPosition == 0) {
@@ -69,11 +69,11 @@ class ReadActivity : BaseFontActivity() {
 
         //book mark scroll
         intent?.getIntExtra(KEY_SCROLL, 0)?.let { scroll ->
-            logD("setupData scroll $scroll")
+//            logD("setupData scroll $scroll")
             vp.post {
                 val readFragment = vp.adapter?.instantiateItem(vp, vp.currentItem)
                 if (readFragment is ReadFrm) {
-                    logD("readFragment is ReadFragment setupData scroll $scroll")
+//                    logD("readFragment is ReadFragment setupData scroll $scroll")
                     readFragment.scrollToPosition(scroll = scroll)
                 }
             }
@@ -82,7 +82,11 @@ class ReadActivity : BaseFontActivity() {
 
     private fun setupViews() {
         swipeBackLayout.setSwipeBackListener(object : SwipeBackLayout.OnSwipeBackListener {
-            override fun onViewPositionChanged(mView: View?, swipeBackFraction: Float, swipeBackFactor: Float) {
+            override fun onViewPositionChanged(
+                mView: View?,
+                swipeBackFraction: Float,
+                swipeBackFactor: Float
+            ) {
             }
 
             override fun onViewSwipeFinished(mView: View?, isEnd: Boolean) {
@@ -93,7 +97,7 @@ class ReadActivity : BaseFontActivity() {
             }
         })
         ivBack.setSafeOnClickListener {
-            onBackPressed()
+            onBaseBackPressed()
         }
         btZoomIn.setOnClickListener {
             handleZoomIn()
@@ -107,7 +111,11 @@ class ReadActivity : BaseFontActivity() {
             override fun onPageScrollStateChanged(state: Int) {
             }
 
-            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
             }
 
             override fun onPageSelected(position: Int) {
@@ -130,8 +138,9 @@ class ReadActivity : BaseFontActivity() {
         //do nothing
     }
 
-    private inner class SlidePagerAdapter(fm: FragmentManager)
-        : FragmentStatePagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+    //TODO viewpager2
+    private inner class SlidePagerAdapter(fm: FragmentManager) :
+        FragmentStatePagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
         override fun getItem(position: Int): Fragment {
             return ReadFrm(currentPosition = position)
@@ -190,7 +199,7 @@ class ReadActivity : BaseFontActivity() {
         }
     }
 
-    override fun onBackPressed() {
+    override fun onBaseBackPressed() {
         val readFragment = vp.adapter?.instantiateItem(vp, vp.currentItem)
         if (readFragment is ReadFrm) {
             val onScroll = readFragment.onScroll
@@ -199,6 +208,6 @@ class ReadActivity : BaseFontActivity() {
             LSharedPrefsUtil.instance.putInt(AppConstant.KEY_SCROLL, onScroll)
             showShortInformation(getString(R.string.book_mark_success))
         }
-        super.onBackPressed()
+        super.onBaseBackPressed()
     }
 }

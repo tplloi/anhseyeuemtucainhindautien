@@ -10,15 +10,15 @@ import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import com.google.android.material.navigation.NavigationView
-import com.roy93group.R
-import com.roy93group.fragment.HomeFrm
-import com.roy93group.fragment.SettingFrm
 import com.loitpcore.annotation.LogTag
 import com.loitpcore.core.base.BaseFontActivity
 import com.loitpcore.core.common.Constants
 import com.loitpcore.core.helper.adHelper.AdHelperActivity
 import com.loitpcore.core.helper.gallery.GalleryCoreSplashActivity
 import com.loitpcore.core.utilities.*
+import com.roy93group.R
+import com.roy93group.fragment.HomeFrm
+import com.roy93group.fragment.SettingFrm
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.view_drawer_end.*
 import kotlinx.android.synthetic.main.view_drawer_main.*
@@ -48,11 +48,11 @@ class MainActivity : BaseFontActivity(), NavigationView.OnNavigationItemSelected
         setSupportActionBar(toolbar)
 
         val toggle = ActionBarDrawerToggle(
-            this,
-            drawerLayout,
-            toolbar,
-            R.string.navigation_drawer_open,
-            R.string.navigation_drawer_close
+            /* activity = */ this,
+            /* drawerLayout = */ drawerLayout,
+            /* toolbar = */ toolbar,
+            /* openDrawerContentDescRes = */ R.string.navigation_drawer_open,
+            /* closeDrawerContentDescRes = */ R.string.navigation_drawer_close
         )
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
@@ -78,12 +78,12 @@ class MainActivity : BaseFontActivity(), NavigationView.OnNavigationItemSelected
     }
 
     private var doubleBackToExitPressedOnce = false
-    override fun onBackPressed() {
+    override fun onBaseBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START)
         } else {
             if (doubleBackToExitPressedOnce) {
-                super.onBackPressed()
+                super.onBaseBackPressed()
                 return
             }
             this.doubleBackToExitPressedOnce = true
@@ -99,7 +99,12 @@ class MainActivity : BaseFontActivity(), NavigationView.OnNavigationItemSelected
         when (item.itemId) {
             R.id.navHome -> {
                 idItemChecked = R.id.navHome
-                LScreenUtil.replaceFragment(this, R.id.flContainer, HomeFrm(), false)
+                LScreenUtil.replaceFragment(
+                    activity = this,
+                    containerFrameLayoutIdRes = R.id.flContainer,
+                    fragment = HomeFrm(),
+                    isAddToBackStack = false
+                )
             }
             R.id.navGallery -> {
                 val intent = Intent(this, GalleryCoreSplashActivity::class.java)
@@ -115,9 +120,6 @@ class MainActivity : BaseFontActivity(), NavigationView.OnNavigationItemSelected
                 startActivity(intent)
                 LActivityUtil.tranIn(this)
             }
-//            R.id.navGallery18 -> {
-//                LSocialUtil.openBrowserGirl(context = this)
-//            }
             R.id.navRateApp -> {
                 LSocialUtil.rateApp(activity = this, packageName = packageName)
             }
