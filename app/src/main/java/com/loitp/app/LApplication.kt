@@ -8,9 +8,8 @@ import com.data.ActivityData
 import com.data.AdmobData
 import com.loitp.R
 
-//done
-//TODO done link link_cover string
-//TODO done id admob
+//TODO keystore
+//TODO ic_laucher
 
 @LogTag("LApplication")
 class LApplication : BaseApplication() {
