@@ -9,10 +9,9 @@ import com.loitpcore.data.ActivityData
 //TODO keystore
 //TODO ic_laucher
 //TODO pkg name
-//TODO valid gg drive
-//TODO pkg name
 
 //done
+//valid gg drive 2022.10.11
 
 @LogTag("LApplication")
 class LApplication : BaseApplication() {
