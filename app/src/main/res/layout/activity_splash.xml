@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary">
+    android:background="?attr/themePrimaryColor">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvCopyright"
@@ -43,6 +43,11 @@
             android:layout_height="@dimen/w_120"
             android:src="@drawable/ic_launcher" />
     </FrameLayout>
+
+    <nl.dionsegijn.konfetti.xml.KonfettiView
+        android:id="@+id/konfettiView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
     <ProgressBar
         android:id="@+id/pb"
