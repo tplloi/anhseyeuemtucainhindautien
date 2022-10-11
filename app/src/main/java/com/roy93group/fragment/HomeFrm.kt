@@ -6,17 +6,17 @@ import android.view.View
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.roy93group.R
-import com.roy93group.activity.ReadActivity
-import com.roy93group.adapter.ChapAdapter
-import com.roy93group.common.AppConstant
-import com.roy93group.viewmodels.MainViewModel
 import com.loitpcore.annotation.LogTag
 import com.loitpcore.core.base.BaseFragment
 import com.loitpcore.core.utilities.LActivityUtil
 import com.loitpcore.core.utilities.LDialogUtil
 import com.loitpcore.core.utilities.LSharedPrefsUtil
 import com.loitpcore.views.setSafeOnClickListener
+import com.roy93group.R
+import com.roy93group.activity.ReadActivity
+import com.roy93group.adapter.ChapAdapter
+import com.roy93group.common.AppConstant
+import com.roy93group.viewmodels.MainViewModel
 import kotlinx.android.synthetic.main.frm_home.*
 
 /**
@@ -28,10 +28,9 @@ import kotlinx.android.synthetic.main.frm_home.*
  */
 @LogTag("HomeFrm")
 class HomeFrm : BaseFragment() {
-
     private var mainViewModel: MainViewModel? = null
-    private var concatAdapter: ConcatAdapter? = null
-    private var chapAdapter: ChapAdapter? = null
+    private var concatAdapter = ConcatAdapter()
+    private var chapAdapter = ChapAdapter()
 
     override fun setLayoutResourceId(): Int {
         return R.layout.frm_home
@@ -47,15 +46,13 @@ class HomeFrm : BaseFragment() {
     }
 
     private fun setupViews() {
-        chapAdapter = ChapAdapter()
-        chapAdapter?.let { ca ->
-            ca.onClickRootListener = { _, position ->
-                goToReadScreen(position = position, scroll = 0)
-            }
-
-            val listOfAdapters = listOf<RecyclerView.Adapter<out RecyclerView.ViewHolder>>(ca)
-            concatAdapter = ConcatAdapter(listOfAdapters)
+        chapAdapter.onClickRootListener = { _, position ->
+            goToReadScreen(position = position, scroll = 0)
         }
+
+        val listOfAdapters = listOf<RecyclerView.Adapter<out RecyclerView.ViewHolder>>(chapAdapter)
+        concatAdapter = ConcatAdapter(listOfAdapters)
+
         rvChap.layoutManager = LinearLayoutManager(context)
         rvChap.adapter = concatAdapter
 
@@ -68,14 +65,14 @@ class HomeFrm : BaseFragment() {
     }
 
     private fun goToReadScreen(position: Int, scroll: Int) {
-        val intent = Intent(context, ReadActivity::class.java)
-        intent.putExtra(ReadActivity.KEY_POSITION_CHAP, position)
-        intent.putExtra(ReadActivity.KEY_SCROLL, scroll)
+        val i = Intent(context, ReadActivity::class.java)
+        i.putExtra(ReadActivity.KEY_POSITION_CHAP, position)
+        i.putExtra(ReadActivity.KEY_SCROLL, scroll)
         mainViewModel?.listChapLiveData?.value?.let {
             val list = it as ArrayList
-            intent.putStringArrayListExtra(ReadActivity.KEY_LIST_DATA, list)
+            i.putStringArrayListExtra(ReadActivity.KEY_LIST_DATA, list)
         }
-        startActivity(intent)
+        startActivity(i)
         LActivityUtil.tranIn(context)
     }
 
@@ -84,15 +81,15 @@ class HomeFrm : BaseFragment() {
         mainViewModel?.let { mvm ->
             mvm.eventLoading.observe(viewLifecycleOwner) { isLoading ->
                 if (isLoading) {
-                    LDialogUtil.showProgress(indicatorView)
+                    LDialogUtil.showProgress(pb)
                 } else {
-                    LDialogUtil.hideProgress(indicatorView)
+                    LDialogUtil.hideProgress(pb)
                 }
             }
 
             mvm.listChapLiveData.observe(viewLifecycleOwner) { listChap ->
 //                logD("<<<listChapLiveData " + BaseApplication.gson.toJson(listChap))
-                chapAdapter?.setData(listChap)
+                chapAdapter.setData(listChap)
             }
         }
 
