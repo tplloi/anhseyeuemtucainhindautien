@@ -75,10 +75,11 @@ class MainActivity : BaseFontActivity(), NavigationView.OnNavigationItemSelected
     }
 
     private fun switchHomeScreen() {
-        navViewStart.menu.performIdentifierAction(R.id.navHome, 0)
         if (isFullData) {
+            navViewStart.menu.performIdentifierAction(R.id.navHome, 0)
             navViewStart.menu.findItem(R.id.navHome).isChecked = true
         } else {
+            navViewStart.menu.performIdentifierAction(R.id.navSetting, 0)
             navViewStart.menu.findItem(R.id.navSetting).isChecked = true
         }
     }
@@ -104,13 +105,17 @@ class MainActivity : BaseFontActivity(), NavigationView.OnNavigationItemSelected
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.navHome -> {
-                idItemChecked = R.id.navHome
-                LScreenUtil.replaceFragment(
-                    activity = this,
-                    containerFrameLayoutIdRes = R.id.flContainer,
-                    fragment = HomeFrm(),
-                    isAddToBackStack = false
-                )
+                if (isFullData) {
+                    idItemChecked = R.id.navHome
+                    LScreenUtil.replaceFragment(
+                        activity = this,
+                        containerFrameLayoutIdRes = R.id.flContainer,
+                        fragment = HomeFrm(),
+                        isAddToBackStack = false
+                    )
+                } else {
+                    showShortInformation(getString(R.string.err_unknown))
+                }
             }
             R.id.navGallery -> {
                 if (isFullData) {

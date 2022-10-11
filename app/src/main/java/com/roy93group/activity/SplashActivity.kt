@@ -74,9 +74,9 @@ class SplashActivity : BaseFontActivity() {
             }
             PermissionX.init(this)
                 .permissions(
-                    Manifest.permission.ACCESS_FINE_LOCATION,
-                    Manifest.permission.READ_EXTERNAL_STORAGE,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
+//                    Manifest.permission.ACCESS_FINE_LOCATION,
+//                    Manifest.permission.READ_EXTERNAL_STORAGE,
+//                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 )
                 .setDialogTintColor(color, color)
                 .onExplainRequestReason { scope, deniedList, _ ->
@@ -113,29 +113,30 @@ class SplashActivity : BaseFontActivity() {
                 }
         }
 
-        val isCanWriteSystem = LScreenUtil.checkSystemWritePermission()
-        if (isCanWriteSystem) {
-            checkPer()
-        } else {
-            val alertDialog = LDialogUtil.showDialog2(
-                context = this,
-                title = "Need Permissions",
-                msg = "This app needs permission to allow modifying system settings",
-                button1 = getString(R.string.ok),
-                button2 = getString(R.string.cancel),
-                onClickButton1 = {
-                    val intent = Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS)
-                    intent.data = Uri.parse("package:$packageName")
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                    startActivity(intent)
-                    LActivityUtil.tranIn(this@SplashActivity)
-                },
-                onClickButton2 = {
-                    onBaseBackPressed()
-                }
-            )
-            alertDialog.setCancelable(false)
-        }
+        checkPer()
+//        val isCanWriteSystem = LScreenUtil.checkSystemWritePermission()
+//        if (isCanWriteSystem) {
+//            checkPer()
+//        } else {
+//            val alertDialog = LDialogUtil.showDialog2(
+//                context = this,
+//                title = "Need Permissions",
+//                msg = "This app needs permission to allow modifying system settings",
+//                button1 = getString(R.string.ok),
+//                button2 = getString(R.string.cancel),
+//                onClickButton1 = {
+//                    val intent = Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS)
+//                    intent.data = Uri.parse("package:$packageName")
+//                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+//                    startActivity(intent)
+//                    LActivityUtil.tranIn(this@SplashActivity)
+//                },
+//                onClickButton2 = {
+//                    onBaseBackPressed()
+//                }
+//            )
+//            alertDialog.setCancelable(false)
+//        }
     }
 
     private fun goToHome() {
