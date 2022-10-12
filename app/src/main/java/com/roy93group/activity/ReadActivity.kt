@@ -206,7 +206,7 @@ class ReadActivity : BaseFontActivity() {
 //            logD("onBackPressed onScroll $onScroll, currentItem: " + vp.currentItem)
             LSharedPrefsUtil.instance.putInt(AppConstant.KEY_CURRENT_POSITION, vp.currentItem)
             LSharedPrefsUtil.instance.putInt(AppConstant.KEY_SCROLL, onScroll)
-            showShortInformation(getString(R.string.book_mark_success))
+            showShortInformation(msg = getString(R.string.book_mark_success), isTopAnchor = false)
         }
         super.onBaseBackPressed()
     }
