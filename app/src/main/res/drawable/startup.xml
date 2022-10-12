@@ -2,7 +2,7 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <shape android:shape="rectangle">
-            <solid android:color="@color/colorPrimary" />
+            <solid android:color="?attr/themePrimaryColor" />
 
             <size
                 android:width="900dp"
@@ -11,8 +11,8 @@
     </item>
 
     <item
-        android:width="@dimen/w_120"
-        android:height="@dimen/w_120"
+        android:width="@dimen/w_150"
+        android:height="@dimen/w_150"
         android:drawable="@drawable/ic_launcher"
         android:gravity="center" />
 </layer-list>

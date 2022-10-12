@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/themeBackgroundColor">
+    android:background="?attr/themePrimaryColor">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvCopyright"
@@ -13,28 +13,41 @@
         android:gravity="center"
         android:padding="@dimen/margin_padding_medium"
         android:text="@string/copyright"
-        android:textColor="?attr/themeTextColor"
+        android:textColor="@color/white"
         android:textSize="@dimen/txt_medium" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/ivLogo"
+        android:layout_above="@+id/flLogo"
         android:layout_below="@+id/tvCopyright"
         android:layout_centerHorizontal="true"
-        android:contentDescription="@string/app_name_vn"
+        android:contentDescription="@string/app_name"
         android:gravity="center"
         android:padding="@dimen/margin_padding_medium"
-        android:text="@string/app_name_vn"
-        android:textColor="?attr/themeTextColor"
+        android:text="@string/app_name"
+        android:textColor="@color/white"
         android:textSize="@dimen/txt_largest" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/ivLogo"
-        android:layout_width="@dimen/w_120"
-        android:layout_height="@dimen/w_120"
+    <FrameLayout
+        android:id="@+id/flLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:src="@drawable/ic_launcher" />
+        android:background="@drawable/circle"
+        android:padding="@dimen/margin_padding_large">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivLogo"
+            android:layout_width="@dimen/w_120"
+            android:layout_height="@dimen/w_120"
+            android:src="@drawable/ic_launcher" />
+    </FrameLayout>
+
+    <nl.dionsegijn.konfetti.xml.KonfettiView
+        android:id="@+id/konfettiView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
     <ProgressBar
         android:id="@+id/pb"
@@ -43,7 +56,8 @@
         android:layout_above="@+id/textViewVersion"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center"
-        android:layout_marginBottom="@dimen/margin_padding_medium" />
+        android:layout_marginBottom="@dimen/margin_padding_medium"
+        android:indeterminateTint="@color/white" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textViewVersion"
@@ -51,7 +65,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/tvPolicy"
         android:gravity="center"
-        android:textColor="?attr/themeTextColor"
+        android:textColor="@color/white"
         android:textSize="@dimen/txt_medium"
         android:textStyle="bold"
         tools:text="Version 69" />
@@ -65,6 +79,6 @@
         android:gravity="center"
         android:padding="@dimen/margin_padding_medium"
         android:text="@string/policy"
-        android:textColor="?attr/themeTextColor"
+        android:textColor="@color/white"
         android:textSize="@dimen/txt_medium" />
 </RelativeLayout>

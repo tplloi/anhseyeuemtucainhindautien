@@ -1,12 +1,9 @@
 package com.roy93group.activity
 
-import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color
-import android.net.Uri
 import android.os.Bundle
-import android.provider.Settings
 import com.loitpcore.annotation.LogTag
 import com.loitpcore.core.base.BaseApplication
 import com.loitpcore.core.base.BaseFontActivity
@@ -16,6 +13,7 @@ import com.loitpcore.views.setSafeOnClickListener
 import com.permissionx.guolindev.PermissionX
 import com.roy93group.BuildConfig
 import com.roy93group.R
+import com.roy93group.common.Presets
 import kotlinx.android.synthetic.main.activity_splash.*
 import okhttp3.Call
 import java.io.IOException
@@ -46,6 +44,7 @@ class SplashActivity : BaseFontActivity() {
 
     @SuppressLint("SetTextI18n")
     private fun setupViews() {
+        konfettiView.start(Presets.festive())
         LUIUtil.setDelay(mls = 1500, runnable = {
             isAnimDone = true
             goToHome()

@@ -1,19 +1,15 @@
 package com.roy93group.activity
 
 import android.os.Bundle
-import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.daimajia.androidanimations.library.Techniques
-import com.loitpcore.annotation.IsSwipeActivity
 import com.loitpcore.annotation.LogTag
 import com.loitpcore.core.base.BaseFontActivity
-import com.loitpcore.core.utilities.LActivityUtil
 import com.loitpcore.core.utilities.LAnimationUtil
 import com.loitpcore.core.utilities.LSharedPrefsUtil
-import com.loitpcore.views.layout.swipeBack.SwipeBackLayout
 import com.loitpcore.views.setSafeOnClickListener
 import com.roy93group.R
 import com.roy93group.common.AppConstant
@@ -28,7 +24,6 @@ import kotlinx.android.synthetic.main.activity_read.*
  * freuss47@gmail.com
  */
 @LogTag("ReadActivity")
-@IsSwipeActivity(true)
 class ReadActivity : BaseFontActivity() {
 
     companion object {
@@ -81,21 +76,6 @@ class ReadActivity : BaseFontActivity() {
     }
 
     private fun setupViews() {
-        swipeBackLayout.setSwipeBackListener(object : SwipeBackLayout.OnSwipeBackListener {
-            override fun onViewPositionChanged(
-                mView: View?,
-                swipeBackFraction: Float,
-                swipeBackFactor: Float
-            ) {
-            }
-
-            override fun onViewSwipeFinished(mView: View?, isEnd: Boolean) {
-                if (isEnd) {
-                    finish()
-                    LActivityUtil.transActivityNoAnimation(context = this@ReadActivity)
-                }
-            }
-        })
         ivBack.setSafeOnClickListener {
             onBaseBackPressed()
         }
@@ -206,7 +186,7 @@ class ReadActivity : BaseFontActivity() {
 //            logD("onBackPressed onScroll $onScroll, currentItem: " + vp.currentItem)
             LSharedPrefsUtil.instance.putInt(AppConstant.KEY_CURRENT_POSITION, vp.currentItem)
             LSharedPrefsUtil.instance.putInt(AppConstant.KEY_SCROLL, onScroll)
-            showShortInformation(getString(R.string.book_mark_success))
+            showShortInformation(msg = getString(R.string.book_mark_success), isTopAnchor = false)
         }
         super.onBaseBackPressed()
     }

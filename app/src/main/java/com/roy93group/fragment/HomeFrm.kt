@@ -16,8 +16,12 @@ import com.roy93group.R
 import com.roy93group.activity.ReadActivity
 import com.roy93group.adapter.ChapAdapter
 import com.roy93group.common.AppConstant
+import com.roy93group.common.Presets
 import com.roy93group.viewmodels.MainViewModel
+import kotlinx.android.synthetic.main.activity_splash.*
 import kotlinx.android.synthetic.main.frm_home.*
+import kotlinx.android.synthetic.main.frm_home.konfettiView
+import kotlinx.android.synthetic.main.frm_home.pb
 
 /**
  * Created by Loitp on 2022.10.11
@@ -46,6 +50,7 @@ class HomeFrm : BaseFragment() {
     }
 
     private fun setupViews() {
+        konfettiView.start(Presets.festive())
         chapAdapter.onClickRootListener = { _, position ->
             goToReadScreen(position = position, scroll = 0)
         }

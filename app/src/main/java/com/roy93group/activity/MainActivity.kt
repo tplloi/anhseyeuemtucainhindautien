@@ -114,7 +114,7 @@ class MainActivity : BaseFontActivity(), NavigationView.OnNavigationItemSelected
                         isAddToBackStack = false
                     )
                 } else {
-                    showShortInformation(getString(R.string.err_unknown))
+                    showShortInformation(msg = getString(R.string.err_unknown), isTopAnchor = false)
                 }
             }
             R.id.navGallery -> {
@@ -132,7 +132,7 @@ class MainActivity : BaseFontActivity(), NavigationView.OnNavigationItemSelected
                     startActivity(intent)
                     LActivityUtil.tranIn(this)
                 } else {
-                    showShortInformation(getString(R.string.err_unknown))
+                    showShortInformation(msg = getString(R.string.err_unknown), isTopAnchor = false)
                 }
             }
             R.id.navRateApp -> {
@@ -166,7 +166,7 @@ class MainActivity : BaseFontActivity(), NavigationView.OnNavigationItemSelected
                     startActivity(intent)
                     LActivityUtil.tranIn(this)
                 } else {
-                    showShortInformation(getString(R.string.err_unknown))
+                    showShortInformation(msg = getString(R.string.err_unknown), isTopAnchor = false)
                 }
             }
             R.id.navPolicy -> {

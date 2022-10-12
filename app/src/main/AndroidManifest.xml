@@ -30,8 +30,7 @@
         <activity
             android:name=".activity.ReadActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:exported="true"
-            android:theme="@style/SwipeTheme" />
+            android:exported="true" />
     </application>
 
 </manifest>

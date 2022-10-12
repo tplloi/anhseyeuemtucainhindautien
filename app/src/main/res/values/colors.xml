@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#000000</color>
-    <color name="colorPrimaryDark">#000000</color>
-    <color name="colorAccent">#000000</color>
-    <color name="colorEdgeEffect">#000000</color>
-    <color name="ripple_material_dark">#80FFFFFF</color>
-    <color name="ripple_material_light">#80000000</color>
+    <color name="colorPrimary">#9D61E1</color>
+    <color name="colorPrimaryLight">#9D61E1</color>
+    <color name="colorPrimaryDark">#2F0D5A</color>
+    <color name="colorAccent">#9D61E1</color>
+    <color name="colorEdgeEffect">#9D61E1</color>
+    <color name="ripple_material_dark">#809D61E1</color>
+    <color name="ripple_material_light">#802F0D5A</color>
 </resources>
