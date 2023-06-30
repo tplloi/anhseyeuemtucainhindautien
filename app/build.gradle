@@ -76,4 +76,5 @@ dependencies {
     api 'com.infideap.drawerbehavior:drawer-behavior:1.0.1'
     api 'com.daimajia.androidanimations:library:2.4@aar'
     api 'nl.dionsegijn:konfetti-xml:2.0.2'
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.10'
 }

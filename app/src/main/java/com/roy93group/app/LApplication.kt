@@ -16,7 +16,6 @@ import com.loitpcore.data.ActivityData
  */
 
 //TODO ad
-//TODO leak canary
 
 //done
 //pkg name 2022.10.11
@@ -24,6 +23,7 @@ import com.loitpcore.data.ActivityData
 //keystore
 //ic_launcher
 //isFullData
+//leak canary
 
 @LogTag("LApplication")
 class LApplication : BaseApplication() {
