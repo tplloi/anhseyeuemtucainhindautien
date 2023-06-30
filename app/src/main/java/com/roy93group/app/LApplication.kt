@@ -15,6 +15,7 @@ import com.loitpcore.data.ActivityData
  * freuss47@gmail.com
  */
 
+//google drive config https://drive.google.com/drive/u/0/folders/1fBHp13gaIebFCaeiUoCuijjw-TvvAtDI
 //TODO ad
 
 //done
