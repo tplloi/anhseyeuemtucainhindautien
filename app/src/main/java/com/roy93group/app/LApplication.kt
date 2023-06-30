@@ -15,6 +15,9 @@ import com.loitpcore.data.ActivityData
  * freuss47@gmail.com
  */
 
+//TODO ad
+//TODO leak canary
+
 //done
 //pkg name 2022.10.11
 //valid gg drive 2022.10.11

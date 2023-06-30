@@ -17,8 +17,8 @@ android {
         applicationId "com.roy93group.asyetcndt"
         minSdkVersion 24
         targetSdkVersion 33
-        versionCode 20221011
-        versionName "2022.10.11"
+        versionCode 20230639
+        versionName "2023.06.30"
         multiDexEnabled true
 
         renderscriptTargetApi 19
